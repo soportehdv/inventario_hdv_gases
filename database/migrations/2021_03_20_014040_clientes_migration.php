@@ -18,7 +18,6 @@ class ClientesMigration extends Migration
             $table->string('nombre');
             $table->string('email');
             $table->string('direccion')->nullable();
-            $table->string('dni')->nullable();
             $table->string('telefono')->nullable();
            
             $table->timestamps();

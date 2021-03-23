@@ -246,8 +246,8 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Productos',
+            'url'  => 'productos/list',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

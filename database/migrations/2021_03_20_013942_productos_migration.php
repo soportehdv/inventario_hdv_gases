@@ -16,6 +16,18 @@ class ProductosMigration extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->integer('stock');
+            $table->date('fecha_vence');
+            $table->string('ubicacion')->nullable();
+            $table->string('cod_barra');
+            $table->float('costo_compra');
+            $table->string('laboratorio')->nullable();
+
+
+
+
+
+
             $table->integer('proveedor_id');
 
             $table->timestamps();

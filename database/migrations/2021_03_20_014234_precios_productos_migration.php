@@ -18,6 +18,8 @@ class PreciosProductosMigration extends Migration
             $table->integer('producto_id')->index();
             $table->string('titulo');
             $table->float('precio');
+            $table->float('unidades');
+
             $table->timestamps();
         });
     }
