@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use \Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password' => bcryp('1234'),
+            'password' => bcrypt('1234'),
             'rol' => 'admin'
         ]);
     }

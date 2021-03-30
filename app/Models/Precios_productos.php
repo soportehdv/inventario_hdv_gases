@@ -12,7 +12,9 @@ class Precios_productos extends Model
     protected $fillable = [
         'titulo',
         'producto_id',
-        'precio'
+        'precio',
+        'unidades',
+        'tipo'
         
     ];
 }

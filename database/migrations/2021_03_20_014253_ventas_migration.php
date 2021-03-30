@@ -15,14 +15,9 @@ class VentasMigration extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
-            $table->integer('producto_id');
-            $table->integer('precio_id');
             $table->integer('cliente_id');
             $table->float('impuesto')->nullable();
             $table->float('descuento')->nullable();
-
-
-
             $table->timestamps();
         });
     }

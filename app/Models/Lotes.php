@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Productos extends Model
+class Lotes extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nombre',
-        'cod_barra'
-        
+        'blister',
+        'unidad_blister',
+        'unidades',
+        'stock'
     ];
 }

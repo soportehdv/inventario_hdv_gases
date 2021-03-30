@@ -41,5 +41,21 @@ Route::post('productos/create', [App\Http\Controllers\ProductosController::class
 Route::get('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update.vista');
 Route::post('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'updateProductos'])->name('productos.update');
 Route::get('productos/list', [App\Http\Controllers\ProductosController::class, 'getProductos'])->name('productos.lista');
+Route::get('productos/stock', [App\Http\Controllers\ProductosController::class, 'getProductosStock'])->name('productos.lista');
+Route::get('productos/sin-stock', [App\Http\Controllers\ProductosController::class, 'sinStock'])->name('productos.lista');
 
+//Lotes
+Route::get('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'create'])->name('lotes.create.vista');
+Route::post('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'createLotes'])->name('lotes.create');
+Route::get('lotes/update/{lote_id}', [App\Http\Controllers\LotesController::class, 'update'])->name('lotes.update.vista');
+Route::post('lotes/update/{lote_id}', [App\Http\Controllers\LotesController::class, 'updateLotes'])->name('lotes.update');
+Route::get('lotes/list/{producto_id}', [App\Http\Controllers\LotesController::class, 'getLotes'])->name('lotes.lista');
+
+//Clientes
+Route::get('clientes/create', [App\Http\Controllers\ClientesController::class, 'create'])->name('clientes.create.vista');
+Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 'createClientes'])->name('clientes.create');
+Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
+Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
+Route::get('clientes/list', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
+Route::post('ventas/cliente', [App\Http\Controllers\ClientesController::class, 'getOneClient'])->name('clientes.one');
 

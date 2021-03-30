@@ -246,48 +246,35 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Productos',
-            'url'  => 'productos/list',
+            'text' => 'Clientes',
+            'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'multilevel',
+            'text'    => 'Productos',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Todos',
+                    'url'  => 'productos/list',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'En stock',
+                    'url'  => 'productos/stock',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Fuera de stock',
+                    'url'  => 'productos/sin-stock',
                 ],
             ],
         ],
+        [
+            'text' => 'Ventas',
+            'url'  => 'ventas/list',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        
+       
         ['header' => 'labels'],
         [
             'text'       => 'important',
