@@ -7,6 +7,12 @@ use App\Models\Proveedores;
 
 class ProveedoresController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getProveedor(){
         
         $proveedor = Proveedores::all();

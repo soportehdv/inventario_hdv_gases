@@ -7,6 +7,11 @@ use App\Models\Lotes;
 
 class LotesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getLotes($producto_id){
         
         $lotes = Lotes::where('producto_id', $producto_id)->get();
