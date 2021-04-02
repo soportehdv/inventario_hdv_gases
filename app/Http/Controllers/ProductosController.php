@@ -75,6 +75,8 @@ class ProductosController extends Controller
             
         ]);
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar producto');
+
            return redirect()->back();
         }
         $Productos = new Productos();
@@ -101,6 +103,7 @@ class ProductosController extends Controller
         }
 
         
+        $request->session()->flash('alert-success', 'Producto registrado con exito!');
 
         return redirect()->route('productos.lista');
     }
@@ -130,6 +133,8 @@ class ProductosController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar productos');
+
             return redirect()->back();
         }
         $Productos->nombre = $request->input('name');
@@ -184,6 +189,7 @@ class ProductosController extends Controller
         }
         
 
+        $request->session()->flash('alert-success', 'Producto actualizado con exito!');
 
 
         return redirect()->route('productos.lista');

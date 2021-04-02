@@ -1,0 +1,58 @@
+@extends('adminlte::page')
+@section('title', 'Ventas')
+
+@section('content_header')
+<div class="card">
+    <div class="card-header">
+      <h2>Ventas</h2>
+    </div>
+    
+  </div>
+    
+@endsection
+
+@section('content')
+
+<div class="container">
+    <a href="{{route('ventas.create.vista')}}" class="btn btn-success mb-2">Vender</a>
+    <a href="{{route('ventas.descargar', ['filtro' => $filtro, 'fecha_inicio' => $fecha_inicial, 'fecha_final' => $fecha_final, 'id' => $id])}}" 
+      class="btn btn-primary mb-2">Descargar</a>
+
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+      @if(Session::has('alert-' . $msg)) 
+        <div class="alert {{'alert-' . $msg}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ Session::get('alert-' . $msg) }} 
+        </div>
+        
+        @endif 
+    @endforeach 
+    <br>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acción</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($ventas as $venta)
+            <tr>
+                <th scope="row">{{$venta->id}}</th>
+                <td>{{$venta->nombre}}</td>
+                <td>{{$venta->monto}}</td>
+                <td>{{$venta->fecha}}</td>
+
+                <td><a href="{{route('ventas.update.vista', $venta->id)}}" class="btn btn-success mb-2">Detalle</a>
+                </td>
+
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+</div>
+@endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('user.lista');
+        if(Auth::user()->rol = 'inventario')
+            return redirect()->route('productos.lista');
+        else 
+            if(Auth::user()->rol = 'ventas')
+                return redirect()->route('ventas.lista');
+            else
+                return redirect()->route('user.lista');
     }
 }

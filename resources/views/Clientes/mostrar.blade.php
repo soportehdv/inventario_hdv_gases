@@ -14,15 +14,29 @@
 @section('content')
 
 <div class="container">
+
     <a href="{{route('clientes.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
+
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+      @if(Session::has('alert-' . $msg)) 
+        <div class="alert {{'alert-' . $msg}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ Session::get('alert-' . $msg) }} 
+        </div>
+        
+        @endif 
+    @endforeach 
     <br>
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">DUI</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Telefono</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Registro</th>
+            <th scope="col">NIT</th>
+            <th scope="col">Giro</th>
             <th scope="col">Acción</th>
 
           </tr>
@@ -30,10 +44,15 @@
         <tbody>
             @foreach($clientes as $cliente)
             <tr>
-                <th scope="row">{{$cliente->dui}}</th>
+                <th scope="row">{{$cliente->id}}</th>
                 <td>{{$cliente->nombre}}</td>
-                <td>{{$cliente->email}}</td>
-                <td>{{$cliente->telefono}}</td>
+                <td>{{$cliente->tipo}}</td>
+                <td>{{$cliente->departamento}}</td>
+                <td>{{$cliente->registro}}</td>
+                <td>{{$cliente->nit}}</td>
+                <td>{{$cliente->giro}}</td>
+
+
                 <td><a href="{{route('clientes.update.vista', $cliente->id)}}" class="btn btn-success mb-2">Editar</a>
                 </td>
 

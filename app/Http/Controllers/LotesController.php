@@ -38,6 +38,8 @@ class LotesController extends Controller
             
         ]);
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar lote');
+
            return redirect()->back();
         }
 
@@ -55,6 +57,8 @@ class LotesController extends Controller
 
         $Lotes->unidades = $total_unidades;
         $Lotes->save();
+        $request->session()->flash('alert-success', 'Lote registrado con exito!');
+
 
         return redirect()->route('lotes.lista', $producto_id);
     }
@@ -82,6 +86,8 @@ class LotesController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar lote');
+
             return redirect()->back();
         }
 
@@ -97,6 +103,8 @@ class LotesController extends Controller
         $total_unidades = $Lotes->blister * $Lotes->unidad_blister * $Lotes->stock;
 
         $Lotes->unidades = $total_unidades;
+        $request->session()->flash('alert-success', 'Lote actualizado con exito!');
+
         $Lotes->save();
 
        
@@ -110,6 +118,8 @@ class LotesController extends Controller
         $lotes->stock += $request->input('stock');
 
         $lotes->save();
+        $request->session()->flash('alert-success', 'Lote cargado con exito!');
+
 
         return redirect()->route('productos.lista');
 

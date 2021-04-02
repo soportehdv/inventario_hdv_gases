@@ -1,3 +1,5 @@
+@if(isset($item['role']) && ( Auth::user()->rol == 'admin' || $item['role'] == Auth::user()->rol))
+
 <li @if(isset($item['id'])) id="{{ $item['id'] }}" @endif class="nav-item has-treeview {{ $item['submenu_class'] }}">
 
     {{-- Menu toggler --}}
@@ -27,3 +29,4 @@
     </ul>
 
 </li>
+@endif

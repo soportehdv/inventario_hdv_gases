@@ -239,58 +239,72 @@ return [
             'text'        => 'Usuarios',
             'url'         => 'user/list',
             'icon'        => 'far fa-fw fa-user',
+            'role'        => 'admin'
         ],
         [
             'text' => 'Proveedores',
             'url'  => 'proveedor/list',
             'icon' => 'fas fa-fw fa-user',
+            'role'        => 'admin'
+
         ],
         [
             'text' => 'Clientes',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-lock',
+            'role'        => 'ventas'
+
         ],
         [
             'text'    => 'Productos',
             'icon'    => 'fas fa-fw fa-share',
+            'role'        => 'inventario',
+
             'submenu' => [
                 [
                     'text' => 'Todos',
                     'url'  => 'productos/list',
+                    'role'        => 'inventario',
                 ],
                 [
                     'text' => 'En stock',
                     'url'  => 'productos/stock',
+                    'role'        => 'inventario',
                 ],
                 [
                     'text' => 'Fuera de stock',
                     'url'  => 'productos/sin-stock',
+                    'role'        => 'inventario',
                 ],
             ],
         ],
+        
         [
             'text' => 'Ventas',
             'url'  => 'ventas/list',
             'icon' => 'fas fa-fw fa-lock',
+            'role' => 'ventas',
+            'submenu' => [
+                [
+                    'text' => 'Todos',
+                    'url'  => 'ventas/todas',
+                    'role' => 'ventas',
+                ],
+                [
+                    'text' => 'Por fecha',
+                    'url'  => 'ventas/fecha',
+                    'role' => 'ventas',
+                ],
+                [
+                    'text' => 'Ultima semana',
+                    'url'  => '#',
+                    'role' => 'ventas',
+                ],
+            ],
         ],
         
        
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+       
     ],
 
     /*

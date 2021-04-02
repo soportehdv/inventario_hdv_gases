@@ -36,6 +36,8 @@ class UserController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar usuario');
+
             return redirect()->back();
         }
 
@@ -45,6 +47,8 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');
         $user->save();
+        $request->session()->flash('alert-success', 'Usuario registrado con exito!');
+
 
         return redirect()->route('user.lista');
     }
@@ -71,6 +75,8 @@ class UserController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar usuario');
+
             return redirect()->back();
         }
 
@@ -79,6 +85,9 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');
         $user->save();
+
+        $request->session()->flash('alert-success', 'Usuario actualizado con exito!');
+
 
         return redirect()->route('user.lista');
     }

@@ -14,6 +14,16 @@
 @section('content')
 
 <div class="container">
+
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+      @if(Session::has('alert-' . $msg)) 
+        <div class="alert {{'alert-' . $msg}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ Session::get('alert-' . $msg) }} 
+        </div>
+        
+        @endif 
+    @endforeach 
     <div class="card">
         <div class="card-body">
             <form method="POST" action="{{(!isset($producto))? route('productos.create'): route('productos.update',$producto->id)}}">

@@ -36,6 +36,8 @@ class ProveedoresController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar Proveedor');
+
            return redirect()->back();
         }
         $proveedor = new Proveedores;
@@ -43,6 +45,9 @@ class ProveedoresController extends Controller
         $proveedor->email = $request->input('email');
         
         $proveedor->save();
+
+        $request->session()->flash('alert-success', 'Proveedor registrado con exito!');
+
 
         return redirect()->route('proveedor.lista');
     }
@@ -68,6 +73,8 @@ class ProveedoresController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error al ingresar Proveedor');
+
             return redirect()->back();
         }
 
@@ -75,6 +82,8 @@ class ProveedoresController extends Controller
         $proveedor->email = $request->input('email');
        
         $proveedor->save();
+        $request->session()->flash('alert-success', 'Proveedor actualizado con exito!');
+
 
         return redirect()->route('proveedor.lista');
     }

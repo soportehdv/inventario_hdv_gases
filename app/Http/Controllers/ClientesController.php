@@ -30,20 +30,31 @@ class ClientesController extends Controller
     //validamos los datos
         $validate = \Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required|email|unique:clientes',
             
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error almacenando los datos');
+
             return redirect()->back();
         }
 
+
         $Clientes = new Clientes();
-        $Clientes->nombre = $request->input('name');
-        $Clientes->email = $request->input('email');
-        $Clientes->telefono = $request->input('telefono');
-        $Clientes->dui = $request->input('dui');
+        $clientes->email = ' ';
+        $Clientes->nombre =  $request->input('name');
+        $Clientes->nit = ($request->input('tipo') == 'fiscal')? $request->input('nit'): 'N/A';
+        $Clientes->departamento = ($request->input('tipo') == 'fiscal')? $request->input('departamento'): 'N/A';
+        $Clientes->giro = ($request->input('tipo') == 'fiscal')? $request->input('giro'): 'N/A';
+        $Clientes->tipo = ($request->input('tipo') == 'fiscal')? $request->input('tipo'): 'N/A';
+        $Clientes->registro = ($request->input('tipo') == 'fiscal')? $request->input('registro'): 'N/A';
+        $Clientes->direccion = $request->input('direccion');
+
+
+
         $Clientes->save();
+
+        $request->session()->flash('alert-success', 'Cliente registrado con exito!');
 
         return redirect()->route('clientes.lista');
     }
@@ -69,14 +80,23 @@ class ClientesController extends Controller
         ]);
 
         if($validate->fails()){
+            $request->session()->flash('alert-danger', 'Error almacenando los datos');
+
             return redirect()->back();
         }
 
-        $Clientes->nombre = $request->input('name');
-        $Clientes->email = $request->input('email');
-        $Clientes->telefono = $request->input('telefono');
-        $Clientes->dui = $request->input('dui');
+        $clientes->email = ' ';
+        $Clientes->nombre =  $request->input('name');
+        $Clientes->nit = ($request->input('tipo') == 'fiscal')? $request->input('nit'): 'N/A';
+        $Clientes->departamento = ($request->input('tipo') == 'fiscal')? $request->input('departamento'): 'N/A';
+        $Clientes->giro = ($request->input('tipo') == 'fiscal')? $request->input('giro'): 'N/A';
+        $Clientes->tipo = ($request->input('tipo') == 'fiscal')? $request->input('tipo'): 'N/A';
+        $Clientes->registro = ($request->input('tipo') == 'fiscal')? $request->input('registro'): 'N/A';
+        $Clientes->direccion = $request->input('direccion');
         $Clientes->save();
+
+        $request->session()->flash('alert-success', 'Cliente actualizado con exito!');
+
 
         return redirect()->route('clientes.lista');
     }

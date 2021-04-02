@@ -1,3 +1,5 @@
+@if(isset($item['role']) && ( Auth::user()->rol == 'admin' || $item['role'] == Auth::user()->rol))
+
 <li @if(isset($item['id'])) id="{{ $item['id'] }}" @endif class="nav-item">
 
     <a class="nav-link {{ $item['class'] }} @if(isset($item['shift'])) {{ $item['shift'] }} @endif"
@@ -19,5 +21,7 @@
         </p>
 
     </a>
+   
 
 </li>
+@endif
