@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Proveedores')
+@section('title', 'detalles')
 
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Proveedores</h2>
+      <h2>detalles</h2>
     </div>
     
   </div>
@@ -14,9 +14,9 @@
 @section('content')
 
 <div class="container">
-    <a href="{{route('proveedor.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
-    
-    
+    <a href="{{ route('detalles.descargar.factura',$venta_id)}}" class="btn btn-primary mb-2">Descargar factura</a>
+
+  
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
       @if(Session::has('alert-' . $msg)) 
         <div class="alert {{'alert-' . $msg}} alert-dismissable">
@@ -25,26 +25,28 @@
         </div>
         
         @endif 
-    @endforeach 
+    @endforeach
+   
     <br>
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Acción</th>
+            <th scope="col">ID</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Unidades</th>
+            <th scope="col">Precio </th>
+
+           
 
           </tr>
         </thead>
         <tbody>
-            @foreach($proveedores as $proveedor)
+            @foreach($detalles as $detalle)
             <tr>
-                <th scope="row">{{$proveedor->id}}</th>
-                <td>{{$proveedor->nombre}}</td>
-                <td>{{$proveedor->email}}</td>
-                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2">Editar</a>
-                </td>
+                <th scope="row">{{$detalle->id}}</th>
+                <td>{{$detalle->nombre}}</td>
+                <td>{{$detalle->unidades}}</td>
+                <td>${{($detalle->precio*$detalle->unidades)}}</td>
 
             </tr>
           @endforeach

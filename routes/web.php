@@ -73,3 +73,7 @@ Route::post('precios/create', [App\Http\Controllers\Precios_productosController:
 Route::get('precios/mostrar', [App\Http\Controllers\Precios_productosController::class, 'getPrecios'])->name('precios.lista');
 Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'update'])->name('precios.update.vista');
 Route::post('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'updatePrecios'])->name('precios.update');
+
+//Detalle de ventas
+Route::get('ventas/detalle/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getDetalle'])->name('ventas.detalle');
+Route::get('detalles/descargar/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'imprimirFactura'])->name('detalles.descargar.factura');

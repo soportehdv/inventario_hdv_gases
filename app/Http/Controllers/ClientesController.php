@@ -18,13 +18,13 @@ class ClientesController extends Controller
             $Clientes = Clientes::all();
         else
             if($filtro == 1) //mas reciente
-                $clientes = $clientes::orderby('created_at', 'desc')->get();
+                $clientes = Clientes::orderby('created_at', 'desc')->get();
             else
-                if($filtro == 2) //mas antiguo
-                    $clientes = $clientes::orderby('created_at', 'asc')->get();
+                if($filtro == 2) //tipo
+                    $clientes = Clientes::where('tipo', 'fiscal')->orderby('created_at', 'asc')->get();
                 else
                     if($filtro == 3)//Alfabetico
-                        $clientes = $clientes::orderby('nombre', 'desc')->get();
+                        $clientes = Clientes::orderby('nombre', 'desc')->get();
                         
         return view('Clientes/mostrar', [
             'clientes' => $Clientes

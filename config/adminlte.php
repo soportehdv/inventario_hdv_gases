@@ -311,8 +311,8 @@ return [
                     'role' => 'ventas',
                 ],
                 [
-                    'text' => 'Ultima semana',
-                    'url'  => '#',
+                    'text' => 'Hoy',
+                    'url'  => 'ventas/todas?filtro=6',
                     'role' => 'ventas',
                 ],
             ],

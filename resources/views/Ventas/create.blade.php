@@ -14,6 +14,16 @@
 @section('content')
 
 <?php $i = 0; ?>
+
+@foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+      @if(Session::has('alert-' . $msg)) 
+        <div class="alert {{'alert-' . $msg}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ Session::get('alert-' . $msg) }} 
+        </div>
+        
+        @endif 
+    @endforeach 
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -24,6 +34,7 @@
                         <div class="form-group">
                             <label for="">Cliente </label>
                             <select class="form-control" name="cliente_id">
+                                <option value="0">Generico</option>
                                 @foreach($clientes as $cliente)
                                     <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
                                 @endforeach
@@ -37,32 +48,18 @@
                
                 <div id="venta">
                     <div class="row" >
-                        <div class="col-sm-1 mt-4">
-                            <button class="btn btn-danger">Quitar</button>
-                        </div>
 
-                        <div class="col-sm-4">
-                            <label for="">Producto </label>
-                            <select class="form-control" name="producto_id[]" >
-                                @foreach($productos as $producto)
-                                    <option value="{{$producto->id}}">{{$producto->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-8">
                             <label for="">Lote </label>
                             <select class="form-control" name="lote_id[]">
                                 @foreach($lotes as $lote)
-                                    <option value="{{$lote->id}}">{{$lote->nombre}} - {{$lote->unidades}}</option>
+                                    <option value="{{$lote->id}}">{{$lote->nombre}} - ${{$lote->precio}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-2">
-                            <label for="">Precio </label>
-                            <input type="number" class="form-control" name="precios[]" required> 
-                        </div>
-                        <div class="col-sm-2">
+                        
+                        <div class="col-sm-4">
                             <label for="">Unidades </label>
                             <input type="number" class="form-control" name="unidades[]" required> 
                         </div>
@@ -74,7 +71,6 @@
 
                 
                
-                <button type="submit" class="btn btn-primary mt-3">Terminar venta</button>
               </form>
 
         </div>
@@ -86,8 +82,8 @@
 <script>
 var i = 0;
 function aparece() {
-    var $button = $('#venta').clone();
-  $('#nueva').html($button);
+    $button = ' <div class="row" ><div class="col-sm-8"><label for="">Lote </label><select class="form-control" name="lote_id[]">@foreach($lotes as $lote)<option value="{{$lote->id}}">{{$lote->nombre}} - ${{$lote->precio}}</option>@endforeach</select></div><div class="col-sm-4"><label for="">Unidades </label><input type="number" class="form-control" name="unidades[]" required> </div></div>'
+  $('#nueva').append($button);
 };
 </script>
 

@@ -15,8 +15,31 @@
 
 <div class="container">
 
-    <a href="{{route('clientes.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
+  <div class="row">
+    <div class="col-sm-2">
+      <a href="{{route('clientes.create.vista')}}" class="btn btn-primary mt-4">Añadir nuevo</a>
 
+    </div>
+
+    <div class="col-sm-2">
+      <form method="GET" action="{{route('clientes.lista')}}">
+        <label>Ordenar por:</label>
+        <select class="form-control" name="filtro">
+          <option value="1">Más recientes </option>
+          <option value="3">Alfabeticamente </option>
+          <option value="2">Fiscales</option>
+
+        </select>
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-primary  mt-4">Buscar</button>
+
+    </div>
+  </form>
+
+  </div>
+      
+    </div>
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
       @if(Session::has('alert-' . $msg)) 
         <div class="alert {{'alert-' . $msg}} alert-dismissable">
