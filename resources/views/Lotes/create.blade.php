@@ -27,6 +27,19 @@
         <div class="card-body">
             <form method="POST" action="{{(!isset($lote))? route('lotes.create', $producto_id): route('lotes.update',$lote->id)}}">
                 @csrf
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Proveedor</label>
+                        <select name="proveedor_id" class="form-control">
+                            @foreach($proveedores as $proveedor)
+                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    
+                </div>
                 
                 
 
@@ -48,8 +61,8 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="exampleInputEmail1">Cajas a ingresar </label>
-                            <input type="number" class="form-control" name="stock" value="{{(isset($lote))? $lote->stock: ''}}" aria-describedby="emailHelp" placeholder="Cantidad (cajas) en inventario">
+                            <label for="exampleInputEmail1">Unidades </label>
+                            <input type="number" class="form-control" name="unidades" value="{{(isset($lote))? $lote->unidades: ''}}" aria-describedby="emailHelp" placeholder="Cantidad (cajas) en inventario">
 
                         </div>
 
@@ -60,7 +73,21 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Precio</label>
+                        <select name="precio_id" class="form-control">
+                            @foreach($precios as $precio)
+                                <option value="{{$precio->id}}">{{$precio->titulo}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    
+                </div>
+
                 <div class="form-group">
+                    <label>En caso de aplicar...</label>
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="exampleInputEmail1">Cantidad de blister (por caja) </label>

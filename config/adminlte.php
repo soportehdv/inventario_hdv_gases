@@ -256,6 +256,21 @@ return [
 
         ],
         [
+            'text' => 'Lotes',
+            'url'  => 'lotes/todos',
+            'icon' => 'fas fa-fw fa-lock',
+            'role'        => 'inventario'
+
+        ],
+        
+        [
+            'text' => 'Precios',
+            'url'  => 'precios/mostrar',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+        [
             'text'    => 'Productos',
             'icon'    => 'fas fa-fw fa-share',
             'role'        => 'inventario',

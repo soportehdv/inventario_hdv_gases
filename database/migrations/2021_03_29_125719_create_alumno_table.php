@@ -15,14 +15,14 @@ class CreateAlumnoTable extends Migration
     {
         Schema::create('lotes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->integer('unidades'); //Pastillas por el lote completo
-            $table->integer('blister'); //Blister por caja
-            $table->integer('unidad_blister');//pastilla por blister
-            $table->integer('stock'); //Cajas por lote
             $table->integer('producto_id');
+            $table->string('nombre');
+            $table->integer('unidades'); //Pastillas por el lote completo o producto
+            $table->integer('blister')->nullable(); //Blister por caja
+            $table->integer('unidad_blister')->nullable();//pastilla por blister
             $table->float('precio_compra');
-            $table->float('fecha_vence');
+            $table->integer('precio_id');
+            $table->date('fecha_vence');
             $table->integer('proveedor_id');
 
             $table->timestamps();

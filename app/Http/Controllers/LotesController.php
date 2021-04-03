@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lotes;
+use App\Models\Proveedores;
+use App\Models\Precios_productos;
+
+
 
 class LotesController extends Controller
 {
@@ -14,7 +18,10 @@ class LotesController extends Controller
 
     public function getLotes($producto_id){
         
-        $lotes = Lotes::where('producto_id', $producto_id)->get();
+        $lotes = Lotes::where('producto_id', $producto_id)
+        ->join('precios_productos', 'precios_productos.id','=', 'lotes.precio_id')
+        ->select('lotes.*', 'precios_productos.precio as precio_venta')
+        ->get();
         
 
         return view('Lotes/mostrar', [
@@ -26,7 +33,14 @@ class LotesController extends Controller
 
     public function create($producto_id){
 
-        return view('Lotes/create',['producto_id' => $producto_id]);
+        $proveedores = Proveedores::all();
+        $precios = Precios_productos::all();
+
+        return view('Lotes/create',[
+            'producto_id' => $producto_id,
+            'proveedores' => $proveedores,
+            'precios'     => $precios
+        ]);
     }
 
     public function createLotes(Request $request, $producto_id){
@@ -46,16 +60,15 @@ class LotesController extends Controller
         $Lotes = new Lotes();
         $Lotes->nombre = $request->input('name');
         $Lotes->precio_compra = $request->input('precio_compra');
+        $Lotes->proveedor_id = $request->input('proveedor_id');
         $Lotes->fecha_vence = $request->input('fecha_vence');
-        $Lotes->stock = $request->input('stock');
+
         $Lotes->blister = $request->input('blister');
         $Lotes->unidad_blister = $request->input('unidad_blister');
         $Lotes->producto_id = $producto_id;
+        $Lotes->unidades = $request->input('unidades');
+        $Lotes->precio_id = $request->input('precio_id');
 
-
-        $total_unidades = $Lotes->blister * $Lotes->unidad_blister * $Lotes->stock;
-
-        $Lotes->unidades = $total_unidades;
         $Lotes->save();
         $request->session()->flash('alert-success', 'Lote registrado con exito!');
 
@@ -66,10 +79,14 @@ class LotesController extends Controller
     public function update($id){
         
         $Lotes = Lotes::where('id', $id)->first();
-       
+       $proveedores = Proveedores::all();
+       $precios = Precios_productos::all();
+
 
         return view('Lotes/create', [
             'lote' => $Lotes,
+            'proveedores' => $proveedores,
+            'precios'   => $precios
             
         ]);
 
@@ -94,21 +111,18 @@ class LotesController extends Controller
         $Lotes->nombre = $request->input('name');
         $Lotes->precio_compra = $request->input('precio_compra');
         $Lotes->fecha_vence = $request->input('fecha_vence');
-        $Lotes->stock = $request->input('stock');
-        $Lotes->blister = $request->input('blister');
-        $Lotes->unidad_blister = $request->input('unidad_blister');
-        $Lotes->producto_id = $producto_id;
+        $Lotes->blister = $request->input('blister'); //Blister por caja si aplica
+        $Lotes->unidad_blister = $request->input('unidad_blister'); //pastilla por blister si aplica
+        $Lotes->precio_id = $request->input('precio_id');
+        $Lotes->proveedor_id = $request->input('proveedor_id');
+        $Lotes->unidades = $request->input('unidades'); //Unidades por todo el stock (pastillas o no)
 
-
-        $total_unidades = $Lotes->blister * $Lotes->unidad_blister * $Lotes->stock;
-
-        $Lotes->unidades = $total_unidades;
         $request->session()->flash('alert-success', 'Lote actualizado con exito!');
 
         $Lotes->save();
 
        
-        return redirect()->route('Lotes.lista');
+        return redirect()->route('lotes.lista',$Lotes->producto_id);
     }
 
     public function cargar(Request $request){
@@ -122,6 +136,18 @@ class LotesController extends Controller
 
 
         return redirect()->route('productos.lista');
+
+    }
+
+    public function getAll(){
+
+        $lotes = Lotes::join('precios_productos', 'precios_productos.id','=', 'lotes.precio_id')
+        ->select('lotes.*', 'precios_productos.precio as precio_venta')
+        ->get();
+
+        return view('Lotes/mostrar', [
+            'lotes' => $lotes
+        ]);
 
     }
 }

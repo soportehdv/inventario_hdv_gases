@@ -19,7 +19,6 @@ class CreateVentasDetalleTable extends Migration
             $table->integer('producto_id');
             $table->integer('lote_id');
             $table->integer('unidades');
-            $table->integer('precio_id');
 
             $table->timestamps();
         });

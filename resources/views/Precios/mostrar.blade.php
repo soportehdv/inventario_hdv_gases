@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Lotes')
+@section('title', 'precioss')
 
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Lotes</h2>
+      <h2>Precios</h2>
     </div>
     
   </div>
@@ -14,9 +14,7 @@
 @section('content')
 
 <div class="container">
-  @if(isset($producto_id))
-    <a href="{{ route('lotes.create.vista',$producto_id)}}" class="btn btn-primary mb-2">Añadir nuevo</a>
-  @endif 
+    <a href="{{route('precios.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
       @if(Session::has('alert-' . $msg)) 
         <div class="alert {{'alert-' . $msg}} alert-dismissable">
@@ -32,28 +30,24 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Unidades</th>
-            <th scope="col">Precio compra</th>
-            <th scope="col">Precio de venta</th>
+            <th scope="col">Precio x unidad</th>
 
-            <th scope="col">Fecha_vence</th>
+
             <th scope="col">Acción</th>
 
           </tr>
         </thead>
         <tbody>
-            @foreach($lotes as $lote)
+            @foreach($precios as $precio)
             <tr>
-                <th scope="row">{{$lote->id}}</th>
-                <td>{{$lote->nombre}}</td>
-                <td>{{$lote->unidades}}</td>
-                <td>${{$lote->precio_compra}}</td>
-                <td>${{$lote->precio_venta}}</td>
+                
+                <th scope="row">{{$precio->id}}</th>
+                <td>{{$precio->titulo}}</td>
+                <td>${{$precio->precio}} x {{$precio->unidades}} {{$precio->tipo}}</td>
 
-                <td>{{$lote->fecha_vence}}</td>
-
-                <td><a href="{{route('lotes.update.vista', $lote->id)}}" class="btn btn-success mb-2">Detalle</a>
+                <td><a href="{{route('precios.update.vista', $precio->id)}}" class="btn btn-success mb-2">Editar</a>
                 </td>
+                
 
             </tr>
           @endforeach

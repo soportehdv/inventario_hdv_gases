@@ -50,13 +50,14 @@ Route::post('lotes/create/{producto_id}', [App\Http\Controllers\LotesController:
 Route::get('lotes/update/{lote_id}', [App\Http\Controllers\LotesController::class, 'update'])->name('lotes.update.vista');
 Route::post('lotes/update/{lote_id}', [App\Http\Controllers\LotesController::class, 'updateLotes'])->name('lotes.update');
 Route::get('lotes/list/{producto_id}', [App\Http\Controllers\LotesController::class, 'getLotes'])->name('lotes.lista');
+Route::get('lotes/todos', [App\Http\Controllers\LotesController::class, 'getAll'])->name('lotes.todos');
 
 //Clientes
 Route::get('clientes/create', [App\Http\Controllers\ClientesController::class, 'create'])->name('clientes.create.vista');
 Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 'createClientes'])->name('clientes.create');
 Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
 Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
-Route::get('clientes/list', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
+Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
 Route::post('ventas/cliente', [App\Http\Controllers\ClientesController::class, 'getOneClient'])->name('clientes.one');
 
 //Ventas
@@ -66,3 +67,9 @@ Route::post('ventas/create', [App\Http\Controllers\VentasController::class, 'cre
 Route::get('ventas/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
 Route::get('ventas/descargar/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'export'])->name('ventas.descargar');
 
+//Precios
+Route::get('precios/create', [App\Http\Controllers\Precios_productosController::class, 'create'])->name('precios.create.vista');
+Route::post('precios/create', [App\Http\Controllers\Precios_productosController::class, 'createPrecios'])->name('precios.create');
+Route::get('precios/mostrar', [App\Http\Controllers\Precios_productosController::class, 'getPrecios'])->name('precios.lista');
+Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'update'])->name('precios.update.vista');
+Route::post('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'updatePrecios'])->name('precios.update');
