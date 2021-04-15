@@ -17,7 +17,8 @@ class CreateVentasDetalleTable extends Migration
             $table->id();
             $table->integer('venta_id');
             $table->integer('producto_id');
-            $table->integer('lote_id');
+            $table->integer('fraccion_id');
+            $table->integer('precio_id');
             $table->integer('unidades');
 
             $table->timestamps();

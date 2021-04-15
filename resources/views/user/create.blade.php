@@ -42,9 +42,25 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Rol </label>
                     <select class="form-control" name="rol">
+                      @if(isset($user))
+                        @if($user->rol == 'admin')
+                          <option value="admin">Admin</option>
+                          <option value="inventario">Inventario</option>
+                          <option value="ventas">Ventas</option>
+                        @elseif($user->rol == 'inventario')
+                          <option value="inventario">Inventario</option>
+                          <option value="ventas">Ventas</option>
+                          <option value="admin">Admin</option>
+                        @else
+                          <option value="ventas">Ventas</option>
+                          <option value="admin">Admin</option>
+                          <option value="inventario">Inventario</option>
+                        @endif
+                      @else
                         <option value="admin">Admin</option>
                         <option value="inventario">Inventario</option>
                         <option value="ventas">Ventas</option>
+                      @endif
 
                     </select>
                 </div>

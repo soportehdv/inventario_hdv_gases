@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Datatables;
 
 class UserController extends Controller
 {
@@ -12,6 +13,9 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
+
+    
+
     public function getUser(){
         
         $user = User::all();

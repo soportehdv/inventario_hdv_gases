@@ -15,10 +15,10 @@ class PreciosProductosMigration extends Migration
     {
         Schema::create('precios_productos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->integer('producto_id');
+            $table->integer('fraccion_id');
+            $table->integer('listaprecio_id');
             $table->float('precio');
-            $table->integer('unidades');
-            $table->string('tipo');
 
 
             $table->timestamps();

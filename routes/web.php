@@ -77,3 +77,23 @@ Route::post('precios/update/{precio_id}', [App\Http\Controllers\Precios_producto
 //Detalle de ventas
 Route::get('ventas/detalle/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getDetalle'])->name('ventas.detalle');
 Route::get('detalles/descargar/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'imprimirFactura'])->name('detalles.descargar.factura');
+
+//Compras
+Route::get('compras/create', [App\Http\Controllers\ComprasController::class, 'create'])->name('compras.create.vista');
+Route::post('compras/create', [App\Http\Controllers\ComprasController::class, 'createCompras'])->name('compras.create');
+Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
+
+//Lista de precios
+Route::get('nombres/create', [App\Http\Controllers\listapreciosController::class, 'create'])->name('listaprecios.create.vista');
+Route::post('nombres/create', [App\Http\Controllers\listapreciosController::class, 'createlistaprecios'])->name('listaprecios.create');
+Route::get('nombres/lista', [App\Http\Controllers\listapreciosController::class, 'getlistaprecios'])->name('listaprecios.lista');
+Route::get('nombres/update/{precio_id}', [App\Http\Controllers\listapreciosController::class, 'update'])->name('listaprecios.update.vista');
+Route::post('nombres/update/{precio_id}', [App\Http\Controllers\listapreciosController::class, 'updatelistaprecios'])->name('listaprecios.update');
+
+//Fracciones
+Route::get('fracciones/create', [App\Http\Controllers\FraccionesController::class, 'create'])->name('fracciones.create.vista');
+Route::post('fracciones/create', [App\Http\Controllers\FraccionesController::class, 'createfraccion'])->name('fracciones.create');
+Route::get('fracciones/lista', [App\Http\Controllers\FraccionesController::class, 'getfraccion'])->name('fracciones.lista');
+Route::get('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesController::class, 'update'])->name('fracciones.update.vista');
+Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesController::class, 'updatefraccion'])->name('fracciones.update');
+

@@ -33,7 +33,7 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre </label>
-                      <input type="text" class="form-control" name="name" value="{{(isset($cliente))? $cliente->nombre: ''}}"  placeholder="Nombre">
+                      <input type="text" class="form-control" name="name"  value="{{(isset($cliente))? $cliente->nombre: ''}}"  placeholder="Nombre">
                     </div>
                   </div>
 
@@ -63,7 +63,7 @@
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">DUI </label>
-                        <input type="text" class="form-control" name="dui" value="{{(isset($cliente))? $cliente->dui: ''}}"  placeholder="Dui">
+                        <input type="text" class="form-control" name="dui"  value="{{(isset($cliente))? $cliente->dui: ''}}"  placeholder="Dui">
                       </div>
 
                     </div>
@@ -71,7 +71,7 @@
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Departamento </label>
-                        <input type="text" class="form-control" name="departamento" value="{{(isset($cliente))? $cliente->departamento: ''}}"  placeholder="Departamento">
+                        <input type="text" class="form-control" name="departamento"  value="{{(isset($cliente))? $cliente->departamento: ''}}"  placeholder="Departamento">
                       </div>
                     </div>
                 
@@ -79,7 +79,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputEmail1">Giro </label>
-                        <input type="text" class="form-control" name="giro" value="{{(isset($cliente))? $cliente->giro: ''}}" placeholder="Giro">
+                        <input type="text" class="form-control" name="giro"  value="{{(isset($cliente))? $cliente->giro: ''}}" placeholder="Giro">
                       </div>
                     </div>
                 </div>

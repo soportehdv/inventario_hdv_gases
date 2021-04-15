@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Usuarios')
+@section('title', 'Productos')
 
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Usuarios</h2>
+      <h2>Productos</h2>
     </div>
     
   </div>
@@ -13,10 +13,8 @@
 
 @section('content')
 
-
-
 <div class="container">
-    <a href="{{route('user.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
+    <a href="{{route('listaprecios.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
       @if(Session::has('alert-' . $msg)) 
         <div class="alert {{'alert-' . $msg}} alert-dismissable">
@@ -27,34 +25,28 @@
         @endif 
     @endforeach 
     <br>
-   <table class="table table-striped">
+    <table class="table table-striped">
         <thead>
           <tr>
-            <th >#</th>
-            <th >Nombre</th>
-            <th>Email</th>
-            <th >Rol</th>
-            <th >Acción</th>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Acción</th>
 
           </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($listas as $precios)
             <tr>
-                <th >{{$user->id}}</th>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->rol}}</td>
-                <td><a href="{{route('user.update.vista', $user->id)}}" class="btn btn-success mb-2">Editar</a>
+                <th scope="row">{{$precios->id}}</th>
+                <td>{{$precios->titulo}}</td>
+
+                <td><a href="{{route('listaprecios.update.vista', $precios->id)}}" class="btn btn-success mb-2">Editar</a>
                 </td>
+                
 
             </tr>
           @endforeach
-         
         </tbody>
       </table>
 </div>
-
-
-
 @endsection

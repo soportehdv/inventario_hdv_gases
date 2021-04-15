@@ -256,45 +256,42 @@ return [
 
         ],
         [
-            'text' => 'Lotes',
-            'url'  => 'lotes/todos',
+            'text' => 'Compras',
+            'url'  => 'compras/lista',
             'icon' => 'fas fa-fw fa-lock',
             'role'        => 'inventario'
 
         ],
-        
         [
-            'text' => 'Precios',
-            'url'  => 'precios/mostrar',
+            'text' => 'Nombres precios',
+            'url'  => 'nombres/lista',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+        [
+            'text' => 'Fracciones',
+            'url'  => 'fracciones/lista',
             'icon' => 'fas fa-fw fa-lock',
             'role' => 'admin'
 
         ],
         [
             'text'    => 'Productos',
+            'url'     => 'productos/list',
             'icon'    => 'fas fa-fw fa-share',
             'role'        => 'inventario',
 
-            'submenu' => [
-                [
-                    'text' => 'Todos',
-                    'url'  => 'productos/list',
-                    'role'        => 'inventario',
-                ],
-                [
-                    'text' => 'En stock',
-                    'url'  => 'productos/stock',
-                    'role'        => 'inventario',
-                ],
-                [
-                    'text' => 'Fuera de stock',
-                    'url'  => 'productos/sin-stock',
-                    'role'        => 'inventario',
-                ],
-            ],
+        ],
+        [
+            'text'    => 'Stock',
+            'url'     => 'stock/list',
+            'icon'    => 'fas fa-fw fa-share',
+            'role'        => 'inventario',
+
         ],
         
-        [
+       /* [
             'text' => 'Ventas',
             'url'  => 'ventas/list',
             'icon' => 'fas fa-fw fa-lock',
@@ -316,7 +313,7 @@ return [
                     'role' => 'ventas',
                 ],
             ],
-        ],
+        ],*/
         
        
        

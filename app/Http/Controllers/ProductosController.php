@@ -82,7 +82,10 @@ class ProductosController extends Controller
         $Productos = new Productos();
         $Productos->nombre = $request->input('name');
         $Productos->cod_barra = $request->input('cod_barra');
-
+        $Productos->ubicacion = $request->input('ubicacion');
+        $Productos->registro = $request->input('registro');
+        $Productos->componente = $request->input('componente');
+        $Productos->cod_barra = $request->input('cod_barra');
         $Productos->save();
 
         
@@ -121,6 +124,10 @@ class ProductosController extends Controller
             return redirect()->back();
         }
         $Productos->nombre = $request->input('name');
+        $Productos->cod_barra = $request->input('cod_barra');
+        $Productos->ubicacion = $request->input('ubicacion');
+        $Productos->registro = $request->input('registro');
+        $Productos->componente = $request->input('componente');
         $Productos->cod_barra = $request->input('cod_barra');
         
         $Productos->save();
