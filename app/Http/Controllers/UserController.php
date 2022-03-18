@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Datatables;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -14,10 +16,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    
 
-    public function getUser(){
-        
+
+    public function getUser()
+    {
+
         $user = User::all();
 
         return view('user/lista', [
@@ -25,21 +28,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('user/create');
     }
 
-    public function createUser(Request $request){
+    public function createUser(Request $request)
+    {
 
-    //validamos los datos
-        $validate = \Validator::make($request->all(), [
+        //validamos los datos
+        $validate = Validator::make($request->all(), [
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
             'rol'      => 'required',
             'password'  => 'required',
         ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             $request->session()->flash('alert-danger', 'Error al ingresar usuario');
 
             return redirect()->back();
@@ -57,28 +62,29 @@ class UserController extends Controller
         return redirect()->route('user.lista');
     }
 
-    public function update($id){
+    public function update($id)
+    {
         $user = User::where('id', $id)->first();
 
         return view('user/create', [
             'user' => $user
         ]);
-
     }
 
-    public function updateUser(Request $request, $user_id){
+    public function updateUser(Request $request, $user_id)
+    {
 
         $user = User::where('id', $user_id)->first();
 
         //validamos los datos
-        $validate = \Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [
             'name'      => 'required',
             'email'     => 'required',
             'rol'      => 'required',
             'password'  => 'required',
         ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             $request->session()->flash('alert-danger', 'Error al ingresar usuario');
 
             return redirect()->back();
@@ -95,9 +101,9 @@ class UserController extends Controller
 
         return redirect()->route('user.lista');
     }
-    
 
-    public function deleteUser(){
-        
+
+    public function deleteUser()
+    {
     }
 }
