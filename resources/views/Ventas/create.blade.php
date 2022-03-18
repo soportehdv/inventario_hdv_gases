@@ -54,7 +54,7 @@
                             <label for="">Lote </label>
                             <select class="form-control" name="lote_id[]">
                                 @foreach($lotes as $lote)
-                                    <option value="{{$lote->id}}">{{$lote->nombre}} - ${{$lote->precio}}</option>
+                                    <option value="{{$lote->id}}">{{$lote->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>

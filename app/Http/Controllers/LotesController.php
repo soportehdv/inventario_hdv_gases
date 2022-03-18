@@ -27,7 +27,7 @@ class LotesController extends Controller
             ->get();
 
 
-        return view('Lotes/mostrar', [
+        return view('lotes/mostrar', [
             'lotes' => $lotes,
             'producto_id' => $producto_id
 

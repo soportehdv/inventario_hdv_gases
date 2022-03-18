@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Inventarios-HDV',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,8 +45,8 @@ return [
     |
     */
 
-    'logo' => '<b>BET</b>-EL',
-    'logo_img' => 'vendor/adminlte/dist/img/logo_farmacia.jpeg',
+    'logo' => '<b>Inventarios</b>-Gases',
+    'logo_img' => 'vendor/adminlte/dist/img/logoHDV.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -263,6 +263,13 @@ return [
 
         ],
         [
+            'text' => 'Lotes',
+            'url'  => 'lotes/todos',
+            'icon' => 'fas fa-fw fa-lock',
+            'role'        => 'admin'
+
+        ],
+        [
             'text' => 'Nombres precios',
             'url'  => 'nombres/lista',
             'icon' => 'fas fa-fw fa-lock',
@@ -291,7 +298,7 @@ return [
 
         ],
         
-       /* [
+        [
             'text' => 'Ventas',
             'url'  => 'ventas/list',
             'icon' => 'fas fa-fw fa-lock',
@@ -313,7 +320,7 @@ return [
                     'role' => 'ventas',
                 ],
             ],
-        ],*/
+        ],
         
        
        

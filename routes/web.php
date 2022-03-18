@@ -97,3 +97,8 @@ Route::get('fracciones/lista', [App\Http\Controllers\FraccionesController::class
 Route::get('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesController::class, 'update'])->name('fracciones.update.vista');
 Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesController::class, 'updatefraccion'])->name('fracciones.update');
 
+//Stock
+Route::get('stock/list', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
+// Route::get('stock/list', [App\Http\Controllers\UserController::class, 'create'])->name('user.create.vista');
+
+

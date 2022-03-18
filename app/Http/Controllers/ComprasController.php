@@ -22,7 +22,7 @@ class ComprasController extends Controller
         $compras = Compras::join('fracciones', 'fracciones.id', '=', 'compras.fraccion_id')
         ->join('productos', 'productos.id', '=', 'compras.producto_id')
         ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-        ->select('productos.nombre AS producto', 'proveedores.nombre as proveedor', 'fracciones.nombre as fraccion', 'compras.*' )
+        ->select('productos.nombre as producto', 'proveedores.nombre as proveedor', 'fracciones.nombre as fraccion', 'compras.*' )
         ->get();
 
         return view('compras/lista', [
