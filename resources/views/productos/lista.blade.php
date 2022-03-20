@@ -50,7 +50,8 @@
                 <td>{{$producto->componente}}</td>
                 <td>{{$producto->cod_barra}}</td>
 
-                <td><a href="{{route('productos.update.vista', $producto->id)}}" class="btn btn-success mb-2">Editar</a>
+                <td>
+                  <a href="{{route('productos.update.vista', $producto->id)}}" class="btn btn-success mb-2">Editar</a>
                 </td>
                 
             </tr>

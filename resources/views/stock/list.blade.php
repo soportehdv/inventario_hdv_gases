@@ -30,17 +30,15 @@
    <table class="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
-            <th>fracion_id</th>
+            <th>id</th>
+            <th>fracion</th>
             <th>producto</th>
             <th>Fecha_ingreso</th>
-            <th >precio compra</th>
+            <th>costo unitario</th>            
+            <th>precio compra</th>
             <th>vencimiento</th>
             <th>unidades</th>
             <th>lote</th>
-
-
-
             <th >Acción</th>
 
           </tr>
@@ -52,6 +50,7 @@
                 <td>{{$stoc->fraccion}}</td>
                 <td>{{$stoc->producto}}</td>
                 <td>{{$stoc->fecha_ingreso}}</td>
+                <td>{{$stoc->costo_unitario}}</td>                
                 <td>${{$stoc->precio_compra}}</td>
                 <td>{{$stoc->fecha_vencimiento}}</td>
                 <td>{{$stoc->unidades}}</td>

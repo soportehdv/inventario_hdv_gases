@@ -9,18 +9,17 @@ class Stock extends Model
 {
     use HasFactory;
 
-    protected $table="stock";
+    protected $table = "stock";
 
     protected $fillable = [
         'fraccion_id',
         'producto_id',
         'fecha_ingreso',
+        'costo_unitario',
         'precio_compra',
         'fecha_vencimiento',
         'unidades',
         'compra_id'
-        
-    ];
 
-    
+    ];
 }
