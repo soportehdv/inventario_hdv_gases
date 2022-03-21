@@ -242,52 +242,31 @@ return [
             'role'        => 'admin'
         ],
         [
-            'text' => 'Proveedores',
-            'url'  => 'proveedor/list',
-            'icon' => 'fas fa-fw fa-user',
-            'role'        => 'admin'
+            'text'    => 'Crear producto',
+            'url'     => 'productos/list',
+            'icon'    => 'fas fa-fw fa-plus-circle',
+            'role'        => 'inventario',
 
         ],
         [
-            'text' => 'Clientes',
+            'text' => 'Ingresar producto',
+            'url'  => 'compras/lista',
+            'icon' => 'fas fa-fw fa-share',
+            'role'        => 'inventario'
+
+        ],
+        [
+            'text' => 'Responsables',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-lock',
             'role'        => 'ventas'
 
         ],
         [
-            'text' => 'Compras',
-            'url'  => 'compras/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role'        => 'inventario'
-
-        ],
-        [
-            'text' => 'Lotes',
-            'url'  => 'lotes/todos',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Proveedores',
+            'url'  => 'proveedor/list',
+            'icon' => 'fas fa-fw fa-user',
             'role'        => 'admin'
-
-        ],
-        [
-            'text' => 'Nombres precios',
-            'url'  => 'nombres/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
-
-        ],
-        [
-            'text' => 'Fracciones',
-            'url'  => 'fracciones/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
-
-        ],
-        [
-            'text'    => 'Productos',
-            'url'     => 'productos/list',
-            'icon'    => 'fas fa-fw fa-share',
-            'role'        => 'inventario',
 
         ],
         [
@@ -297,7 +276,7 @@ return [
             'role'        => 'inventario',
 
         ],
-        
+
         [
             'text' => 'Ventas',
             'url'  => 'ventas/list',
@@ -321,9 +300,30 @@ return [
                 ],
             ],
         ],
-        
-       
-       
+        [
+            'text' => 'Lotes',
+            'url'  => 'lotes/todos',
+            'icon' => 'fas fa-fw fa-lock',
+            'role'        => 'admin'
+
+        ],
+        [
+            'text' => 'Nombres precios',
+            'url'  => 'nombres/lista',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+        [
+            'text' => 'Fracciones',
+            'url'  => 'fracciones/lista',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+
+
+
     ],
 
     /*

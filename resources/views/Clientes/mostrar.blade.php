@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Clientes')
+@section('title', 'Responsables')
 
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Clientes</h2>
+      <h2>Lista de responsables</h2>
     </div>
     
   </div>

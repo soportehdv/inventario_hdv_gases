@@ -7,7 +7,7 @@
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Productos</h2>
+      <h2>Crear nuevo producto</h2>
     </div>
     
   </div>
