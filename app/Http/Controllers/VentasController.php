@@ -41,61 +41,58 @@ class VentasController extends Controller
         return view('Ventas/fecha');
     }
 
-    public function getVentas(Request $request, $filtro = null, $fecha_inicio = null, $fecha_final = null, $id = null)
+    public function getVentas(Request $request)
     {
 
-        if ($filtro == null) { //Todas
+        if ($request->get('filtro') == null) { //Todas
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->get();
         } else
-            if ($filtro == 1) { //Por cliente
+            if ($request->get('filtro') == 1) { //Por cliente
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->where('ventas.cliente_id', $id)
                 ->get();
         } else
-                if ($filtro == 2) { //Por fecha
+                if ($request->get('filtro') == 2) { //Por fecha
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->whereBetween('ventas.created_at', [$fecha_inicio, $fecha_final])
                 ->get();
         } else
-                    if ($filtro == 3) { //Por tipo de cliente
+                if ($request->get('filtro') == 3) { //Por tipo de cliente
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->where('clientes.tipo', $id)
                 ->get();
         } else
-                        if ($filtro == 4) { //Más recientes
+                if ($request->get('filtro') == 4) { //Más recientes
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->orderby('ventas.created_at', 'asc')
                 ->get();
         } else
-                            if ($filtro == 5) { // Más antiguos
+                if ($request->get('filtro') == 5) { // Más antiguos
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->orderby('ventas.created_at', 'desc')
                 ->get();
         } else
-                                if ($filtro == 6) {
-            $hoy = Ventas::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
+                if ($request->get('filtro') == 6) {
+            $ventas = Ventas::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
         }
 
 
         return view('Ventas/mostrar', [
             'ventas' => $ventas,
-            'filtro' => $filtro,
-            'fecha_inicial' => $fecha_inicio,
-            'fecha_final' => $fecha_final,
-            'id' => $id
+            
         ]);
     }
 

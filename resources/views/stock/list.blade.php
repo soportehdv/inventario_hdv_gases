@@ -55,7 +55,7 @@
                 <td>{{$stoc->fecha_vencimiento}}</td>
                 <td>{{$stoc->unidades}}</td>
                 <td>{{$stoc->lote}}</td>
-                <td><a href="#" class="btn btn-success mb-2">Editar</a>
+                <td><a href="{{ route('compras.update.vista', $stoc->id) }}" class="btn btn-success mb-2">Editar</a>
                 </td>
 
             </tr>

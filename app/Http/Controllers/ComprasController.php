@@ -34,12 +34,13 @@ class ComprasController extends Controller
     }
     public function create()
     {
-
+        // $compras = Compras::all();
         $productos = Productos::all();
         $proveedores = Proveedores::all();
         $fracciones = Fracciones::all();
 
         return view('Compras/create', [
+            // 'compras' => $compras,
             'proveedores' => $proveedores,
             'productos' => $productos,
             'fracciones' => $fracciones
@@ -50,12 +51,16 @@ class ComprasController extends Controller
     {
 
         //validamos los datos
+        $validate = Validator::make($request->all(), [
+            'unidades'      => 'required',
 
-        /*if($validate->fails()){
+        ]);
+
+        if($validate->fails()){
             $request->session()->flash('alert-danger', 'Error almacenando los datos');
 
             return redirect()->back();
-        }*/
+        }
 
 
         $Compras = new Compras();
@@ -96,7 +101,7 @@ class ComprasController extends Controller
         $proveedores = Proveedores::all();
         $fracciones = Fracciones::all();
 
-        return view('Compras/create', [
+        return view('Compras/editar', [
             'compras' => $compras,
             'proveedores' => $proveedores,
             'productos' => $productos,
@@ -107,6 +112,8 @@ class ComprasController extends Controller
     {
 
         $Compras = Compras::where('id', $compra_id)->first();
+        $stock = Stock::where('id', $compra_id)->first();
+
 
         $validate = Validator::make($request->all(), [
             'unidades'      => 'required',
@@ -136,17 +143,16 @@ class ComprasController extends Controller
 
         //Guardamos en el stock
         // $stock = new Stock();
-        // $stock->fraccion_id = $request->input('fraccion_id');
-        // $stock->producto_id =  $request->input('producto_id');
-        // $stock->fecha_ingreso = $request->input('fecha_ingreso');
-        // $stock->costo_unitario = $request->input('costo_unitario');
-        // $stock->precio_compra = $request->input('precio_compra');
+        $stock->fraccion_id = $request->input('fraccion_id');
+        $stock->producto_id =  $request->input('producto_id');
+        $stock->fecha_ingreso = $request->input('fecha_ingreso');
+        $stock->precio_compra = $request->input('precio_compra');
+        $stock->costo_unitario = $request->input('costo_unitario');
+        $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
+        $stock->unidades = $request->input('unidades');
+        $stock->compra_id = $Compras->id;
 
-        // $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
-        // $stock->unidades = $request->input('unidades');
-        // $stock->compra_id = $Compras->id;
-
-        // $stock->save();
+        $stock->save();
 
         $request->session()->flash('alert-success', 'Ingreso actualizado con exito!');
 

@@ -60,7 +60,6 @@ Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 
 Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
 Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
 Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
-Route::post('ventas/cliente', [App\Http\Controllers\ClientesController::class, 'getOneClient'])->name('clientes.one');
 
 //Ventas
 Route::get('ventas/todas/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'getVentas'])->name('ventas.lista');
