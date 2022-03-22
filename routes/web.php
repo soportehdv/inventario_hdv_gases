@@ -73,8 +73,8 @@ Route::get('ventas/descargar/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [A
 Route::get('precios/create', [App\Http\Controllers\Precios_productosController::class, 'create'])->name('precios.create.vista');
 Route::post('precios/create', [App\Http\Controllers\Precios_productosController::class, 'createPrecios'])->name('precios.create');
 Route::get('precios/mostrar', [App\Http\Controllers\Precios_productosController::class, 'getPrecios'])->name('precios.lista');
-Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'update'])->name('precios.update.vista');
 Route::post('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'updatePrecios'])->name('precios.update');
+Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productosController::class, 'update'])->name('precios.update.vista');
 
 //Detalle de ventas
 Route::get('ventas/detalle/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getDetalle'])->name('ventas.detalle');
@@ -83,6 +83,8 @@ Route::get('detalles/descargar/{venta_id}', [App\Http\Controllers\Detalle_ventas
 //Compras
 Route::get('compras/create', [App\Http\Controllers\ComprasController::class, 'create'])->name('compras.create.vista');
 Route::post('compras/create', [App\Http\Controllers\ComprasController::class, 'createCompras'])->name('compras.create');
+Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'update'])->name('compras.update.vista');
+Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
 
 //Lista de precios

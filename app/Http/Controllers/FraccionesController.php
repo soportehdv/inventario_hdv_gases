@@ -41,7 +41,7 @@ class FraccionesController extends Controller
         $fraccion->unidad = $request->input('unidad');
 
         $fraccion->save();
-        $request->session()->flash('alert-success', 'Usuario registrado con exito!');
+        $request->session()->flash('alert-success', 'Fraccion registrado con exito!');
 
 
         return redirect()->route('fracciones.lista');
@@ -77,7 +77,7 @@ class FraccionesController extends Controller
 
         $fraccion->save();
 
-        $request->session()->flash('alert-success', 'Precio actualizado con exito!');
+        $request->session()->flash('alert-success', 'Fracion actualizada con exito!');
 
 
         return redirect()->route('fracciones.lista');
