@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Inventarios-HDV',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,8 +45,8 @@ return [
     |
     */
 
-    'logo' => '<b>BET</b>-EL',
-    'logo_img' => 'vendor/adminlte/dist/img/logo_farmacia.jpeg',
+    'logo' => '<b>Inventarios</b>-Gases',
+    'logo_img' => 'vendor/adminlte/dist/img/logoHDV.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -242,45 +242,31 @@ return [
             'role'        => 'admin'
         ],
         [
-            'text' => 'Proveedores',
-            'url'  => 'proveedor/list',
-            'icon' => 'fas fa-fw fa-user',
-            'role'        => 'admin'
+            'text'    => 'Crear producto',
+            'url'     => 'productos/list',
+            'icon'    => 'fas fa-fw fa-plus-circle',
+            'role'        => 'inventario',
 
         ],
         [
-            'text' => 'Clientes',
+            'text' => 'Ingresar producto',
+            'url'  => 'compras/lista',
+            'icon' => 'fas fa-fw fa-share',
+            'role'        => 'inventario'
+
+        ],
+        [
+            'text' => 'Responsables',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-lock',
             'role'        => 'ventas'
 
         ],
         [
-            'text' => 'Compras',
-            'url'  => 'compras/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role'        => 'inventario'
-
-        ],
-        [
-            'text' => 'Nombres precios',
-            'url'  => 'nombres/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
-
-        ],
-        [
-            'text' => 'Fracciones',
-            'url'  => 'fracciones/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
-
-        ],
-        [
-            'text'    => 'Productos',
-            'url'     => 'productos/list',
-            'icon'    => 'fas fa-fw fa-share',
-            'role'        => 'inventario',
+            'text' => 'Proveedores',
+            'url'  => 'proveedor/list',
+            'icon' => 'fas fa-fw fa-user',
+            'role'        => 'admin'
 
         ],
         [
@@ -290,8 +276,8 @@ return [
             'role'        => 'inventario',
 
         ],
-        
-       /* [
+
+        [
             'text' => 'Ventas',
             'url'  => 'ventas/list',
             'icon' => 'fas fa-fw fa-lock',
@@ -313,10 +299,31 @@ return [
                     'role' => 'ventas',
                 ],
             ],
-        ],*/
-        
-       
-       
+        ],
+        [
+            'text' => 'Lotes',
+            'url'  => 'lotes/todos',
+            'icon' => 'fas fa-fw fa-lock',
+            'role'        => 'admin'
+
+        ],
+        [
+            'text' => 'Nombres precios',
+            'url'  => 'nombres/lista',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+        [
+            'text' => 'Fracciones',
+            'url'  => 'fracciones/lista',
+            'icon' => 'fas fa-fw fa-lock',
+            'role' => 'admin'
+
+        ],
+
+
+
     ],
 
     /*

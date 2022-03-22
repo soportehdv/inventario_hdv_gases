@@ -31,11 +31,10 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
+            <th>Nombre</th>
             <th scope="col">Unidades</th>
             <th scope="col">Precio compra</th>
             <th scope="col">Precio de venta</th>
-
             <th scope="col">Fecha_vence</th>
             <th scope="col">Acción</th>
 
@@ -46,11 +45,10 @@
             <tr>
                 <th scope="row">{{$lote->id}}</th>
                 <td>{{$lote->nombre}}</td>
-                <td>{{$lote->unidades}}</td>
-                <td>${{$lote->precio_compra}}</td>
-                <td>${{$lote->precio_venta}}</td>
-
-                <td>{{$lote->fecha_vence}}</td>
+                  <td>{{$lote->unidades}}</td>
+                  <td>${{$lote->precio_compra}}</td>
+                  <td>${{$lote->precio_venta}}</td>
+                  <td>{{$lote->fecha_vence}}</td>
 
                 <td><a href="{{route('lotes.update.vista', $lote->id)}}" class="btn btn-success mb-2">Detalle</a>
                 </td>

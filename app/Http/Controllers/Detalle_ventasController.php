@@ -16,7 +16,7 @@ class Detalle_ventasController extends Controller
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
             ->join('lotes', 'lotes.id', '=', 'detalle_ventas.lote_id')
             ->join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('detalle_ventas.id', 'lotes.nombre', 'precios_productos.precio', 'detalle_ventas.unidades')
+            ->select('detalle_ventas.id as id', 'lotes.nombre as nombre', 'precios_productos.precio as precio', 'detalle_ventas.unidades as unidades')
             ->get();
 
         return view('detalle/mostrar', [
