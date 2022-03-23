@@ -15,8 +15,6 @@ use App\Models\Clientes;
 use App\Models\Detalle_ventas;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
-use App\Models\Compras;
-
 
 
 
@@ -123,7 +121,6 @@ class VentasController extends Controller
 
     public function createVenta(Request $request)
     {
-
         $unidades = $request->input('unidades');
         $producto_id = $request->input('lote_id');
         $stock_id = $request->input('stock_id');
@@ -138,43 +135,31 @@ class VentasController extends Controller
 
         $i = 0;
         $monto_final = 0;
-
-        foreach ($stock_id as $stock) {
-
-            $stock = Stock::where('stock.id', $stock)
-                ->join('productos', 'productos.id', '=', 'stock.producto_id')
-                ->select('stock.*', 'productos.nombre as producto')
+        foreach ($producto_id as $lote) {
+            $lotes = Lotes::where('lotes.id', $lote)
+                ->join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
+                ->select('lotes.*', 'precios_productos.precio as precio', 'lotes.id as id')
                 ->first();
-            $compras = Compras::all()->first();
-            $lotes = Lotes::all()->first();
 
+            if ($unidades[$i] > $lotes->unidades) {
 
-            
-            if ($unidades[$i] > $stock->unidades && $unidades[$i] > $compras->unidades) {
-
-                $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
+                $request->session()->flash('alert-danger', "No hay suficientes $lotes->nombre, quedan solo $lotes->unidades ");
                 return redirect()->back();
             }
 
-            $stock->unidades = $stock->unidades - $unidades[$i];
-            $stock->save();
-            $compras->unidades = $compras->unidades - $unidades[$i];
-            $compras->save();
-
-            // ---------------------factura o historial
+            $lotes->unidades = $lotes->unidades - $unidades[$i];
+            $lotes->save();
 
             $detalle = new Detalle_ventas();
-            $detalle->producto_id = $stock->producto_id;
-            $detalle->venta_id = $venta->id; //usuario quien entrego
+            $detalle->producto_id = $lotes->producto_id;
+            $detalle->venta_id = $venta->id;
             $detalle->lote_id = $lotes->id;
 
             $detalle->unidades = $unidades[$i];
             $detalle->save();
 
             $monto_final += $lotes->precio * $unidades[$i];
-
-        }        
-
+        }
 
         $monto_impuesto = $monto_final * 0.13;
         $monto_final = $monto_final + $monto_impuesto;

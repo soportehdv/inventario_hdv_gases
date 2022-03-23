@@ -43,8 +43,6 @@ Route::post('productos/create', [App\Http\Controllers\ProductosController::class
 Route::get('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update.vista');
 Route::post('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'updateProductos'])->name('productos.update');
 Route::get('productos/list', [App\Http\Controllers\ProductosController::class, 'getProductos'])->name('productos.lista');
-Route::get('productos/stock', [App\Http\Controllers\ProductosController::class, 'getProductosStock'])->name('productos.lis');
-Route::get('productos/sin-stock', [App\Http\Controllers\ProductosController::class, 'sinStock'])->name('productos.list');
 
 //Lotes
 Route::get('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'create'])->name('lotes.create.vista');
@@ -85,6 +83,7 @@ Route::post('compras/create', [App\Http\Controllers\ComprasController::class, 'c
 Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'update'])->name('compras.update.vista');
 Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
+
 
 //Lista de precios
 Route::get('nombres/create', [App\Http\Controllers\listapreciosController::class, 'create'])->name('listaprecios.create.vista');

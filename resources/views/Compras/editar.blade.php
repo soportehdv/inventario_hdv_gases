@@ -16,6 +16,7 @@
 
 
     <div class="container">
+
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
@@ -27,7 +28,7 @@
         <div class="card">
             <div class="card-body">
                 <form method="POST"
-                    action="{{ !isset($compras) ? route('compras.create') : route('compras.update', $compras->id) }}">
+                    action="{{route('compras.update', $compras->id)}}">
                     @csrf
 
                     <div class="form-group">
@@ -37,8 +38,8 @@
 
                                 <select name="proveedor_id" class="form-control">
                                     @foreach ($proveedores as $proveedor)
-                                        <option data-tokens="{{ $proveedor->nombre }}" value="{{ $proveedor->id }}">
-                                            {{ $proveedor->nombre }}</option>
+                                        <option value="{{ $proveedor->id }}" @if($compras->proveedor_id=== $proveedor->id) selected='selected' @endif>{{ $proveedor->nombre }}</option>
+
                                     @endforeach
                                 </select>
                             </div>
@@ -46,13 +47,13 @@
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha de ingreso </label>
                                 <input type="date" class="form-control" name="fecha_ingreso"
-                                    value="{{ isset($compras) ? $compras->fecha_ingreso : '' }}">
+                                    value="{{$compras->fecha_ingreso}}">
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha Vencimiento </label>
                                 <input type="date" class="form-control" name="fecha_vencimiento"
-                                    value="{{ isset($compras) ? $compras->fecha_vencimiento : '' }}">
+                                    value="{{$compras->fecha_vencimiento}}">
                             </div>
                         </div>
 
@@ -61,8 +62,7 @@
                                 <label for="">Producto </label>
                                 <select id="producto" name="producto_id" class="form-control">
                                     @foreach ($productos as $producto)
-                                            <option value="{{ $producto->id }}" @if($compras->producto_id=== $producto->id) selected='selected' @endif>{{ $producto->nombre }}</option>
-
+                                            <option value="{{ $producto->id }}" @if($compras->producto_id=== $producto->id) selected='selected' @endif>{{ $producto->serial }}</option>
                                     @endforeach
                                 </select>
 
@@ -80,7 +80,7 @@
                             <div class="col-sm-4">
                                 <label for="">Precio compra </label>
                                 <input type="number" min="0" class="form-control" name="precio_compra"
-                                    value="{{ isset($compras) ? $compras->precio_compra : '' }}"
+                                    value="{{$compras->precio_compra}}"
                                     placeholder="Precio compra">
                             </div>
                         </div>
@@ -90,21 +90,21 @@
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Unidades </label>
                             <input type="number" min="0" class="form-control" name="unidades"
-                                value="{{ isset($compras) ? $compras->unidades : '' }}" placeholder="Precio compra">
+                                value="{{$compras->unidades}}" placeholder="Precio compra">
 
                         </div>
 
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Número de lote </label>
                             <input type="number" min="0" class="form-control" name="nlote"
-                                value="{{ isset($compras) ? $compras->nlote : '' }}" aria-describedby="emailHelp"
+                                value="{{$compras->nlote}}" aria-describedby="emailHelp"
                                 placeholder="Numero de lote">
                         </div>
 
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Costo unitario </label>
                             <input type="number" min="0" class="form-control" name="costo_unitario"
-                                value="{{ isset($compras) ? $compras->costo_unitario : '' }}"
+                                value="{{$compras->costo_unitario}}"
                                 aria-describedby="emailHelp" placeholder="Valor unitario">
                         </div>
                     </div>

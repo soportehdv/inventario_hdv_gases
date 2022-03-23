@@ -16,6 +16,22 @@
 
 
     <div class="container">
+        <div class="row">
+
+            <form method="GET" action="{{ route('compras.create') }}">
+                <div class="input-group col-sm-8">
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control" placeholder="Buscar por serial" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <br>
+
+
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
@@ -26,8 +42,7 @@
         @endforeach
         <div class="card">
             <div class="card-body">
-                <form method="POST"
-                    action="{{ !isset($compras) ? route('compras.create') : route('compras.update', $compras->id) }}">
+                <form method="POST" action="{{ route('compras.create') }}">
                     @csrf
 
                     <div class="form-group">
@@ -37,7 +52,8 @@
 
                                 <select name="proveedor_id" class="form-control">
                                     @foreach ($proveedores as $proveedor)
-                                        <option data-tokens="{{ $proveedor->nombre }}" value="{{ $proveedor->id }}">
+                                        <option value="">Seleccioné un proveedor</option>
+                                        <option value="{{ $proveedor->id }}">
                                             {{ $proveedor->nombre }}</option>
                                     @endforeach
                                 </select>
@@ -45,14 +61,12 @@
 
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha de ingreso </label>
-                                <input type="date" class="form-control" name="fecha_ingreso"
-                                    value="{{ isset($compras) ? $compras->fecha_ingreso : '' }}">
+                                <input type="date" class="form-control" name="fecha_ingreso" value="">
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha Vencimiento </label>
-                                <input type="date" class="form-control" name="fecha_vencimiento"
-                                    value="{{ isset($compras) ? $compras->fecha_vencimiento : '' }}">
+                                <input type="date" class="form-control" name="fecha_vencimiento" value="">
                             </div>
                         </div>
 
@@ -60,9 +74,10 @@
                             <div class="col-sm-4">
                                 <label for="">Producto </label>
                                 <select id="producto" name="producto_id" class="form-control">
+                                    <option value="">Seleccioné un producto</option>
                                     @foreach ($productos as $producto)
-                                        <option data-tokens="{{ $producto->nombre }}" value="{{ $producto->id }}">
-                                            {{ $producto->nombre }}</option>
+                                        <option value="{{ $producto->id }}">
+                                            {{ $producto->serial }}</option>
                                     @endforeach
                                 </select>
 
@@ -71,8 +86,9 @@
                             <div class="col-sm-4">
                                 <label for="">Fracción</label>
                                 <select id="fraccion" name="fraccion_id" class="form-control">
+                                    <option value="">Seleccioné una fracción</option>
                                     @foreach ($fracciones as $fraccion)
-                                        <option data-tokens="{{ $fraccion->nombre }}" value="{{ $fraccion->id }}">
+                                        <option value="{{ $fraccion->id }}">
                                             {{ $fraccion->nombre }}</option>
                                     @endforeach
                                 </select>
@@ -80,8 +96,7 @@
 
                             <div class="col-sm-4">
                                 <label for="">Precio compra </label>
-                                <input type="number" min="0" class="form-control" name="precio_compra"
-                                    value="{{ isset($compras) ? $compras->precio_compra : '' }}"
+                                <input type="number" min="0" class="form-control" name="precio_compra" value=""
                                     placeholder="Precio compra">
                             </div>
                         </div>
@@ -90,22 +105,20 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Unidades </label>
-                            <input type="number" min="0" class="form-control" name="unidades"
-                                value="{{ isset($compras) ? $compras->unidades : '' }}" placeholder="Precio compra">
+                            <input type="number" min="0" class="form-control" name="unidades" value=""
+                                placeholder="Precio compra">
 
                         </div>
 
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Número de lote </label>
-                            <input type="number" min="0" class="form-control" name="nlote"
-                                value="{{ isset($compras) ? $compras->nlote : '' }}" aria-describedby="emailHelp"
-                                placeholder="Numero de lote">
+                            <input type="number" min="0" class="form-control" name="nlote" value=""
+                                aria-describedby="emailHelp" placeholder="Numero de lote">
                         </div>
 
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Costo unitario </label>
-                            <input type="number" min="0" class="form-control" name="costo_unitario"
-                                value="{{ isset($compras) ? $compras->costo_unitario : '' }}"
+                            <input type="number" min="0" class="form-control" name="costo_unitario" value=""
                                 aria-describedby="emailHelp" placeholder="Valor unitario">
                         </div>
                     </div>

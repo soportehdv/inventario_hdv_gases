@@ -32,8 +32,8 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="exampleInputEmail1">Nombre </label>
-                        <input type="text" class="form-control" name="name" value="{{(isset($producto))? $producto->nombre: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
+                            <label for="exampleInputEmail1">Serial </label>
+                        <input type="text" class="form-control" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial">
 
                         </div>
 
@@ -45,8 +45,8 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="">Ubicación </label>
-                        <input type="text" class="form-control" name="ubicacion" value="{{(isset($producto))? $producto->ubicacion: ''}}" placeholder="Ubicación">
+                            <label for="">Presentación (m3) </label>
+                        <input type="number" class="form-control" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación">
 
                         </div>
 
@@ -56,8 +56,8 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <label for="">Componente </label>
-                            <input type="text" class="form-control" name="componente" value="{{(isset($producto))? $producto->componente: ''}}" placeholder="Componente">
+                            <label for="">Color </label>
+                            <input type="text" class="form-control" name="color" value="{{(isset($producto))? $producto->color: ''}}" placeholder="Color">
                         </div>
                     </div>
                 </div>

@@ -15,11 +15,11 @@ class ProductosMigration extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('serial');
             $table->string('cod_barra');
             $table->string('registro');
-            $table->string('ubicacion');
-            $table->string('componente');
+            $table->integer('presentacion');
+            $table->string('color');
             $table->timestamps();
         });
     }
