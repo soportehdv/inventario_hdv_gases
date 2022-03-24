@@ -21,7 +21,7 @@
 
             </div>
 
-            <div class="col-sm-2" >
+            <div class="col-sm-2">
                 <form method="GET" action="{{ route('clientes.lista') }}">
                     <label>Ordenar por:</label>
                     <select class="form-control" name="filtro">
@@ -49,6 +49,8 @@
         @endif
     @endforeach
     <br>
+    <div class="container">
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -83,5 +85,6 @@
             @endforeach
         </tbody>
     </table>
+    </div>
     </div>
 @endsection

@@ -25,7 +25,7 @@ class ComprasController extends Controller
         $compras = Compras::join('fracciones', 'fracciones.id', '=', 'compras.fraccion_id')
             ->join('productos', 'productos.id', '=', 'compras.producto_id')
             ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-            ->select('productos.serial as producto', 'proveedores.nombre as proveedor', 'fracciones.nombre as fraccion', 'compras.*')
+            ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'proveedores.nombre as proveedor', 'fracciones.nombre as fraccion', 'compras.*')
             ->get();
 
         return view('compras/lista', [
@@ -108,7 +108,7 @@ class ComprasController extends Controller
             'fracciones' => $fracciones
         ]);
     }
-    public function updatecompras(Request $request, $ss)
+    public function updatecompras(Request $request, $compra_id)
     {
 
         $Compras = Compras::where('id', $compra_id)->first();

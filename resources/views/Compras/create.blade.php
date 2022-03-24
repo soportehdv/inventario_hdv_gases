@@ -16,20 +16,7 @@
 
 
     <div class="container">
-        <div class="row">
-
-            <form method="GET" action="{{ route('compras.create') }}">
-                <div class="input-group col-sm-8">
-                    <div class="form-outline">
-                        <input type="search" id="form1" class="form-control" placeholder="Buscar por serial" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-        <br>
+          <br>
 
 
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -100,6 +87,7 @@
                                     placeholder="Precio compra">
                             </div>
                         </div>
+                       
                     </div>
 
                     <div class="row">

@@ -15,7 +15,7 @@
 
 
 
-    <div class="container">
+    <div class="">
         <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2">Añadir nuevo</a>
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
@@ -30,10 +30,14 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Producto</th>
+                    <th>Serial</th>
+                    <th>Codigo</th>
+                    <th>N° Registro</th>
+                    <th>Color</th>
+                    <th>m3</th>
                     <th>Fracción</th>
                     <th>Lote</th>
-                    <th>Fecha_ingreso</th>
+                    <th>Ingreso</th>
                     <th>Proveedor</th>
                     <th>Unidades</th>
                     <th>Precio Compra</th>
@@ -49,6 +53,10 @@
                     <tr>
                         <th>{{ $compra->id }}</th>
                         <td>{{ $compra->producto }}</td>
+                        <td>{{ $compra->barras }}</td>
+                        <td>{{ $compra->sanitario }}</td>
+                        <td>{{ $compra->color }}</td>
+                        <td>{{ $compra->present }}</td>
                         <td>{{ $compra->fraccion }}</td>
                         <td>{{ $compra->nlote }}</td>
                         <td>{{ $compra->fecha_ingreso }}</td>

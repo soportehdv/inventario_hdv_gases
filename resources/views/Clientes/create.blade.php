@@ -44,7 +44,6 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
 
                         <div class="col-sm-4">
                             <div class="form-group">
-
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">NIT </label>
                                     <input type="text" class="form-control" name="nit"
@@ -56,7 +55,6 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                         </div>
 
                         <div class="col-sm-4">
-
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Registro </label>
                                 <input type="text" class="form-control" name="registro"
@@ -103,8 +101,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                                     {{-- <option value="coordinador">Coordinador</option>
                                     <option value="otros">Otros</option> --}}
                                     @foreach ($array as $item)
-                                        <option value="{{ $item }}"
-                                            @if ($cliente->tipo === $item) selected='selected' @endif>
+                                        <option value="{{ $item }}">
                                             {{ $item }}</option>
                                     @endforeach
 
