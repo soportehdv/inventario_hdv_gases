@@ -8,6 +8,7 @@ use App\Models\Stock;
 use App\Models\Proveedores;
 use App\Models\Fracciones;
 use App\Models\Productos;
+use App\Models\Estados;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -22,10 +23,9 @@ class ComprasController extends Controller
     public function getCompras()
     {
 
-        $compras = Compras::join('fracciones', 'fracciones.id', '=', 'compras.fraccion_id')
-            ->join('productos', 'productos.id', '=', 'compras.producto_id')
-            ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-            ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'proveedores.nombre as proveedor', 'fracciones.nombre as fraccion', 'compras.*')
+        $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
+            ->join('estados', 'estados.id', '=', 'compras.estado_id')
+            ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado', 'compras.*')
             ->get();
 
         return view('compras/lista', [
@@ -34,21 +34,20 @@ class ComprasController extends Controller
     }
     public function create()
     {
-        // $compras = Compras::all();
+        $estado = Estados::all();
         $productos = Productos::all();
-        $proveedores = Proveedores::all();
-        $fracciones = Fracciones::all();
+        // $fracciones = Fracciones::all();
 
         return view('Compras/create', [
-            // 'compras' => $compras,
-            'proveedores' => $proveedores,
+            'estado' => $estado,
             'productos' => $productos,
-            'fracciones' => $fracciones
+            // 'fracciones' => $fracciones
         ]);
     }
 
     public function createCompras(Request $request)
     {
+        // dd($request->all());
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
@@ -57,36 +56,45 @@ class ComprasController extends Controller
         ]);
 
         if($validate->fails()){
-            $request->session()->flash('alert-danger', 'Error almacenando los datos');
+            $request->session()->flash('alert-danger', 'Error en el almacenando los datos');
 
             return redirect()->back();
         }
 
 
         $Compras = new Compras();
-        $Compras->fraccion_id = $request->input('fraccion_id');
+        $Compras->remision = $request->input('remision');
         $Compras->producto_id =  $request->input('producto_id');
+        $Compras->estado_id =  $request->input('estado_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
-        $Compras->precio_compra = $request->input('precio_compra');
-        $Compras->costo_unitario = $request->input('costo_unitario');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
-        $Compras->nlote = $request->input('nlote');
-        $Compras->proveedor_id = $request->input('proveedor_id');
+        $Compras->lote = $request->input('lote');
+        $Compras->limpieza = $request->input('limpieza');
+        $Compras->sello = $request->input('sello');
+        $Compras->eti_producto = $request->input('eti_producto');
+        $Compras->prueba = $request->input('prueba');
+        $Compras->estandar = $request->input('estandar');
+        $Compras->eti_lote = $request->input('eti_lote');
+        $Compras->integridad = $request->input('integridad');
+        // $Compras->precio_compra = $request->input('precio_compra');
+        // $Compras->costo_unitario = $request->input('costo_unitario');
+        // $Compras->nlote = $request->input('nlote');
+        // $Compras->fraccion_id = $request->input('fraccion_id');
 
         $Compras->save();
 
         //Guardamos en el stock
         $stock = new Stock();
-        $stock->fraccion_id = $request->input('fraccion_id');
         $stock->producto_id =  $request->input('producto_id');
+        $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_ingreso = $request->input('fecha_ingreso');
-        $stock->costo_unitario = $request->input('costo_unitario');
-        $stock->precio_compra = $request->input('precio_compra');
-
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');
+        
         $stock->compra_id = $Compras->id;
+        // $stock->costo_unitario = $request->input('costo_unitario');
+        // $stock->fraccion_id = $request->input('fraccion_id');
 
         $stock->save();
 
@@ -98,14 +106,15 @@ class ComprasController extends Controller
     {
         $compras = Compras::where('id', $id)->first();
         $productos = Productos::all();
-        $proveedores = Proveedores::all();
-        $fracciones = Fracciones::all();
+        $estado = Estados::all();
+
+        // $fracciones = Fracciones::all();
 
         return view('Compras/editar', [
             'compras' => $compras,
-            'proveedores' => $proveedores,
             'productos' => $productos,
-            'fracciones' => $fracciones
+            'estado' => $estado,
+            // 'fracciones' => $fracciones
         ]);
     }
     public function updatecompras(Request $request, $compra_id)
@@ -127,15 +136,24 @@ class ComprasController extends Controller
 
         //validamos los datos
         // $Compras = new Compras();
-        $Compras->fraccion_id = $request->input('fraccion_id');
+        $Compras->remision = $request->input('remision');
         $Compras->producto_id =  $request->input('producto_id');
+        $Compras->estado_id =  $request->input('estado_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
-        $Compras->precio_compra = $request->input('precio_compra');
-        $Compras->costo_unitario = $request->input('costo_unitario');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
-        $Compras->nlote = $request->input('nlote');
-        $Compras->proveedor_id = $request->input('proveedor_id');
+        $Compras->lote = $request->input('lote');
+        $Compras->limpieza = $request->input('limpieza');
+        $Compras->sello = $request->input('sello');
+        $Compras->eti_producto = $request->input('eti_producto');
+        $Compras->prueba = $request->input('prueba');
+        $Compras->estandar = $request->input('estandar');
+        $Compras->eti_lote = $request->input('eti_lote');
+        $Compras->integridad = $request->input('integridad');
+
+        // $Compras->nlote = $request->input('nlote');
+        // $Compras->precio_compra = $request->input('precio_compra');
+        // $Compras->fraccion_id = $request->input('fraccion_id');
 
         $Compras->save();
 
@@ -143,14 +161,14 @@ class ComprasController extends Controller
 
         //Guardamos en el stock
         // $stock = new Stock();
-        $stock->fraccion_id = $request->input('fraccion_id');
         $stock->producto_id =  $request->input('producto_id');
+        $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_ingreso = $request->input('fecha_ingreso');
-        $stock->precio_compra = $request->input('precio_compra');
-        $stock->costo_unitario = $request->input('costo_unitario');
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');
         $stock->compra_id = $Compras->id;
+        // $stock->precio_compra = $request->input('precio_compra');
+        // $stock->fraccion_id = $request->input('fraccion_id');
 
         $stock->save();
 

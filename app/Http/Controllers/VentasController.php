@@ -106,7 +106,7 @@ class VentasController extends Controller
             ->get();
 
         $stocks = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->select('stock.*', 'productos.nombre as producto')
+            ->select('stock.*', 'productos.serial as producto')
             ->get();
               
         $clientes = Clientes::all();
@@ -143,7 +143,7 @@ class VentasController extends Controller
 
             $stock = Stock::where('stock.id', $stock)
                 ->join('productos', 'productos.id', '=', 'stock.producto_id')
-                ->select('stock.*', 'productos.nombre as producto')
+                ->select('stock.*', 'productos.serial as producto')
                 ->first();
             $compras = Compras::all()->first();
             $lotes = Lotes::all()->first();

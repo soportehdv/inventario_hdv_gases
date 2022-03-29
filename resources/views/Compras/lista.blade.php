@@ -30,20 +30,16 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Serial</th>
-                    <th>Codigo</th>
-                    <th>N° Registro</th>
-                    <th>Color</th>
-                    <th>m3</th>
-                    <th>Fracción</th>
-                    <th>Lote</th>
                     <th>Ingreso</th>
-                    <th>Proveedor</th>
+                    <th>Codigo</th>
+                    <th>Remisión</th>
+                    <th>Lote</th>
+                    <th>Vencimiento</th>
+                    <th>Serial</th>
+                    <th>N° Registro</th>
+                    <th>m3</th>
+                    <th>Color</th>
                     <th>Unidades</th>
-                    <th>Precio Compra</th>
-                    <th>Precio unitario</th>
-
-
                     <th>Acción</th>
 
                 </tr>
@@ -52,18 +48,16 @@
                 @foreach ($compras as $compra)
                     <tr>
                         <th>{{ $compra->id }}</th>
-                        <td>{{ $compra->producto }}</td>
-                        <td>{{ $compra->barras }}</td>
-                        <td>{{ $compra->sanitario }}</td>
-                        <td>{{ $compra->color }}</td>
-                        <td>{{ $compra->present }}</td>
-                        <td>{{ $compra->fraccion }}</td>
-                        <td>{{ $compra->nlote }}</td>
                         <td>{{ $compra->fecha_ingreso }}</td>
-                        <td>{{ $compra->proveedor }}</td>
+                        <td>{{ $compra->barras }}</td>
+                        <td>{{ $compra->remision }}</td>
+                        <td>{{ $compra->lote }}</td>
+                        <td>{{ $compra->fecha_vencimiento }}</td>
+                        <td>{{ $compra->producto }}</td>
+                        <td>{{ $compra->sanitario }}</td>
+                        <td>{{ $compra->present }}</td>
+                        <td>{{ $compra->color }}</td>
                         <td>{{ $compra->unidades }}</td>
-                        <td>${{ $compra->precio_compra }}</td>
-                        <td>${{ $compra->costo_unitario }}</td>
                         <td><a href="{{ route('compras.update.vista', $compra->id) }}"
                                 class="btn btn-success mb-2">Editar</a>
                         </td>

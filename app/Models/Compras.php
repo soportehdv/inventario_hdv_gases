@@ -10,15 +10,24 @@ class Compras extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fraccion_id',
+        'remision',
         'producto_id',
+        'estado_id',
         'fecha_ingreso',
-        'precio_compra',
-        'costo_unitario',
         'fecha_vencimiento',
         'unidades',
-        'nlote',
-        'proveedor_id',
+        'lote',
+        'limpieza',
+        'sello',
+        'eti_producto',
+        'prueba',
+        'estandar',
+        'eti_lote',
+        'integridad'
+
+        // 'costo_unitario',
+        // 'precio_compra',
+        // 'fraccion_id',
     ];
 
 }

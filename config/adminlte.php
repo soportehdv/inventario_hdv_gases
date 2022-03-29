@@ -270,6 +270,13 @@ return [
 
         ],
         [
+            'text' => 'Ubicaciones',
+            'url'  => 'ubicacion/lista',
+            'icon' => 'fas fa-fw fa-user',
+            'role'        => 'admin'
+
+        ],
+        [
             'text'    => 'Stock',
             'url'     => 'stock/list',
             'icon'    => 'fas fa-fw fa-share',
