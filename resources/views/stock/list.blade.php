@@ -27,65 +27,70 @@
                 <a href="{{ route('ventas.descargar', ['filtro', 'fecha_inicio', 'fecha_final', 'id']) }}"
                     class="btn btn-primary mb-2">Descargar</a>
             </div>
-        </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <form method="GET" action="{{ route('stock.list') }}">
-                        <label>Ordenar por:</label>
-                        <select class="form-control" name="filtro">
-                            <option value="1">Hoy </option>
-                            <option value="4">Más recientes </option>
-                            <option value="3">Antiguos </option>
-                        </select>
-                </div>
-
-                <div class="col-sm-2" style="padding-top: 0.5em">
-                    <button type="submit" class="btn btn-primary  mt-4">Buscar</button>
-
-                </div>
-                <!-- Button trigger modal -->
-                <div class="col-sm-7" style="padding-top: 0.5em">
-
-                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="float: right">
-                    Filtrar por fecha
-                </button> --}}
-                </div>
-                
-                <!-- Modal -->
-                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Seleccione fechas para filtrar</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                              <form method="GET" action="{{route('stock.list', ['filtro' => 4])}}">
-                                @csrf
-                                
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Fecha Inicial</label>
-                                  <input type="date" class="form-control" name="fecha_inicial" placeholder="Fecha inicial">
-                                </div>
-                                
-                                  <button type="submit" class="btn btn-primary">Filtrar</button>
-                                
-                              </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                            </div>
-                        </div>
+        </div>{{-- <!-- Modal --> --}}
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Seleccione fechas para filtrar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div> --}}
+                    <div class="modal-body">
+                        <form method="GET" action="{{ route('stock.list', ['filtro' => 3]) }}">
+
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Fecha Inicial</label>
+                                <input type="date" class="form-control" name="fecha_inicio" placeholder="Fecha inicial">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Fecha Final</label>
+                                <input type="date" class="form-control" name="fecha_final" placeholder="Fecha final">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form method="GET" action="{{ route('stock.list') }}">
+                    <label>Ordenar por:</label>
+                    <select class="form-control" name="filtro">
+                        <option value="1">Hoy </option>
+                        <option value="2">Más recientes </option>
+                        <option value="3">Antiguos </option>
+                    </select>
             </div>
 
-            </form>
-        
+            <div class="col-sm-2" style="padding-top: 0.5em">
+                <button type="submit" class="btn btn-primary  mt-4">Buscar</button>
+
+            </div>
+            <!-- Button trigger modal -->
+            <div class="col-sm-7" style="padding-top: 0.5em">
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    style="float: right">
+                    Filtrar por fecha
+                </button>
+            </div>
+
+
+        </div>
+
+        </form>
+
 
 
 
