@@ -36,33 +36,6 @@ class ProductosController extends Controller
         ]);
     }
 
-    public function sinStock()
-    {
-
-        $Productos = Productos::join('lotes', 'producto_id', '=', 'productos.id')
-            ->groupBy('lotes.producto_id')
-            ->select('productos.id', 'productos.nombre', DB::raw('SUM(lotes.unidades) AS cantidad'))
-            ->having(DB::raw('SUM(lotes.unidades) = 0'))
-            ->get();
-
-        return view('productos/lista', [
-            'productos' => $Productos
-        ]);
-    }
-
-    public function getProductosStock()
-    {
-
-        $Productos = Productos::join('lotes', 'producto_id', '=', 'productos.id')
-            ->groupBy('lotes.producto_id')
-            ->select('productos.id', 'productos.nombre', DB::raw('SUM(lotes.unidades) AS cantidad'))
-            ->get();
-
-        return view('productos/lista', [
-            'productos' => $Productos
-        ]);
-    }
-
     public function create()
     {
         $proveedores = Proveedores::all();
@@ -78,7 +51,7 @@ class ProductosController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'name'      => 'required',
+            'serial'      => 'required',
 
         ]);
         if ($validate->fails()) {
@@ -87,12 +60,11 @@ class ProductosController extends Controller
             return redirect()->back();
         }
         $Productos = new Productos();
-        $Productos->nombre = $request->input('name');
+        $Productos->serial = $request->input('serial');
         $Productos->cod_barra = $request->input('cod_barra');
-        $Productos->ubicacion = $request->input('ubicacion');
+        $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');
-        $Productos->componente = $request->input('componente');
-        $Productos->cod_barra = $request->input('cod_barra');
+        $Productos->color = $request->input('color');
         $Productos->save();
 
 
@@ -122,7 +94,7 @@ class ProductosController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'name'      => 'required',
+            'serial'      => 'required',
 
         ]);
 
@@ -131,12 +103,11 @@ class ProductosController extends Controller
 
             return redirect()->back();
         }
-        $Productos->nombre = $request->input('name');
+        $Productos->serial = $request->input('serial');
         $Productos->cod_barra = $request->input('cod_barra');
-        $Productos->ubicacion = $request->input('ubicacion');
+        $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');
-        $Productos->componente = $request->input('componente');
-        $Productos->cod_barra = $request->input('cod_barra');
+        $Productos->color = $request->input('color');
 
         $Productos->save();
 

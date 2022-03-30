@@ -15,23 +15,28 @@ class ClientesController extends Controller
         $this->middleware('auth');
     }
 
-    public function getClientes($filtro = null)
+    public function getClientes(Request $request)
     {
 
-        if ($filtro == null)
-            $Clientes = Clientes::all();
+        if ($request->get('filtro') == null)
+            $clientes = Clientes::all();
+
+        
         else
-            if ($filtro == 1) //mas reciente
+            if($request->get('filtro') == 1) //mas reciente
             $clientes = Clientes::orderby('created_at', 'desc')->get();
+
+
         else
-                if ($filtro == 2) //tipo
+            if ($request->get('filtro') == 2 ) //tipo
             $clientes = Clientes::where('tipo', 'fiscal')->orderby('created_at', 'asc')->get();
+
         else
-                    if ($filtro == 3) //Alfabetico
-            $clientes = Clientes::orderby('nombre', 'desc')->get();
+        if ($request->get('filtro') == 3) //Alfabetico
+            $clientes = Clientes::orderby('nombre', 'asc')->get();
 
         return view('Clientes/mostrar', [
-            'clientes' => $Clientes
+            'clientes' => $clientes
         ]);
     }
 
@@ -59,11 +64,11 @@ class ClientesController extends Controller
         $Clientes = new Clientes();
         $Clientes->email = ' ';
         $Clientes->nombre =  $request->input('name');
-        $Clientes->nit = ($request->input('tipo') == 'fiscal') ? $request->input('nit') : 'N/A';
-        $Clientes->departamento = ($request->input('tipo') == 'fiscal') ? $request->input('departamento') : 'N/A';
-        $Clientes->giro = ($request->input('tipo') == 'fiscal') ? $request->input('giro') : 'N/A';
-        $Clientes->tipo = ($request->input('tipo') == 'fiscal') ? $request->input('tipo') : 'N/A';
-        $Clientes->registro = ($request->input('tipo') == 'fiscal') ? $request->input('registro') : 'N/A';
+        $Clientes->nit = $request->input('nit');
+        $Clientes->departamento = $request->input('departamento');
+        $Clientes->giro = $request->input('giro');
+        $Clientes->tipo = $request->input('tipo');
+        $Clientes->registro = $request->input('registro');
         $Clientes->direccion = $request->input('direccion');
 
 
@@ -92,7 +97,6 @@ class ClientesController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required',
 
         ]);
 
@@ -104,11 +108,11 @@ class ClientesController extends Controller
 
         $Clientes->email = ' ';
         $Clientes->nombre =  $request->input('name');
-        $Clientes->nit = ($request->input('tipo') == 'fiscal') ? $request->input('nit') : 'N/A';
-        $Clientes->departamento = ($request->input('tipo') == 'fiscal') ? $request->input('departamento') : 'N/A';
-        $Clientes->giro = ($request->input('tipo') == 'fiscal') ? $request->input('giro') : 'N/A';
-        $Clientes->tipo = ($request->input('tipo') == 'fiscal') ? $request->input('tipo') : 'N/A';
-        $Clientes->registro = ($request->input('tipo') == 'fiscal') ? $request->input('registro') : 'N/A';
+        $Clientes->nit = $request->input('nit');
+        $Clientes->departamento = $request->input('departamento');
+        $Clientes->giro = $request->input('giro');
+        $Clientes->tipo = $request->input('tipo');
+        $Clientes->registro = $request->input('registro');
         $Clientes->direccion = $request->input('direccion');
         $Clientes->save();
 

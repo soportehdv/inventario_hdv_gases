@@ -43,8 +43,6 @@ Route::post('productos/create', [App\Http\Controllers\ProductosController::class
 Route::get('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update.vista');
 Route::post('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'updateProductos'])->name('productos.update');
 Route::get('productos/list', [App\Http\Controllers\ProductosController::class, 'getProductos'])->name('productos.lista');
-Route::get('productos/stock', [App\Http\Controllers\ProductosController::class, 'getProductosStock'])->name('productos.lis');
-Route::get('productos/sin-stock', [App\Http\Controllers\ProductosController::class, 'sinStock'])->name('productos.list');
 
 //Lotes
 Route::get('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'create'])->name('lotes.create.vista');
@@ -60,7 +58,6 @@ Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 
 Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
 Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
 Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
-Route::post('ventas/cliente', [App\Http\Controllers\ClientesController::class, 'getOneClient'])->name('clientes.one');
 
 //Ventas
 Route::get('ventas/todas/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'getVentas'])->name('ventas.lista');
@@ -87,6 +84,7 @@ Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController
 Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
 
+
 //Lista de precios
 Route::get('nombres/create', [App\Http\Controllers\listapreciosController::class, 'create'])->name('listaprecios.create.vista');
 Route::post('nombres/create', [App\Http\Controllers\listapreciosController::class, 'createlistaprecios'])->name('listaprecios.create');
@@ -102,5 +100,13 @@ Route::get('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesCont
 Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesController::class, 'updatefraccion'])->name('fracciones.update');
 
 //Stock
-Route::get('stock/list', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
-// Route::get('stock/list', [App\Http\Controllers\UserController::class, 'create'])->name('user.create.vista');
+Route::get('stock/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
+// Route::get('stock/fecha', [App\Http\Controllers\StockController::class, 'fechaVista'])->name('stock.fecha');
+
+// ubicaciones
+Route::get('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'create'])->name('listaubicacion.create.vista');
+Route::post('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'createlistaubicacion'])->name('listaubicacion.create');
+Route::get('ubicacion/lista', [App\Http\Controllers\ubicacionController::class, 'getlistaubicacion'])->name('listaubicacion.lista');
+Route::get('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionController::class, 'update'])->name('listaubicacion.update.vista');
+Route::post('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionController::class, 'updatelistaubicacion'])->name('listaubicacion.update');
+

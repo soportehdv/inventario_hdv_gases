@@ -15,15 +15,26 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->integer('fraccion_id')->unsigned();
+            $table->integer('remision');
             $table->integer('producto_id')->unsigned();
+            $table->integer('estado_id')->unsigned();
             $table->date('fecha_ingreso');
-            $table->float('precio_compra');
-            $table->float('costo_unitario');
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
-            $table->integer('nlote');
-            $table->integer('proveedor_id');
+            $table->integer('lote');
+            $table->string('limpieza');
+            $table->string('sello');
+            $table->string('eti_producto');
+            $table->string('prueba');
+            $table->string('estandar');
+            $table->string('eti_lote');
+            $table->string('integridad');
+
+
+
+            // $table->float('precio_compra');
+            // $table->float('costo_unitario');
+            // $table->integer('fraccion_id')->unsigned();
             $table->timestamps();
         });
     }

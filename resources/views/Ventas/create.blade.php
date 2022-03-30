@@ -50,7 +50,7 @@
                     <div class="row" >
 
 
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             <label for="">Lote </label>
                             <select class="form-control" name="lote_id[]">
                                 @foreach($lotes as $lote)
@@ -58,6 +58,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-sm-4">
+                            <label for="">Stock </label>
+                            <select class="form-control" name="stock_id[]">
+                                @foreach($stocks as $stock)
+                                    <option value="{{$stock->id}}">{{$stock->producto}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
                         
                         <div class="col-sm-4">
                             <label for="">Unidades </label>

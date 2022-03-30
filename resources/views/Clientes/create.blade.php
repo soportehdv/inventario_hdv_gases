@@ -11,6 +11,10 @@
     </div>
 
 @endsection
+@php
+// listado de tipos
+$array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
+@endphp
 
 @section('content')
 
@@ -40,7 +44,6 @@
 
                         <div class="col-sm-4">
                             <div class="form-group">
-
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">NIT </label>
                                     <input type="text" class="form-control" name="nit"
@@ -52,7 +55,6 @@
                         </div>
 
                         <div class="col-sm-4">
-
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Registro </label>
                                 <input type="text" class="form-control" name="registro"
@@ -94,11 +96,14 @@
                         <div class="col-sm-12">
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tipo de cliente </label>
+                                <label for="exampleInputEmail1">Tipo de responsable </label>
                                 <select class="form-control" name="tipo">
-                                    <option value="fiscal">Fiscal</option>
-                                    <option value="generico">Generico</option>
-
+                                    {{-- <option value="coordinador">Coordinador</option>
+                                    <option value="otros">Otros</option> --}}
+                                    @foreach ($array as $item)
+                                        <option value="{{ $item }}">
+                                            {{ $item }}</option>
+                                    @endforeach
 
                                 </select>
                             </div>

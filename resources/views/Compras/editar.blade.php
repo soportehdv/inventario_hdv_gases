@@ -16,8 +16,6 @@
 
 
     <div class="container">
-        <br>
-
 
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
@@ -29,7 +27,7 @@
         @endforeach
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('compras.create') }}">
+                <form method="POST" action="{{ route('compras.update', $compras->id) }}">
                     @csrf
                     <style>
                         .padding_center{
@@ -38,7 +36,7 @@
                         .texto_radio{
                             text-align: center;        
                         }
-                        @media (min-width: 360px) and (max-width: 767px){
+                        @media (min-width: 400px) and (max-width: 767px){
                             .padding_center{
                                 padding-left: 0px;
                             }
@@ -64,50 +62,53 @@
 
                     <div class="form-group">
                         <div class="row">
-
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha de ingreso </label>
-                                <input type="date" class="form-control" name="fecha_ingreso" value="">
+                                <input type="date" class="form-control" name="fecha_ingreso"
+                                    value="{{ $compras->fecha_ingreso }}">
                             </div>
                             <div class="col-sm-4">
                                 <label for="">N° Remisión </label>
-                                <input type="number" min="0" class="form-control" name="remision" value=""
-                                    placeholder="Numero de remisión">
+                                <input type="number" min="0" class="form-control" name="remision"
+                                    value="{{ $compras->remision }}" placeholder="Numero de remisión">
                             </div>
                             <div class="col-sm-4">
                                 <label for="">Lote </label>
-                                <input type="number" min="0" class="form-control" name="lote" value="" placeholder="Lote">
+                                <input type="number" min="0" class="form-control" name="lote"
+                                    value="{{ $compras->lote }}" placeholder="Lote">
                             </div>
 
+
                         </div>
-                        <br>
 
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha Vencimiento </label>
-                                <input type="date" class="form-control" name="fecha_vencimiento" value="">
+                                <input type="date" class="form-control" name="fecha_vencimiento"
+                                    value="{{ $compras->fecha_vencimiento }}">
                             </div>
-
                             <div class="col-sm-4">
-                                <label for="">Serial de producto </label>
+                                <label for="">Serial </label>
                                 <select id="producto" name="producto_id" class="form-control">
-                                    <option value="">Seleccioné un serial de producto</option>
                                     @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}">
+                                        <option value="{{ $producto->id }}"
+                                            @if ($compras->producto_id === $producto->id) selected='selected' @endif>
                                             {{ $producto->serial }}</option>
                                     @endforeach
                                 </select>
+
                             </div>
+
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Cantidades </label>
-                                <input type="number" min="0" class="form-control" name="unidades" value=""
-                                    placeholder="Unidades">
+                                <input type="number" min="0" class="form-control" name="unidades"
+                                    value="{{ $compras->unidades }}" placeholder="Unidades">
 
                             </div>
-
 
                         </div>
                         <br>
+
                         <div class="row">
                             <div class="col-md-1 two-column">
                                 <div class="texto_radio">
@@ -115,13 +116,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="C" id="radiolim" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="{{$compras->limpieza}}" @if ('C' === $compras->limpieza) checked="checked" @endif id="radiolim" name="limpieza">
                                         <label class="form-check-label" for="radiolim">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="NC" id="radiolim2" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="{{$compras->limpieza}}" @if ('NC' === $compras->limpieza) checked="checked" @endif id="radiolim2" name="limpieza">
                                         <label class="form-check-label" for="radiolim2">
                                             NC
                                         </label>
@@ -134,13 +135,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="C" id="radioSello" name="sello">
+                                        <input class="form-check-input" type="radio" value="{{$compras->sello}}" @if ('C' === $compras->sello) checked="checked" @endif id="radioSello" name="sello">
                                         <label class="form-check-label" for="radioSello">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="NC" id="radioSello2" name="sello">
+                                        <input class="form-check-input" type="radio" value="{{$compras->sello}}" @if ('NC' === $compras->sello) checked="checked" @endif id="radioSello2" name="sello">
                                         <label class="form-check-label" for="radioSello2">
                                             NC
                                         </label>
@@ -153,13 +154,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="{{$compras->eti_producto}}" @if ('C' === $compras->eti_producto) checked="checked" @endif id="radioEtiP" name="eti_producto">
                                     <label class="form-check-label" for="radioEtiP">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiP2" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="{{$compras->eti_producto}}" @if ('NC' === $compras->eti_producto) checked="checked" @endif id="radioEtiP2" name="eti_producto">
                                     <label class="form-check-label" for="radioEtiP2">
                                         NC
                                     </label>
@@ -172,13 +173,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioPrueba" name="prueba">
+                                    <input class="form-check-input" type="radio" value="{{$compras->prueba}}" @if ('C' === $compras->prueba) checked="checked" @endif id="radioPrueba" name="prueba">
                                     <label class="form-check-label" for="radioPrueba">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioPrueba2" name="prueba">
+                                    <input class="form-check-input" type="radio" value="{{$compras->prueba}}" @if ('NC' === $compras->prueba) checked="checked" @endif id="radioPrueba2" name="prueba">
                                     <label class="form-check-label" for="radioPrueba2">
                                         NC
                                     </label>
@@ -191,13 +192,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEstandar" name="estandar">
+                                    <input class="form-check-input" type="radio" value="{{$compras->estandar}}" @if ('C' === $compras->estandar) checked="checked" @endif id="radioEstandar" name="estandar">
                                     <label class="form-check-label" for="radioEstandar">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEstandar2" name="estandar">
+                                    <input class="form-check-input" type="radio" value="{{$compras->estandar}}" @if ('NC' === $compras->estandar) checked="checked" @endif id="radioEstandar2" name="estandar">
                                     <label class="form-check-label" for="radioEstandar2">
                                         NC
                                     </label>
@@ -210,13 +211,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiLote" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="{{$compras->eti_lote}}" @if ('C' === $compras->eti_lote) checked="checked" @endif id="radioEtiLote" name="eti_lote">
                                     <label class="form-check-label" for="radioEtiLote">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiLote2" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="{{$compras->eti_lote}}" @if ('NC' === $compras->eti_lote) checked="checked" @endif id="radioEtiLote2" name="eti_lote">
                                     <label class="form-check-label" for="radioEtiLote2">
                                         NC
                                     </label>
@@ -229,13 +230,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="C" id="radioIntegridad" name="integridad">
+                                    <input class="form-check-input" type="radio" value="{{$compras->integridad}}" @if ('C' === $compras->integridad) checked="checked" @endif id="radioIntegridad" name="integridad">
                                     <label class="form-check-label" for="radioIntegridad">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioIntegridad2" name="integridad">
+                                    <input class="form-check-input" type="radio" value="{{$compras->integridad}}" @if ('NC' === $compras->integridad) checked="checked" @endif id="radioIntegridad2" name="integridad">
                                     <label class="form-check-label" for="radioIntegridad2">
                                         NC
                                     </label>
@@ -250,16 +251,14 @@
                             <select id="estado_id" name="estado_id" class="form-control">
                                 <option value="">Seleccioné una estado del producto</option>
                                 @foreach ($estado as $estad)
-                                    <option value="{{ $estad->id }}">
+                                    <option value="{{ $estad->id }}"
+                                        @if ($compras->estado_id === $estad->id) selected='selected' @endif>
                                         {{ $estad->estado }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-
-
+                        
                     </div>
-
 
                     <br>
                     <input class="btn btn-success" type="submit" value="Ingresar" />

@@ -15,11 +15,10 @@ class CreateStockTable extends Migration
     {
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
-            $table->integer('fraccion_id')->unsigned();
+            // $table->integer('fraccion_id')->unsigned();
             $table->integer('producto_id')->unsigned();
+            $table->integer('estado_id')->unsigned();
             $table->date('fecha_ingreso');
-            $table->integer('costo_unitario');
-            $table->float('precio_compra');
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
             $table->integer('compra_id')->unsigned();

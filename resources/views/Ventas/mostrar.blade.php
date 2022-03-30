@@ -26,7 +26,7 @@
   <div class="row">
     <div class="col-sm-12">
       <a href="{{route('ventas.create.vista')}}" class="btn btn-success mb-2">Vender</a>
-    <a href="{{route('ventas.descargar', ['filtro' => $filtro, 'fecha_inicio' => $fecha_inicial, 'fecha_final' => $fecha_final, 'id' => $id])}}" 
+    <a href="{{route('ventas.descargar', ['filtro', 'fecha_inicio', 'fecha_final', 'id'])}}" 
       class="btn btn-primary mb-2">Descargar</a>
 
       <div class="col-sm-2">

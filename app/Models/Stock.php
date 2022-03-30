@@ -12,11 +12,9 @@ class Stock extends Model
     protected $table = "stock";
 
     protected $fillable = [
-        'fraccion_id',
         'producto_id',
+        'estado_id',
         'fecha_ingreso',
-        'costo_unitario',
-        'precio_compra',
         'fecha_vencimiento',
         'unidades',
         'compra_id'

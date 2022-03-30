@@ -29,10 +29,10 @@
         <thead>
           <tr>
             <th scope="col">Código</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Ubicacion</th>
+            <th scope="col">Serial</th>
             <th scope="col">Registro Sanitario</th>
-            <th scope="col">Componente</th>
+            <th scope="col">Presentación (m3)</th>
+            <th scope="col">Color</th>
             <th scope="col">Cod barra</th>
 
 
@@ -44,10 +44,10 @@
             @foreach($productos as $producto)
             <tr>
                 <th scope="row">{{$producto->id}}</th>
-                <td>{{$producto->nombre}}</td>
-                <td>{{$producto->ubicacion}}</td>
+                <td>{{$producto->serial}}</td>
                 <td>{{$producto->registro}}</td>
-                <td>{{$producto->componente}}</td>
+                <td>{{$producto->presentacion}}</td>
+                <td>{{$producto->color}}</td>
                 <td>{{$producto->cod_barra}}</td>
 
                 <td>

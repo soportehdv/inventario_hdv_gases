@@ -270,6 +270,13 @@ return [
 
         ],
         [
+            'text' => 'Ubicaciones',
+            'url'  => 'ubicacion/lista',
+            'icon' => 'fas fa-fw fa-user',
+            'role'        => 'admin'
+
+        ],
+        [
             'text'    => 'Stock',
             'url'     => 'stock/list',
             'icon'    => 'fas fa-fw fa-share',
@@ -300,20 +307,20 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Lotes',
-            'url'  => 'lotes/todos',
-            'icon' => 'fas fa-fw fa-lock',
-            'role'        => 'admin'
+        // [
+        //     'text' => 'Lotes',
+        //     'url'  => 'lotes/todos',
+        //     'icon' => 'fas fa-fw fa-lock',
+        //     'role'        => 'admin'
 
-        ],
-        [
-            'text' => 'Nombres precios',
-            'url'  => 'nombres/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
+        // ],
+        // [
+        //     'text' => 'Nombres precios',
+        //     'url'  => 'nombres/lista',
+        //     'icon' => 'fas fa-fw fa-lock',
+        //     'role' => 'admin'
 
-        ],
+        // ],
         [
             'text' => 'Fracciones',
             'url'  => 'fracciones/lista',
