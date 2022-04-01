@@ -67,17 +67,10 @@
                         <div class="row">
 
 
-                            <div class="col-sm-4">
-                                <label for="">Lote </label>
-                                <select class="form-control" name="lote_id[]">
-                                    @foreach ($lotes as $lote)
-                                        <option value="{{ $lote->id }}">{{ $lote->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                           
                             <div class="col-sm-4">
                                 <label for="">Stock </label>
-                                <select class="form-control" name="stock_id[]">
+                                <select class="form-control" name="stock_id">
                                     @foreach ($stocks as $stock)
                                         <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
                                     @endforeach
@@ -87,13 +80,12 @@
 
                             <div class="col-sm-4">
                                 <label for="">Unidades </label>
-                                <input type="number" class="form-control" name="unidades[]" required>
+                                <input type="number" class="form-control" name="unidades" required>
                             </div>
 
                         </div>
                     </div>
 
-                    <div id="nueva"></div>
 
 
 
@@ -105,10 +97,4 @@
     </div>
 @endsection
 
-<script>
-    var i = 0;
-    function aparece() {
-        $button = ' <div class="row" ><div class="col-sm-8"><label for="">Lote </label><select class="form-control" name="lote_id[]">@foreach($lotes as $lote)<option value="{{$lote->id}}">{{$lote->nombre}} - ${{$lote->precio}}</option>@endforeach</select></div><div class="col-sm-4"><label for="">Unidades </label><input type="number" class="form-control" name="unidades[]" required> </div></div>'
-      $('#nueva').append($button);
-    };
-    </script>
+

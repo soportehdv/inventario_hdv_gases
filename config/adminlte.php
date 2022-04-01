@@ -256,7 +256,7 @@ return [
 
         ],
         [
-            'text' => 'Responsables',
+            'text' => 'Pedidos',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-chalkboard-teacher',
             'role'        => 'ventas'
@@ -280,7 +280,7 @@ return [
             'text'    => 'Stock',
             'url'     => 'stock/list',
             'icon'    => 'fas fa-fw fa-warehouse',
-            'role'        => 'inventario',
+            'role'        => 'ventas',
 
         ],
 

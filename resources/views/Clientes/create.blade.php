@@ -32,11 +32,20 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                 <form id="form" method="POST"
                     action="{{ !isset($cliente) ? route('clientes.create') : route('clientes.update', $cliente->id) }}">
                     @csrf
-
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nombre </label>
+                                <label for="exampleInputEmail1">Responsable </label>
+                                <input type="text" class="form-control" name="responsable"
+                                    value="{{ Auth::user()->name }}" placeholder="" disabled>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nombre recibe </label>
                                 <input type="text" class="form-control" name="name"
                                     value="{{ isset($cliente) ? $cliente->nombre : '' }}" placeholder="Nombre">
                             </div>
@@ -45,9 +54,9 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">NIT </label>
-                                    <input type="text" class="form-control" name="nit"
-                                        value="{{ isset($cliente) ? $cliente->nit : '' }}" placeholder="nit">
+                                    <label for="exampleInputEmail1">Cargo recibe</label>
+                                    <input type="text" class="form-control" name="cargorecibe"
+                                        value="{{ isset($cliente) ? $cliente->cargorecibe : '' }}" placeholder="Cargo recibe">
                                 </div>
 
 
@@ -65,22 +74,18 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">DUI </label>
-                                <input type="text" class="form-control" name="dui"
-                                    value="{{ isset($cliente) ? $cliente->dui : '' }}" placeholder="Dui">
-                            </div>
+                        
 
-                        </div>
-
+                        
                         <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Departamento </label>
-                                <input type="text" class="form-control" name="departamento"
-                                    value="{{ isset($cliente) ? $cliente->departamento : '' }}"
-                                    placeholder="Departamento">
-                            </div>
+                            <label for="">Ubicación </label>
+                            <select id="departamento" name="departamento" class="form-control">
+                                <option value="">Seleccioné una ubicación</option>
+                                @foreach ($ubicacion as $ubi)
+                                    <option value="{{ $ubi->id }}">
+                                        {{ $ubi->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-sm-4">
@@ -92,23 +97,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tipo de responsable </label>
-                                <select class="form-control" name="tipo">
-                                    {{-- <option value="coordinador">Coordinador</option>
-                                    <option value="otros">Otros</option> --}}
-                                    @foreach ($array as $item)
-                                        <option value="{{ $item }}">
-                                            {{ $item }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="row">
                         <div class="col-sm-12">

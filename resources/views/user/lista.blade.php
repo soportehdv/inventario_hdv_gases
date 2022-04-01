@@ -37,6 +37,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
+                    <th>Cargo</th>
                     <th>Email</th>
                     <th>Rol</th>
                     <th>Acción</th>
@@ -48,6 +49,7 @@
                     <tr>
                         <th>{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
+                        <td>{{ $user->cargo }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->rol }}</td>
                         <td><a href="{{ route('user.update.vista', $user->id) }}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>

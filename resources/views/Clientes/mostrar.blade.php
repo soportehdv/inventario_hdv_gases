@@ -55,11 +55,12 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Tipo</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Recibió</th>
+                <th scope="col">Cargo quien recibe</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Registro</th>
-                <th scope="col">NIT</th>
                 <th scope="col">Giro</th>
                 <th scope="col">Acción</th>
 
@@ -69,11 +70,12 @@
             @foreach ($clientes as $cliente)
                 <tr>
                     <th scope="row">{{ $cliente->id }}</th>
+                    <td>{{ $cliente->responsable }}</td>
+                    <td>{{ $cliente->cargo }}</td>
                     <td>{{ $cliente->nombre }}</td>
-                    <td>{{ $cliente->tipo }}</td>
+                    <td>{{ $cliente->cargorecibe }}</td>
                     <td>{{ $cliente->departamento }}</td>
                     <td>{{ $cliente->registro }}</td>
-                    <td>{{ $cliente->nit }}</td>
                     <td>{{ $cliente->giro }}</td>
 
 

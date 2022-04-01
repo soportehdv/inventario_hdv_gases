@@ -53,6 +53,7 @@ class UserController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'cargo'      => 'required',
             'email'     => 'required|email|unique:users',
             'rol'      => 'required',
             'password'  => 'required',
@@ -66,6 +67,7 @@ class UserController extends Controller
 
         $user = new User;
         $user->name = $request->input('name');
+        $user->cargo = $request->input('cargo');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');
@@ -93,6 +95,7 @@ class UserController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'cargo'      => 'required',
             'email'     => 'required',
             'rol'      => 'required',
             'password'  => 'required',
@@ -105,6 +108,7 @@ class UserController extends Controller
         }
 
         $user->name = $request->input('name');
+        $user->cargo = $request->input('cargo');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');

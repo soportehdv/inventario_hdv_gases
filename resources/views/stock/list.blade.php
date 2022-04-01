@@ -24,13 +24,12 @@
 
 
     <div class="container">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-sm-12">
                 <a href="{{ route('ventas.create.vista') }}" class="btn btn-success mb-2"><i class="fas fa-clipboard-check"></i> Entregar</a>
-                {{-- <a href="{{ route('ventas.descargar', ['filtro', 'fecha_inicio', 'fecha_final', 'id']) }}"
-                    class="btn btn-primary mb-2">Descargar</a> --}}
+               
             </div>
-        </div>
+        </div> --}}
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">

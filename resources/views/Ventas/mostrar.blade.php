@@ -110,7 +110,7 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Cliente</th>
+            <th scope="col">Responsable</th>
             <th scope="col">Monto</th>
             <th scope="col">Fecha</th>
             <th scope="col">Acción</th>

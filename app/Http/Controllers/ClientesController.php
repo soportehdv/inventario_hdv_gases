@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Clientes;
 use App\Models\Lotes;
 use App\Models\Productos;
+use App\Models\Ubicacion;
+use Illuminate\Support\Facades\Auth;
 
 class ClientesController extends Controller
 {
@@ -22,7 +24,10 @@ class ClientesController extends Controller
             if($request){
 
                 $query= trim($request->get('search'));
-                $clientes = Clientes::where('nombre','LIKE', '%' . $query . '%')
+                $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
+                // ->join('ubicacions', 'ubicacions.id', '=', 'clientes.depatamento')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'clientes.*')
+                ->where('nombre','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 ->get();
             }
@@ -53,7 +58,12 @@ class ClientesController extends Controller
 
     public function create()
     {
-        return view('Clientes/create');
+        $ubicacion = Ubicacion::all();
+
+        return view('Clientes/create', [
+            'ubicacion' => $ubicacion,
+
+        ]);
     }
 
     public function createClientes(Request $request)
@@ -71,14 +81,14 @@ class ClientesController extends Controller
             return redirect()->back();
         }
 
+        $ubicacion = Ubicacion::all();
 
         $Clientes = new Clientes();
-        $Clientes->email = ' ';
+        $Clientes->responsable_id = Auth::user()->id;
         $Clientes->nombre =  $request->input('name');
-        $Clientes->nit = $request->input('nit');
+        $Clientes->cargorecibe =  $request->input('cargorecibe');
         $Clientes->departamento = $request->input('departamento');
         $Clientes->giro = $request->input('giro');
-        $Clientes->tipo = $request->input('tipo');
         $Clientes->registro = $request->input('registro');
         $Clientes->direccion = $request->input('direccion');
 
@@ -116,13 +126,14 @@ class ClientesController extends Controller
 
             return redirect()->back();
         }
+        $ubicacion = Ubicacion::all();
 
-        $Clientes->email = ' ';
+
+        $Clientes->responsable_id = Auth::user()->id;
         $Clientes->nombre =  $request->input('name');
-        $Clientes->nit = $request->input('nit');
+        $Clientes->cargorecibe =  $request->input('cargorecibe');
         $Clientes->departamento = $request->input('departamento');
         $Clientes->giro = $request->input('giro');
-        $Clientes->tipo = $request->input('tipo');
         $Clientes->registro = $request->input('registro');
         $Clientes->direccion = $request->input('direccion');
         $Clientes->save();

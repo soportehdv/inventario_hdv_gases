@@ -38,7 +38,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
+            <th scope="col">N° Remisión</th>
             <th scope="col">Acción</th>
 
           </tr>
@@ -48,7 +48,7 @@
             <tr>
                 <th scope="row">{{$proveedor->id}}</th>
                 <td>{{$proveedor->nombre}}</td>
-                <td>{{$proveedor->email}}</td>
+                <td>{{$proveedor->remision}}</td>
                 <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                 </td>
 

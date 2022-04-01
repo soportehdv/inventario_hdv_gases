@@ -11,7 +11,7 @@ class Proveedores extends Model
 
     protected $fillable = [
         'nombre',
-        'email',
+        'remision',
         
     ];
 }

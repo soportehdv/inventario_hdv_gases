@@ -49,7 +49,7 @@ class ProveedoresController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required|email|unique:proveedores',
+            'remision'     => 'required|integer',
 
         ]);
 
@@ -60,7 +60,7 @@ class ProveedoresController extends Controller
         }
         $proveedor = new Proveedores;
         $proveedor->nombre = $request->input('name');
-        $proveedor->email = $request->input('email');
+        $proveedor->remision = $request->input('remision');
 
         $proveedor->save();
 
@@ -87,7 +87,7 @@ class ProveedoresController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required',
+            'remision'     => 'required',
 
         ]);
 
@@ -98,7 +98,7 @@ class ProveedoresController extends Controller
         }
 
         $proveedor->nombre = $request->input('name');
-        $proveedor->email = $request->input('email');
+        $proveedor->remision = $request->input('remision');
 
         $proveedor->save();
         $request->session()->flash('alert-success', 'Proveedor actualizado con exito!');

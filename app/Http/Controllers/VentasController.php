@@ -91,9 +91,7 @@ class VentasController extends Controller
 
     public function create()
     {
-        $lotes = Lotes::join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('lotes.*', 'precios_productos.precio as precio')
-            ->get();
+        
 
         $stocks = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
             ->select('stock.*', 'productos.serial as producto')
@@ -103,7 +101,6 @@ class VentasController extends Controller
         $productos = Productos::all();
 
         return view('Ventas/create', [
-            'lotes'     => $lotes,
             'clientes'  => $clientes,
             'stocks'  => $stocks,
             'productos' => $productos,
@@ -115,7 +112,6 @@ class VentasController extends Controller
     {
 
         $unidades = $request->input('unidades');
-        $producto_id = $request->input('lote_id');
         $stock_id = $request->input('stock_id');
 
         $venta = new Ventas();
@@ -129,41 +125,39 @@ class VentasController extends Controller
         $i = 0;
         $monto_final = 0;
 
-        foreach ($stock_id as $stock) {
+        
 
-            $stock = Stock::where('stock.id', $stock)
-                ->join('productos', 'productos.id', '=', 'stock.producto_id')
-                ->select('stock.*', 'productos.serial as producto')
-                ->first();
-            $compras = Compras::all()->first();
-            $lotes = Lotes::all()->first();
+        $stock = Stock::where('stock.id', $stock_id)
+            ->join('productos', 'productos.id', '=', 'stock.producto_id')
+            ->select('stock.*', 'productos.serial as producto')
+            ->first();
+        $compras = Compras::all()->first();
 
+
+        
+        if ($unidades > $stock->unidades && $unidades > $compras->unidades) {
+
+            $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
+            return redirect()->back();
+        }
+
+        $stock->unidades = $stock->unidades - $unidades;
+        $stock->save();
+        $compras->unidades = $compras->unidades - $unidades;
+        $compras->save();
+
+        // ---------------------factura o historial
+
+        $detalle = new Detalle_ventas();
+        $detalle->producto_id = $stock->producto_id;
+        $detalle->venta_id = $venta->id; //usuario quien entrego
+
+        $detalle->unidades = $unidades;
+        $detalle->save();
+
+        $monto_final += 20 * $unidades;
 
             
-            if ($unidades[$i] > $stock->unidades && $unidades[$i] > $compras->unidades) {
-
-                $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
-                return redirect()->back();
-            }
-
-            $stock->unidades = $stock->unidades - $unidades[$i];
-            $stock->save();
-            $compras->unidades = $compras->unidades - $unidades[$i];
-            $compras->save();
-
-            // ---------------------factura o historial
-
-            $detalle = new Detalle_ventas();
-            $detalle->producto_id = $stock->producto_id;
-            $detalle->venta_id = $venta->id; //usuario quien entrego
-            $detalle->lote_id = $lotes->id;
-
-            $detalle->unidades = $unidades[$i];
-            $detalle->save();
-
-            $monto_final += $lotes->precio * $unidades[$i];
-
-        }        
 
 
         $monto_impuesto = $monto_final * 0.13;
