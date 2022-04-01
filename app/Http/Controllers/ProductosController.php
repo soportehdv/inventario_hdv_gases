@@ -25,15 +25,28 @@ class ProductosController extends Controller
         $this->middleware('auth');
     }
 
-    public function getProductos()
+    public function getProductos(Request $request)
     {
+        if($request){
 
-        $Productos = Productos::all();
+            $query= trim($request->get('search'));
+            $Productos = Productos::where('serial','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->get();
+
+            return view('productos/lista', [
+                'productos' => $Productos,
+                'search' => $query
+            ]);
+
+        }
+
+        // $Productos = Productos::all();
 
 
-        return view('productos/lista', [
-            'productos' => $Productos
-        ]);
+        // return view('productos/lista', [
+        //     'productos' => $Productos
+        // ]);
     }
 
     public function create()

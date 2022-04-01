@@ -9,13 +9,26 @@ use Illuminate\Support\Facades\Validator;
 
 class UbicacionController extends Controller
 {
-    public function getlistaubicacion()
+    public function getlistaubicacion(Request $request)
     {
-        $ubicacion = ubicacion::all();
+        if($request){
 
-        return view('Ubicacion/lista', [
-            'ubicacion' => $ubicacion
-        ]);
+            $query= trim($request->get('search'));
+            $ubicacion = ubicacion::where('nombre','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->get();
+
+            return view('Ubicacion/lista', [
+                'ubicacion' => $ubicacion,
+                'search' => $query
+            ]);
+
+        }
+        // $ubicacion = ubicacion::all();
+
+        // return view('Ubicacion/lista', [
+        //     'ubicacion' => $ubicacion
+        // ]);
     }
     public function create()
     {

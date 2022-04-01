@@ -13,7 +13,7 @@ use App\Models\Lotes;
 use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Carbon\Carbon;
 use App\Models\Compras;
 
@@ -39,11 +39,7 @@ class VentasController extends Controller
         return $pdf->download('ejemplo.pdf');
     }
 
-    public function fechaVista()
-    {
-        return view('Ventas/fecha');
-    }
-
+   
     public function getVentas(Request $request)
     {
 
@@ -53,45 +49,39 @@ class VentasController extends Controller
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->get();
         } else
-            if ($request->get('filtro') == 1) { //Por cliente
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->where('ventas.cliente_id', $id)
-                ->get();
-        } else
-                if ($request->get('filtro') == 2) { //Por fecha
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->whereBetween('ventas.created_at', [$fecha_inicio, $fecha_final])
-                ->get();
-        } else
-                if ($request->get('filtro') == 3) { //Por tipo de cliente
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->where('clientes.tipo', $id)
-                ->get();
-        } else
-                if ($request->get('filtro') == 4) { //Más recientes
+            if ($request->get('filtro') == 1) { //Más recientes
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->orderby('ventas.created_at', 'asc')
                 ->get();
         } else
-                if ($request->get('filtro') == 5) { // Más antiguos
+                if ($request->get('filtro') == 2) { // Más antiguos
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                 ->orderby('ventas.created_at', 'desc')
                 ->get();
         } else
-                if ($request->get('filtro') == 6) {
+                if ($request->get('filtro') == 3) {
             $ventas = Ventas::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
         }
 
+
+        return view('Ventas/mostrar', [
+            'ventas' => $ventas,
+            
+        ]);
+    }
+    public function fechaVista(Request $request){
+        $start = Carbon::parse($request->get('fecha_inicial'));
+        $end = Carbon::parse($request->get('fecha_final'));
+        $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
+        ->join('users', 'users.id', '=', 'ventas.user_id')
+        ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+        ->whereDate('ventas.created_at','<=',$end)
+        ->whereDate('ventas.created_at','>=',$start)
+        ->get();
 
         return view('Ventas/mostrar', [
             'ventas' => $ventas,

@@ -1,10 +1,10 @@
 @extends('adminlte::page')
-@section('title', 'Ventas')
+@section('title', 'Entregas')
 
 @section('content_header')
 <div class="card">
     <div class="card-header">
-      <h2>Ventas</h2>
+      <h2>Entregas</h2>
     </div>
     
   </div>
@@ -22,29 +22,74 @@
         
         @endif 
     @endforeach 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Seleccione fechas para filtrar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="GET" action="{{ route('ventas.fecha', ['filtro' => 4]) }}">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fecha_inicial" placeholder="Fecha inicial">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Fecha Final</label>
+                        <input type="date" class="form-control" name="fecha_final" placeholder="Fecha final">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{-- ---------- --}}
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <a href="{{route('ventas.create.vista')}}" class="btn btn-success mb-2">Vender</a>
+      <a href="{{route('ventas.create.vista')}}" class="btn btn-success mb-2"><i class="fas fa-clipboard-check"></i> Entregar</a>
     <a href="{{route('ventas.descargar', ['filtro', 'fecha_inicio', 'fecha_final', 'id'])}}" 
-      class="btn btn-primary mb-2">Descargar</a>
-
-      <div class="col-sm-2">
+      class="btn btn-primary mb-2"><i class="fas fa-file-download"></i> Descargar</a>
+    
+    </div>
+      <div class="col-sm-3">
         <form method="GET" action="{{route('ventas.lista')}}">
           <label>Ordenar por:</label>
           <select class="form-control" name="filtro">
-            <option value="6">Hoy </option>
-            <option value="4">Más recientes </option>
-            <option value="5">Antiguos </option>
+            <option value="1">Hoy </option>
+            <option value="2">Más recientes </option>
+            <option value="3">Antiguos </option>
   
           </select>
       </div>
       <div class="col-sm-2">
-        <button type="submit" class="btn btn-primary  mt-4">Buscar</button>
+        <button type="submit" class="btn btn-primary  mt-4" style="top: 0.5em;position: relative;"><i class="fas fa-filter"></i> Buscar</button>
   
       </div>
-    </form>
+      <!-- Button trigger modal -->
+      <div class="col-sm-7" style="padding-top: 0.5em">
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            style="float: right; top:1.4em;position: relative;"><i class="fas fa-filter"></i>
+            Filtrar por fecha
+        </button>
     </div>
+    </form>
+
 
   </div>
     
@@ -61,7 +106,7 @@
         @endif 
     @endforeach 
     <br>
-    <table class="table table-striped">
+    <table class="table table-striped table-res">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -80,7 +125,7 @@
                 <td>${{$venta->monto}}</td>
                 <td>{{$venta->Fecha}}</td>
 
-                <td><a href="{{route('ventas.detalle', $venta->id)}}" class="btn btn-success mb-2">Detalle</a>
+                <td><a href="{{route('ventas.detalle', $venta->id)}}" class="btn btn-success mb-2"> <i class="fas fa-ete"></i> Detalle</a>
                 </td>
 
             </tr>

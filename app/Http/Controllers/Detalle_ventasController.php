@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\PDF;
 use App\Models\Detalle_ventas;
 use App\Models\Ventas;
+use PDF;
 
 
 

@@ -8,6 +8,12 @@
         </div>
 
     </div>
+    @if ($search)
+        <div class="alert alert-primary" role="alert">
+            Los resultados para su busqueda '{{ $search }}' son:
+            <button type="button" class="close" data-dismiss="alert" style="color:white">&times;</button>
+        </div>
+    @endif
 
 @endsection
 
@@ -16,9 +22,10 @@
 
 
     <div class="">
-        <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2">Añadir nuevo</a>
+        <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir nuevo</a>
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
+            <br>
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ Session::get('alert-' . $msg) }}
@@ -26,7 +33,7 @@
             @endif
         @endforeach
         <br>
-        <table class="table table-striped">
+        <table class="table table-striped table-res">
             <thead>
                 <tr>
                     <th>#</th>
@@ -59,7 +66,7 @@
                         <td>{{ $compra->color }}</td>
                         <td>{{ $compra->unidades }}</td>
                         <td><a href="{{ route('compras.update.vista', $compra->id) }}"
-                                class="btn btn-success mb-2">Editar</a>
+                                class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                         </td>
 
                     </tr>

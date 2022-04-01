@@ -18,26 +18,37 @@ class ClientesController extends Controller
     public function getClientes(Request $request)
     {
 
-        if ($request->get('filtro') == null)
-            $clientes = Clientes::all();
+        if ($request->get('filtro') == null){
+            if($request){
+
+                $query= trim($request->get('search'));
+                $clientes = Clientes::where('nombre','LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                ->get();
+            }
+            return view('Clientes/mostrar', [
+                'clientes' => $clientes,
+                'search' => $query
+            ]);
 
         
-        else
-            if($request->get('filtro') == 1) //mas reciente
-            $clientes = Clientes::orderby('created_at', 'desc')->get();
-
-
-        else
-            if ($request->get('filtro') == 2 ) //tipo
-            $clientes = Clientes::where('tipo', 'fiscal')->orderby('created_at', 'asc')->get();
-
-        else
-        if ($request->get('filtro') == 3) //Alfabetico
-            $clientes = Clientes::orderby('nombre', 'asc')->get();
-
-        return view('Clientes/mostrar', [
-            'clientes' => $clientes
-        ]);
+        } else
+            if($request->get('filtro') == 1){ //mas reciente                
+                $clientes = Clientes::orderby('created_at', 'desc')->get();
+                
+                return view('Clientes/mostrar', [
+                    'clientes' => $clientes
+                ]);
+            }else
+                
+                    if ($request->get('filtro') == 2){//Alfabetico
+                        $clientes = Clientes::orderby('nombre', 'asc')->get();
+                        
+                        return view('Clientes/mostrar', [
+                            'clientes' => $clientes
+                        ]);
+                    }
+       
     }
 
     public function create()

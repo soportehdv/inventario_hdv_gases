@@ -15,14 +15,27 @@ class ProveedoresController extends Controller
         $this->middleware('auth');
     }
 
-    public function getProveedor()
+    public function getProveedor(Request $request)
     {
+        if($request){
 
-        $proveedor = Proveedores::all();
+            $query= trim($request->get('search'));
+            $proveedor = Proveedores::where('nombre','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->get();
 
-        return view('proveedor/lista', [
-            'proveedores' => $proveedor
-        ]);
+            return view('proveedor/lista', [
+                'proveedores' => $proveedor,
+                'search' => $query
+            ]);
+
+        }
+
+        // $proveedor = Proveedores::all();
+
+        // return view('proveedor/lista', [
+        //     'proveedores' => $proveedor
+        // ]);
     }
 
     public function create()

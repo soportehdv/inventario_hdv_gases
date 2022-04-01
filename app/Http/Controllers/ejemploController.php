@@ -13,7 +13,7 @@ use App\Models\Lotes;
 use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Carbon\Carbon;
 
 

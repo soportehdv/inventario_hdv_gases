@@ -13,9 +13,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-.padding_center {
-    padding-left: 25%;
-    display: none;
+@media (min-width: 400px) and (max-width: 767px) {
+    .table-res {
+        overflow-x: auto !important;
+        display: block;
+    }
 }
 
 :root {

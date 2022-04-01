@@ -20,17 +20,23 @@ use Illuminate\Support\Facades\Validator;
 class ComprasController extends Controller
 {
 
-    public function getCompras()
+    public function getCompras(Request $request)
     {
+        if($request){
 
-        $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
-            ->join('estados', 'estados.id', '=', 'compras.estado_id')
-            ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado', 'compras.*')
-            ->get();
+            $query= trim($request->get('search'));            
+            $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
+                ->join('estados', 'estados.id', '=', 'compras.estado_id')
+                ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado', 'compras.*')
+                ->where('productos.cod_barra','LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                ->get();
 
-        return view('compras/lista', [
-            'compras' => $compras
-        ]);
+            return view('compras/lista', [
+                'compras' => $compras,
+                'search' => $query
+            ]);
+        }
     }
     public function create()
     {

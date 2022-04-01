@@ -8,6 +8,7 @@
         </div>
 
     </div>
+    
 
 @endsection
 
@@ -17,7 +18,7 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <a href="{{ route('clientes.create.vista') }}" class="btn btn-primary mt-4">Añadir nuevo</a>
+                <a href="{{ route('clientes.create.vista') }}" class="btn btn-primary mt-4"><i class="fas fa-plus-circle"></i> Añadir nuevo</a>
 
             </div>
 
@@ -26,13 +27,12 @@
                     <label>Ordenar por:</label>
                     <select class="form-control" name="filtro">
                         <option value="1">Más recientes </option>
-                        <option value="2">Fiscales</option>
-                        <option value="3">Alfabeticamente </option>
+                        <option value="2">Alfabeticamente </option>
 
                     </select>
             </div>
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary  mt-4">Buscar</button>
+            <div class="col-sm-2" style="top: 0.4em">
+                <button type="submit" class="btn btn-primary  mt-4"><i class="fas fa-search"></i> Buscar</button>
 
             </div>
             </form>
@@ -51,7 +51,7 @@
     <br>
     <div class="container">
 
-    <table class="table table-striped">
+    <table class="table table-striped table-res">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -78,7 +78,7 @@
 
 
                     <td><a href="{{ route('clientes.update.vista', $cliente->id) }}"
-                            class="btn btn-success mb-2">Editar</a>
+                            class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                     </td>
 
                 </tr>
