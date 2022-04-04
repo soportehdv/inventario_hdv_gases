@@ -72,8 +72,8 @@
                                 <label for="">N° Remisión </label>
                                 <select id="proveedor" name="proveedor_id" class="form-control">
                                     <option value="">Seleccioné un N° de remision</option>
-                                    @foreach ($provedores as $proveedor)
-                                        <option value="{{ $proveedor->id }}">
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id }}"
                                             @if ($compras->proveedor_id === $proveedor->id) selected='selected' @endif>
                                             {{ $proveedor->nombre }}</option>
                                     @endforeach

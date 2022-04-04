@@ -288,7 +288,7 @@ return [
             'text' => 'Entrega',
             'url'  => 'ventas/todas',
             'icon' => 'fas fa-fw fa-dolly',
-            'role' => 'ventas'
+            'role' => 'admin'
         ],
         // [
         //     'text' => 'Lotes',

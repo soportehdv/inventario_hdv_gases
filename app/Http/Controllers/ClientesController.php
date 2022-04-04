@@ -25,9 +25,9 @@ class ClientesController extends Controller
 
                 $query= trim($request->get('search'));
                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
-                // ->join('ubicacions', 'ubicacions.id', '=', 'clientes.depatamento')
-                ->select('users.name AS responsable', 'users.cargo AS cargo', 'clientes.*')
-                ->where('nombre','LIKE', '%' . $query . '%')
+                ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'clientes.*')
+                ->where('cargorecibe','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 ->get();
             }
@@ -104,9 +104,12 @@ class ClientesController extends Controller
     public function update($id)
     {
         $Clientes = Clientes::where('id', $id)->first();
+        $ubicacion = Ubicacion::all();
 
         return view('Clientes/create', [
-            'cliente' => $Clientes
+            'cliente' => $Clientes,
+            'ubicacion' => $ubicacion,
+
         ]);
     }
 

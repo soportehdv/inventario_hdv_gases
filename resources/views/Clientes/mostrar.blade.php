@@ -59,10 +59,13 @@
                 <th scope="col">Cargo</th>
                 <th scope="col">Recibió</th>
                 <th scope="col">Cargo quien recibe</th>
-                <th scope="col">Departamento</th>
+                <th scope="col">Ubicación</th>
                 <th scope="col">Registro</th>
                 <th scope="col">Giro</th>
+
+                @if (Auth::user()->rol == "admin")
                 <th scope="col">Acción</th>
+                @endif
 
             </tr>
         </thead>
@@ -74,14 +77,15 @@
                     <td>{{ $cliente->cargo }}</td>
                     <td>{{ $cliente->nombre }}</td>
                     <td>{{ $cliente->cargorecibe }}</td>
-                    <td>{{ $cliente->departamento }}</td>
+                    <td>{{ $cliente->ubicacion }}</td>
                     <td>{{ $cliente->registro }}</td>
                     <td>{{ $cliente->giro }}</td>
 
-
+                    @if (Auth::user()->rol == "admin")
                     <td><a href="{{ route('clientes.update.vista', $cliente->id) }}"
                             class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                     </td>
+                    @endif
 
                 </tr>
             @endforeach
