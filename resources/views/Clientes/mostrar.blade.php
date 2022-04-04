@@ -60,8 +60,10 @@
                 <th scope="col">Recibió</th>
                 <th scope="col">Cargo quien recibe</th>
                 <th scope="col">Ubicación</th>
-                <th scope="col">Registro</th>
-                <th scope="col">Giro</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Comentario</th>
+
 
                 @if (Auth::user()->rol == "admin")
                 <th scope="col">Acción</th>
@@ -80,11 +82,20 @@
                     <td>{{ $cliente->ubicacion }}</td>
                     <td>{{ $cliente->registro }}</td>
                     <td>{{ $cliente->giro }}</td>
+                    <td style="max-width: 100px;
+                    font-size: 16px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;">
+                        {{ $cliente->direccion }}
+                    </td>
 
                     @if (Auth::user()->rol == "admin")
-                    <td><a href="{{ route('clientes.update.vista', $cliente->id) }}"
-                            class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
-                    </td>
+                    <td>
+                        <a href="{{ route('clientes.update.vista', $cliente->id) }}"
+                            class="btn btn-success mb-2" ><i class="fas fa-edit"></i></a>
+                        
+                        </td>
                     @endif
 
                 </tr>

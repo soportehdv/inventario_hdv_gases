@@ -13,7 +13,9 @@ class Clientes extends Model
 
     protected $fillable = [
         'responsable_id',
+        'departamento',
         'nombre',
+        'producto',
         'cargorecibe',   
         'telefono',
         

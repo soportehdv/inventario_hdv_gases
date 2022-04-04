@@ -8,7 +8,15 @@ use App\Models\Ubicacion;
 use Illuminate\Support\Facades\Validator;
 
 class UbicacionController extends Controller
+
 {
+    public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('admin');
+    
+        }
+        
     public function getlistaubicacion(Request $request)
     {
         if($request){

@@ -16,6 +16,7 @@ class ProductosMigration extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('serial');
+            $table->string('nombre');
             $table->string('cod_barra');
             $table->string('registro');
             $table->integer('presentacion');

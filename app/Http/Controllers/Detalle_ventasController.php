@@ -11,6 +11,12 @@ use PDF;
 
 class Detalle_ventasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+
+    }
     public function getDetalle($venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)

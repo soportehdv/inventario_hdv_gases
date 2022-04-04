@@ -17,9 +17,14 @@ use Illuminate\Support\Facades\Validator;
 
 
 
-
 class ComprasController extends Controller
 {
+    public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('admin');
+    
+        }
 
     public function getCompras(Request $request)
     {

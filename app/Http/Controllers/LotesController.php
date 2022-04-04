@@ -16,6 +16,7 @@ class LotesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function getLotes($producto_id)

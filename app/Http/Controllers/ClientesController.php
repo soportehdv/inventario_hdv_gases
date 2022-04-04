@@ -15,6 +15,8 @@ class ClientesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        // $this->middleware('admin');
+
     }
 
     public function getClientes(Request $request)
@@ -59,9 +61,13 @@ class ClientesController extends Controller
     public function create()
     {
         $ubicacion = Ubicacion::all();
+        $clientes = Clientes::all();
+        $productos = Productos::all();
 
         return view('Clientes/create', [
             'ubicacion' => $ubicacion,
+            'clientes' => $clientes,
+            'productos' => $productos,
 
         ]);
     }
@@ -72,6 +78,10 @@ class ClientesController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'departamento'      => 'required',
+            'producto'      => 'required',
+
+
 
         ]);
 
@@ -83,18 +93,20 @@ class ClientesController extends Controller
 
         $ubicacion = Ubicacion::all();
 
-        $Clientes = new Clientes();
-        $Clientes->responsable_id = Auth::user()->id;
-        $Clientes->nombre =  $request->input('name');
-        $Clientes->cargorecibe =  $request->input('cargorecibe');
-        $Clientes->departamento = $request->input('departamento');
-        $Clientes->giro = $request->input('giro');
-        $Clientes->registro = $request->input('registro');
-        $Clientes->direccion = $request->input('direccion');
+
+        $clientes = new Clientes();
+        $clientes->responsable_id = Auth::user()->id;
+        $clientes->nombre =  $request->input('name');
+        $clientes->producto =  $request->input('producto');
+        $clientes->cargorecibe =  $request->input('cargorecibe');
+        $clientes->departamento = $request->input('departamento');
+        $clientes->giro = $request->input('giro');
+        $clientes->registro = $request->input('registro');
+        $clientes->direccion = $request->input('direccion');
 
 
 
-        $Clientes->save();
+        $clientes->save();
 
         $request->session()->flash('alert-success', 'Cliente registrado con exito!');
 
@@ -103,24 +115,31 @@ class ClientesController extends Controller
 
     public function update($id)
     {
-        $Clientes = Clientes::where('id', $id)->first();
-        $ubicacion = Ubicacion::all();
+        $clientes = Clientes::where('id', $id)->first();
+        $ubicacion = Ubicacion::all();        
+        $productos = Productos::all();
+
 
         return view('Clientes/create', [
-            'cliente' => $Clientes,
+            'cliente' => $clientes,
             'ubicacion' => $ubicacion,
-
+            'productos' => $productos,
         ]);
     }
 
-    public function updateClientes(Request $request, $Clientes_id)
+    public function updateClientes(Request $request, $clientes_id)
     {
+        // dd($request->all());
 
-        $Clientes = Clientes::where('id', $Clientes_id)->first();
+        $clientes = Clientes::where('id', $clientes_id)->first();
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'departamento'      => 'required',
+            'producto'      => 'required',
+
+
 
         ]);
 
@@ -132,14 +151,15 @@ class ClientesController extends Controller
         $ubicacion = Ubicacion::all();
 
 
-        $Clientes->responsable_id = Auth::user()->id;
-        $Clientes->nombre =  $request->input('name');
-        $Clientes->cargorecibe =  $request->input('cargorecibe');
-        $Clientes->departamento = $request->input('departamento');
-        $Clientes->giro = $request->input('giro');
-        $Clientes->registro = $request->input('registro');
-        $Clientes->direccion = $request->input('direccion');
-        $Clientes->save();
+        $clientes->responsable_id = Auth::user()->id;
+        $clientes->nombre =  $request->input('name');
+        $clientes->producto =  $request->input('producto');
+        $clientes->cargorecibe =  $request->input('cargorecibe');
+        $clientes->departamento = $request->input('departamento');
+        $clientes->giro = $request->input('giro');
+        $clientes->registro = $request->input('registro');
+        $clientes->direccion = $request->input('direccion');
+        $clientes->save();
 
         $request->session()->flash('alert-success', 'Cliente actualizado con exito!');
 

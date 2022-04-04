@@ -25,12 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->rol = 'inventario')
-            return redirect()->route('productos.lista');
+        if(Auth::user()->rol == 'ventas')
+            return redirect()->route('stock.list');
         else 
-            if(Auth::user()->rol = 'ventas')
-                return redirect()->route('ventas.lista');
-            else
+            if(Auth::user()->rol == 'admin')                
                 return redirect()->route('user.lista');
     }
 }

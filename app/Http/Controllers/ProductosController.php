@@ -23,6 +23,8 @@ class ProductosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
     public function getProductos(Request $request)
@@ -74,6 +76,7 @@ class ProductosController extends Controller
         }
         $Productos = new Productos();
         $Productos->serial = $request->input('serial');
+        $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');
@@ -117,6 +120,7 @@ class ProductosController extends Controller
             return redirect()->back();
         }
         $Productos->serial = $request->input('serial');
+        $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');
