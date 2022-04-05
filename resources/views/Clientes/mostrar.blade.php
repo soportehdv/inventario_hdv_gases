@@ -28,6 +28,8 @@
                     <select class="form-control" name="filtro">
                         <option value="1">Más recientes </option>
                         <option value="2">Alfabeticamente </option>
+                        <option value="3">Estados </option>
+
 
                     </select>
             </div>
@@ -58,10 +60,12 @@
                 <th scope="col">Responsable</th>
                 <th scope="col">Cargo</th>
                 <th scope="col">Recibió</th>
-                <th scope="col">Cargo quien recibe</th>
+                <th scope="col">Cargo</th>
                 <th scope="col">Ubicación</th>
                 <th scope="col">Telefono</th>
+                <th scope="col">Producto</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Comentario</th>
 
 
@@ -81,7 +85,17 @@
                     <td>{{ $cliente->cargorecibe }}</td>
                     <td>{{ $cliente->ubicacion }}</td>
                     <td>{{ $cliente->registro }}</td>
+                    <td>{{ $cliente->nombrep }}</td>
                     <td>{{ $cliente->giro }}</td>
+                    @if ($cliente->estado === 'pendiente')
+                                <td>
+                                    <span class="badge badge-pill badge-danger">Pendiente</span>
+                                </td>
+                            @else()
+                                <td>
+                                    <span class="badge badge-pill badge-success">Entregado</span>
+                                </td>
+                            @endif
                     <td style="max-width: 100px;
                     font-size: 16px;
                     overflow: hidden;
@@ -95,7 +109,7 @@
                         <a href="{{ route('clientes.update.vista', $cliente->id) }}"
                             class="btn btn-success mb-2" ><i class="fas fa-edit"></i></a>
                         
-                        </td>
+                    </td>
                     @endif
 
                 </tr>

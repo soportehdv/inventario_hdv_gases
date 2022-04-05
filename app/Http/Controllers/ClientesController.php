@@ -28,7 +28,8 @@ class ClientesController extends Controller
                 $query= trim($request->get('search'));
                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
-                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'clientes.*')
+                ->join('productos', 'productos.id', '=', 'clientes.producto')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
                 ->where('cargorecibe','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 ->get();
@@ -41,7 +42,12 @@ class ClientesController extends Controller
         
         } else
             if($request->get('filtro') == 1){ //mas reciente                
-                $clientes = Clientes::orderby('created_at', 'desc')->get();
+                $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
+                ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
+                ->join('productos', 'productos.id', '=', 'clientes.producto')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                ->orderby('created_at', 'desc')
+                ->get();
                 
                 return view('Clientes/mostrar', [
                     'clientes' => $clientes
@@ -49,12 +55,30 @@ class ClientesController extends Controller
             }else
                 
                     if ($request->get('filtro') == 2){//Alfabetico
-                        $clientes = Clientes::orderby('nombre', 'asc')->get();
+                        $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
+                        ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
+                        ->join('productos', 'productos.id', '=', 'clientes.producto')
+                        ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                        ->orderby('nombre', 'asc')
+                        ->get();
                         
                         return view('Clientes/mostrar', [
                             'clientes' => $clientes
                         ]);
-                    }
+                    }else
+                            if ($request->get('filtro') == 3){//Alfabetico
+                                $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
+                                ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
+                                ->join('productos', 'productos.id', '=', 'clientes.producto')
+                                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                                ->orderby('estado', 'desc')
+                                ->get();
+                                
+                                return view('Clientes/mostrar', [
+                                    'clientes' => $clientes
+                                ]);
+                            }
+
        
     }
 
@@ -80,6 +104,7 @@ class ClientesController extends Controller
             'name'      => 'required',
             'departamento'      => 'required',
             'producto'      => 'required',
+
 
 
 
@@ -120,7 +145,7 @@ class ClientesController extends Controller
         $productos = Productos::all();
 
 
-        return view('Clientes/create', [
+        return view('Clientes/edit', [
             'cliente' => $clientes,
             'ubicacion' => $ubicacion,
             'productos' => $productos,
@@ -138,6 +163,7 @@ class ClientesController extends Controller
             'name'      => 'required',
             'departamento'      => 'required',
             'producto'      => 'required',
+            'estado'      => 'required',
 
 
 
@@ -153,6 +179,7 @@ class ClientesController extends Controller
 
         $clientes->responsable_id = Auth::user()->id;
         $clientes->nombre =  $request->input('name');
+        $clientes->estado =  $request->input('estado');
         $clientes->producto =  $request->input('producto');
         $clientes->cargorecibe =  $request->input('cargorecibe');
         $clientes->departamento = $request->input('departamento');

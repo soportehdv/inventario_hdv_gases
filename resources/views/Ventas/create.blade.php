@@ -8,12 +8,8 @@
         </div>
 
     </div>
-    {{-- <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'> --}}
     <link rel='stylesheet prefetch'
         href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
-
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> --}}
-    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> --}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 
 @endsection
@@ -40,23 +36,24 @@
                             <button type="submit" class="btn btn-success mt-3"><i class="fa fa-reply-all" aria-hidden="true"></i> Finalizar entrega</button>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-                    <div class="col-sm-12">
-                        <button id="mas" onclick="aparece()" class="btn btn-primary mt-3"><i class="fa fa-plus-circle"></i> Adicionar otro producto</button>
-                    </div>
+                    
                     </div>
                     <div class="row ">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="">Responsable </label>
+                                <label for="">Pendientes por entregar </label>
                                 <select class="form-control" name="cliente_id">
-                                    {{-- <option value="0">Generico</option> --}}
                                     @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                        @if($cliente->estado==="pendiente")
+                                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                        @endif    
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                        
                        
                     </div>
 

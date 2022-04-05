@@ -116,6 +116,8 @@ class VentasController extends Controller
 
         $unidades = $request->input('unidades');
         $stock_id = $request->input('stock_id');
+        $cliente_id = $request->input('cliente_id');
+
 
         $venta = new Ventas();
         $venta->cliente_id = $request->input('cliente_id');
@@ -148,6 +150,11 @@ class VentasController extends Controller
         $stock->save();
         $compras->unidades = $compras->unidades - $unidades;
         $compras->save();
+
+        // actualizacion de estado en la tabla clientes
+        $clientes = Clientes::where('id', $cliente_id)->first();
+        $clientes->estado='entregado';
+        $clientes->save();
 
         // ---------------------factura o historial
 

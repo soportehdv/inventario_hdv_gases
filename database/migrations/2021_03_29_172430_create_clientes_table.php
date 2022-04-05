@@ -17,13 +17,13 @@ class CreateClientesTable extends Migration
                 $table->id();
                 $table->integer('responsable_id')->unsigned();
                 $table->string('nombre');
+                $table->string('estado')->nullable()->default("pendiente");
                 $table->string('cargorecibe')->nullable();
                 $table->string('direccion')->nullable();
                 $table->integer('departamento')->unsigned();
                 $table->integer('producto')->unsigned();
                 $table->string('registro')->nullable();
                 $table->string('giro')->nullable();
-                $table->string('telefono')->nullable();
                
                 $table->timestamps();
             
