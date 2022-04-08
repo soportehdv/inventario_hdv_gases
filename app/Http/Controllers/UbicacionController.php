@@ -24,7 +24,8 @@ class UbicacionController extends Controller
             $query= trim($request->get('search'));
             $ubicacion = ubicacion::where('nombre','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
-            ->get();
+            // ->get();
+            ->paginate(10);
 
             return view('Ubicacion/lista', [
                 'ubicacion' => $ubicacion,

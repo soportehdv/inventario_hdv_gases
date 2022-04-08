@@ -8,6 +8,7 @@ use App\Models\Stock;
 use App\Models\Proveedores;
 use App\Models\Fracciones;
 use App\Models\Productos;
+use App\Models\Ubicacion;
 use App\Models\Estados;
 use Illuminate\Support\Facades\Validator;
 
@@ -37,7 +38,8 @@ class ComprasController extends Controller
                 ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('productos.cod_barra','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
-                ->get();
+                // ->get();
+                ->paginate(10);
 
             return view('compras/lista', [
                 'compras' => $compras,
@@ -50,13 +52,13 @@ class ComprasController extends Controller
         $estado = Estados::all();
         $productos = Productos::all();
         $proveedores = Proveedores::all();
-        // $fracciones = Fracciones::all();
+        $Ubicacion = Ubicacion::all();
 
         return view('Compras/create', [
             'estado' => $estado,
             'productos' => $productos,
             'proveedores' => $proveedores,
-            // 'fracciones' => $fracciones
+            'ubicacion' => $Ubicacion
         ]);
     }
 

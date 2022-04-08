@@ -33,8 +33,6 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Producto</th>
-            <th scope="col">Unidades</th>
-            <th scope="col">Precio </th>
 
            
 
@@ -45,8 +43,6 @@
             <tr>
                 <th scope="row">{{$detalle->id}}</th>
                 <td>{{$detalle->nombre}}</td>
-                <td>{{$detalle->unidades}}</td>
-                <td>${{($detalle->precio*$detalle->unidades)}}</td>
 
             </tr>
           @endforeach

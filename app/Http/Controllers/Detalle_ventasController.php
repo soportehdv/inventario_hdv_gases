@@ -21,7 +21,7 @@ class Detalle_ventasController extends Controller
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
             ->join('productos', 'productos.id', '=', 'detalle_ventas.producto_id')
-            ->select('detalle_ventas.id as id', 'detalle_ventas.unidades as unidades', 'productos.serial as nombre')
+            ->select('detalle_ventas.id as id', 'productos.serial as nombre')
             ->get();
 
         return view('detalle/mostrar', [
@@ -33,8 +33,7 @@ class Detalle_ventasController extends Controller
     public function imprimirFactura($venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
-            ->join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('detalle_ventas.id', 'precios_productos.precio', 'detalle_ventas.unidades')
+            ->select('detalle_ventas.id')
             ->get();
         //var_dump('dd');die();
 

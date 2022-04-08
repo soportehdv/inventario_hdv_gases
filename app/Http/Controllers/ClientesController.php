@@ -32,7 +32,9 @@ class ClientesController extends Controller
                 ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
                 ->where('cargorecibe','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
-                ->get();
+                // ->get();
+                ->simplePaginate(10);
+
             }
             return view('Clientes/mostrar', [
                 'clientes' => $clientes,
@@ -46,8 +48,10 @@ class ClientesController extends Controller
                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
                 ->join('productos', 'productos.id', '=', 'clientes.producto')
                 ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
-                ->orderby('created_at', 'desc')
-                ->get();
+                ->orderby('updated_at', 'desc')
+                // ->get();
+                ->simplePaginate(10);
+
                 
                 return view('Clientes/mostrar', [
                     'clientes' => $clientes
@@ -60,7 +64,9 @@ class ClientesController extends Controller
                         ->join('productos', 'productos.id', '=', 'clientes.producto')
                         ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
                         ->orderby('nombre', 'asc')
-                        ->get();
+                        // ->get();
+                        ->simplePaginate(10);
+
                         
                         return view('Clientes/mostrar', [
                             'clientes' => $clientes
@@ -72,7 +78,9 @@ class ClientesController extends Controller
                                 ->join('productos', 'productos.id', '=', 'clientes.producto')
                                 ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
                                 ->orderby('estado', 'desc')
-                                ->get();
+                                // ->get();
+                                ->simplePaginate(10);
+
                                 
                                 return view('Clientes/mostrar', [
                                     'clientes' => $clientes

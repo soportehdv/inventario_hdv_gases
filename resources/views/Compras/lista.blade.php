@@ -74,6 +74,8 @@
 
             </tbody>
         </table>
+        {{ $compras->links() }}
+
     </div>
 
 

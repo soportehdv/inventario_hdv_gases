@@ -34,7 +34,9 @@ class ProductosController extends Controller
             $query= trim($request->get('search'));
             $Productos = Productos::where('serial','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
-            ->get();
+            // ->get();
+            ->simplePaginate(10);
+
 
             return view('productos/lista', [
                 'productos' => $Productos,

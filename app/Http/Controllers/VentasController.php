@@ -14,9 +14,10 @@ use App\Models\User;
 use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
+use App\Models\Compras;
+use App\Models\Ubicacion;
 use PDF;
 use Carbon\Carbon;
-use App\Models\Compras;
 
 
 
@@ -49,44 +50,31 @@ class VentasController extends Controller
         if ($request->get('filtro') == null) { //Todas
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->get();
-        } else
-            if ($request->get('filtro') == 1) { //Más recientes
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->orderby('ventas.created_at', 'asc')
-                ->get();
-        } else
-                if ($request->get('filtro') == 2) { // Más antiguos
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+                ->join('productos', 'productos.id', '=', 'ventas.producto_id')
+                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'productos.serial AS serial')
                 ->orderby('ventas.created_at', 'desc')
-                ->get();
-        } else
-                if ($request->get('filtro') == 3) {
-            $ventas = Ventas::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
-        }
+                ->simplePaginate(10);
+
+                return view('Ventas/mostrar', [
+                    'ventas' => $ventas,
+                    
+                ]);
+        } 
 
 
-        return view('Ventas/mostrar', [
-            'ventas' => $ventas,
-            
-        ]);
+        
     }
     public function fechaVista(Request $request){
         $start = Carbon::parse($request->get('fecha_inicial'));
         $end = Carbon::parse($request->get('fecha_final'));
         $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
         ->join('users', 'users.id', '=', 'ventas.user_id')
-        ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+        ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
         ->whereDate('ventas.created_at','<=',$end)
         ->whereDate('ventas.created_at','>=',$start)
         ->get();
 
-        return view('Ventas/mostrar', [
+        return view('Ventas/mostrarbusqueda', [
             'ventas' => $ventas,
             
         ]);
@@ -121,14 +109,8 @@ class VentasController extends Controller
 
         $venta = new Ventas();
         $venta->cliente_id = $request->input('cliente_id');
-        $venta->monto = 0;
-        $venta->impuesto = 0.13;
-        $venta->descuento = 0;
+        $venta->producto_id = $request->input('stock_id');
         $venta->user_id = Auth::user()->id;
-        $venta->save(); //se crea la venta
-
-        $i = 0;
-        $monto_final = 0;
 
         
 
@@ -139,45 +121,52 @@ class VentasController extends Controller
         $compras = Compras::all()->first();
 
 
-        
+        // condicion si no hay suficientes productos
         if ($unidades > $stock->unidades && $unidades > $compras->unidades) {
 
             $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
             return redirect()->back();
         }
+        else
+        {
+            $venta->save(); //se crea la venta
 
-        $stock->unidades = $stock->unidades - $unidades;
-        $stock->save();
-        $compras->unidades = $compras->unidades - $unidades;
-        $compras->save();
-
-        // actualizacion de estado en la tabla clientes
-        $clientes = Clientes::where('id', $cliente_id)->first();
-        $clientes->estado='entregado';
-        $clientes->save();
-
-        // ---------------------factura o historial
-
-        $detalle = new Detalle_ventas();
-        $detalle->producto_id = $stock->producto_id;
-        $detalle->venta_id = $venta->id; //usuario quien entrego
-
-        $detalle->unidades = $unidades;
-        $detalle->save();
-
-        $monto_final += 20 * $unidades;
-
+            // actualizacion de estado en la tabla clientes
+            $clientes = Clientes::where('id', $cliente_id)->first();
+            $ubicacions = Ubicacion::where('id', $clientes->departamento)->first();
             
 
+            //---------------------Descontamos del stock total 
+            $stock->unidades = $stock->unidades - $unidades;
+            $stock->estado_ubi = $ubicacions->nombre;
+            $stock->estado_id = 3;
+            $stock->save();
 
-        $monto_impuesto = $monto_final * 0.13;
-        $monto_final = $monto_final + $monto_impuesto;
+            //---------------------Descontamos del total ingresado 
+            $compras->unidades = $compras->unidades - $unidades;
+            $compras->estado_ubi = $ubicacions->nombre;
+            $compras->save();
+            // dd($ubicacions->id);
 
-        $venta->monto = $monto_final;
-        $venta->save();
+            
+            $clientes->estado='entregado';
+            $clientes->save();
 
-        $request->session()->flash('alert-success', 'Venta realizada con exito!');
-        return redirect()->route('ventas.lista', ['filtro' => 4]);
+            // ---------------------factura o historial
+
+            $detalle = new Detalle_ventas();
+            $detalle->producto_id = $stock->producto_id;
+            $detalle->venta_id = $venta->id; //usuario quien entrego
+
+            $detalle->save();
+
+
+
+            $request->session()->flash('alert-success', 'Venta realizada con exito!');
+            return redirect()->route('ventas.lista', ['filtro' => 4]);
+            }
+        
+       
     }
 
     

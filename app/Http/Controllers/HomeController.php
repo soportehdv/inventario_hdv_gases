@@ -29,6 +29,6 @@ class HomeController extends Controller
             return redirect()->route('stock.list');
         else 
             if(Auth::user()->rol == 'admin')                
-                return redirect()->route('user.lista');
+                return redirect()->route('listatarget.target');
     }
 }

@@ -22,6 +22,10 @@ class EstadoSeeder extends Seeder
             'estado' => 'Vacio'
         ]);
 
+        DB::table('estados')->insert([
+            'estado' => 'En servicio'
+        ]);
+
 
     }
 }

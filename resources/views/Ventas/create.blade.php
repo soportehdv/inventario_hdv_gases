@@ -41,7 +41,7 @@
                     
                     </div>
                     <div class="row ">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Pendientes por entregar </label>
                                 <select class="form-control" name="cliente_id">
@@ -53,6 +53,7 @@
                                 </select>
                             </div>
                         </div>
+
                         
                        
                     </div>
@@ -63,17 +64,19 @@
 
 
                            
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="">Stock </label>
                                 <select class="form-control" name="stock_id">
                                     @foreach ($stocks as $stock)
-                                        <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
+                                        @if($stock->unidades != 0)
+                                            <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
+                                        @endif   
                                     @endforeach
                                 </select>
                             </div>
 
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="">Unidades </label>
                                 <input type="number" class="form-control" name="unidades" required>
                             </div>
@@ -91,5 +94,4 @@
 
     </div>
 @endsection
-
 

@@ -54,5 +54,7 @@
           @endforeach
         </tbody>
       </table>
+      {{ $ubicacion->links() }}
+
 </div>
 @endsection

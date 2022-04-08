@@ -28,7 +28,9 @@ class UserController extends Controller
             $query= trim($request->get('search'));
             $user= User::where('name','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
-            ->get();
+            // ->get();
+            ->simplePaginate(10);
+
 
             return view('user/lista', [
                 'users' => $user,

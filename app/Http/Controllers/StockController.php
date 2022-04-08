@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Compras;
 use App\Models\Clientes;
+use App\Models\Ubicacion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,7 +27,8 @@ class StockController extends Controller
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
             ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
             ->where('productos.serial','LIKE', '%' . $query . '%')
-            ->get();
+            // ->get();
+            ->paginate(10);
 
             return view('stock/list', [
                 'stock' => $stock,
@@ -39,7 +41,9 @@ class StockController extends Controller
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
                     ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'asc')                
-                    ->get();
+                    // ->get();
+                    ->paginate(10);
+
 
                     return view('stock/list', [
                         'stock' => $stock
@@ -51,26 +55,14 @@ class StockController extends Controller
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
                     ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'desc')                
-                    ->get();
+                    // ->get();
+                    ->paginate(10);
 
                     return view('stock/list', [
                         'stock' => $stock
                     ]);
-        } else
-                if ($request->get('filtro') == 3) { //Hoy
-                    $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-                    ->join('compras', 'compras.id', '=', 'stock.compra_id')
-                    ->join('estados', 'estados.id', '=', 'stock.estado_id')
-                    ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
-                    ->whereDate('stock.created_at', '=', Carbon::now()->format('Y-m-d'))->get();
-                    
-                    return view('stock/list', [
-                        'stock' => $stock
-                    ]);
         } 
-        // return view('stock/list', [
-        //     'stock' => $stock
-        // ]);
+        
     }
     public function fechaVista(Request $request){
         $start = Carbon::parse($request->get('fecha_inicial'));
@@ -83,7 +75,7 @@ class StockController extends Controller
         ->whereDate('stock.fecha_ingreso','>=',$start)
         ->get();
 
-        return view('stock/list', [
+        return view('stock/listfiltro', [
             'stock' => $stock
         ]);
     }

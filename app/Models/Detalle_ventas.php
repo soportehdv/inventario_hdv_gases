@@ -11,9 +11,7 @@ class Detalle_ventas extends Model
 
     protected $fillable = [
         'cliente_id',
-        'monto',
         'user_id',
-        'impuesto',
         
         
     ];
