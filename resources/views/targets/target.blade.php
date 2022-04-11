@@ -16,30 +16,24 @@
 
     <div class="container">
 
-        {{-- <div class="row"> --}}
-
-        
-        {{-- <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div> --}}
-
-
-
-        {{-- </div> --}}
-
         <div class="flexbox-container">
             <div class="small-box bg-red" style="margin-right: 10px;">
                 <div class="inner">
-                    <h3>{{$clientes->count()}}</h3>           
+                      
+                    @php
+                        $i=0;
+                    @endphp
+                    @foreach ($clientes as $cliente)
+                        @if($cliente->estado === 'pendiente')                    
+                            @php
+                                // $i= $loop->count
+                                $i=$i+1
+                            @endphp
+                        @endif
+
+                    @endforeach
+                    <h3>{{$i}}</h3>
+
                     <p>Pedidos</p>
                 </div>
                 <div class="icon">
@@ -52,24 +46,48 @@
 
             <div class="small-box bg-info" style="margin-right: 10px;">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    @php
+                        $j=0;
+                    @endphp
+                    @foreach ($stock as $stoc)
+                        {{-- @if($cliente->estado === 'pendiente')                     --}}
+                            @php
+                                // $i= $loop->count
+                                $j=$j+1
+                            @endphp
+                        {{-- @endif --}}
+
+                    @endforeach
+                    <h3>{{$j}}</h3>
+                    <p>Stock</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-warehouse"></i>
                 </div>
                 <a href="#" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
 
-            <div class="small-box bg-info" style="margin-right: 10px;">
+            <div class="small-box bg-warning" style="margin-right: 10px;">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    @php
+                        $k=0;
+                    @endphp
+                    @foreach ($stock as $stoc)
+                        @if($stoc->estado_id === 3)                    
+                            @php
+                                // $i= $loop->count
+                                $k=$k+1
+                            @endphp
+                        @endif
+
+                    @endforeach
+                    <h3>{{$k}}</h3>
+                    <p>En servicio</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-dolly"></i>
                 </div>
                 <a href="#" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
