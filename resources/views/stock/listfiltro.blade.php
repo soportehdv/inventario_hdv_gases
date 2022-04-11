@@ -176,7 +176,6 @@
 
                 </tbody>
             </table>
-        {{ $stock->links() }}
 
         </div>
 

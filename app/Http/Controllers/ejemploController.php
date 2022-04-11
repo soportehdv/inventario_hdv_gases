@@ -13,7 +13,7 @@ use App\Models\Lotes;
 use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Carbon\Carbon;
 
 
@@ -24,6 +24,8 @@ class VentasController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
     public function export($filtro = null, $fecha_inicio = null, $fecha_final = null, $id = null)

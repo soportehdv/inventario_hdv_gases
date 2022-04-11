@@ -11,10 +11,7 @@
     </div>
 
 @endsection
-@php
-// listado de tipos
-$array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
-@endphp
+
 
 @section('content')
 
@@ -29,7 +26,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
         @endforeach
         <div class="card">
             <div class="card-body">
-                <form id="form" method="POST" action="{{route('clientes.create')}}">
+                <form id="form" method="POST" action="{{route('clientes.update', $cliente->id) }}">
                     @csrf
                     <div class="row">
                         <div class="col-sm-4">
@@ -40,14 +37,25 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             </div>
                         </div>
 
-                    
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Estado</label>
+                                    <input type="text" class="form-control" name="estado"
+                                        value="{{ $cliente->estado }}" placeholder="pendiente">
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nombre recibe </label>
                                 <input type="text" class="form-control" name="name"
-                                    value="" placeholder="Nombre">
+                                    value="{{ $cliente->nombre }}" placeholder="Nombre">
                             </div>
                         </div>
 
@@ -56,7 +64,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Cargo recibe</label>
                                     <input type="text" class="form-control" name="cargorecibe"
-                                        value="" placeholder="Cargo recibe">
+                                        value="{{ $cliente->cargorecibe }}" placeholder="Cargo recibe">
                                 </div>
 
 
@@ -67,7 +75,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Telefono </label>
                                 <input type="text" class="form-control" name="registro"
-                                    value="" placeholder="Telefono">
+                                    value="{{ $cliente->registro}}" placeholder="Telefono">
                             </div>
 
                         </div>
@@ -82,10 +90,11 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <select id="departamento" name="departamento" class="form-control" required>
                                 <option value="">Seleccioné una ubicación</option>
                                 @foreach ($ubicacion as $ubi)
-                                    <option value="{{  $ubi->id }}" >
-                                        {{ $ubi->nombre }}
-                                    </option>
+                                    <option value="{{  $ubi->id }}" 
+                                        @if ($cliente->departamento === $ubi->id) selected='selected' @endif>
+                                        {{ $ubi->nombre }}</option>
                                 @endforeach
+
                             </select>
                         </div>
 
@@ -94,10 +103,12 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <select id="producto" name="producto" class="form-control" required>
                                 <option value="">Seleccioné un producto</option>
                                 @foreach ($productos as $producto)
-                                    <option value="{{  $producto->id }}" >
+                                    <option value="{{  $producto->id }}" 
+                                        @if ($cliente->producto === $producto->id) selected='selected' @endif>                                                                            
                                         {{ $producto->nombre }}
                                     </option>
                                 @endforeach
+
                             </select>
                         </div>
 
@@ -106,7 +117,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Cantidad: </label>
                                 <input type="text" class="form-control" name="giro"
-                                    value="" placeholder="Cantidad">
+                                    value="{{$cliente->giro}}" placeholder="Cantidad">
                             </div>
                         </div>
                     </div>
@@ -117,7 +128,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea3">Comentario <span>(No es obligatorio)</span></label>
                                 <textarea class="form-control" name="direccion" id="form"
-                                    rows="4"></textarea>
+                                    rows="4"> {{$cliente->direccion}}</textarea>
                             </div>
                         </div>
                     </div>

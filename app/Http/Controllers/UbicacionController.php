@@ -8,14 +8,36 @@ use App\Models\Ubicacion;
 use Illuminate\Support\Facades\Validator;
 
 class UbicacionController extends Controller
-{
-    public function getlistaubicacion()
-    {
-        $ubicacion = ubicacion::all();
 
-        return view('Ubicacion/lista', [
-            'ubicacion' => $ubicacion
-        ]);
+{
+    public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('admin');
+    
+        }
+        
+    public function getlistaubicacion(Request $request)
+    {
+        if($request){
+
+            $query= trim($request->get('search'));
+            $ubicacion = ubicacion::where('nombre','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            // ->get();
+            ->paginate(10);
+
+            return view('Ubicacion/lista', [
+                'ubicacion' => $ubicacion,
+                'search' => $query
+            ]);
+
+        }
+        // $ubicacion = ubicacion::all();
+
+        // return view('Ubicacion/lista', [
+        //     'ubicacion' => $ubicacion
+        // ]);
     }
     public function create()
     {

@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\PDF;
 use App\Models\Detalle_ventas;
 use App\Models\Ventas;
+use PDF;
 
 
 
 class Detalle_ventasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+
+    }
     public function getDetalle($venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
-            ->join('lotes', 'lotes.id', '=', 'detalle_ventas.lote_id')
-            ->join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('detalle_ventas.id as id', 'lotes.nombre as nombre', 'precios_productos.precio as precio', 'detalle_ventas.unidades as unidades')
+            ->join('productos', 'productos.id', '=', 'detalle_ventas.producto_id')
+            ->select('detalle_ventas.id as id', 'productos.serial as nombre')
             ->get();
 
         return view('detalle/mostrar', [
@@ -28,9 +33,7 @@ class Detalle_ventasController extends Controller
     public function imprimirFactura($venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
-            ->join('lotes', 'lotes.id', '=', 'detalle_ventas.lote_id')
-            ->join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('detalle_ventas.id', 'lotes.nombre', 'precios_productos.precio', 'detalle_ventas.unidades')
+            ->select('detalle_ventas.id')
             ->get();
         //var_dump('dd');die();
 

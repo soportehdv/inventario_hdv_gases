@@ -10,12 +10,14 @@ use App\Models\Ventas;
 use App\Models\Stock;
 use App\Models\Precios_productos;
 use App\Models\Lotes;
+use App\Models\User;
 use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
-use Barryvdh\DomPDF\PDF;
-use Carbon\Carbon;
 use App\Models\Compras;
+use App\Models\Ubicacion;
+use PDF;
+use Carbon\Carbon;
 
 
 
@@ -26,6 +28,8 @@ class VentasController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
     public function export($filtro = null, $fecha_inicio = null, $fecha_final = null, $id = null)
@@ -39,61 +43,38 @@ class VentasController extends Controller
         return $pdf->download('ejemplo.pdf');
     }
 
-    public function fechaVista()
-    {
-        return view('Ventas/fecha');
-    }
-
+   
     public function getVentas(Request $request)
     {
 
         if ($request->get('filtro') == null) { //Todas
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->get();
-        } else
-            if ($request->get('filtro') == 1) { //Por cliente
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->where('ventas.cliente_id', $id)
-                ->get();
-        } else
-                if ($request->get('filtro') == 2) { //Por fecha
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->whereBetween('ventas.created_at', [$fecha_inicio, $fecha_final])
-                ->get();
-        } else
-                if ($request->get('filtro') == 3) { //Por tipo de cliente
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->where('clientes.tipo', $id)
-                ->get();
-        } else
-                if ($request->get('filtro') == 4) { //Más recientes
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
-                ->orderby('ventas.created_at', 'asc')
-                ->get();
-        } else
-                if ($request->get('filtro') == 5) { // Más antiguos
-            $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-                ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+                ->join('productos', 'productos.id', '=', 'ventas.producto_id')
+                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'productos.serial AS serial')
                 ->orderby('ventas.created_at', 'desc')
-                ->get();
-        } else
-                if ($request->get('filtro') == 6) {
-            $ventas = Ventas::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
-        }
+                ->simplePaginate(10);
+
+                return view('Ventas/mostrar', [
+                    'ventas' => $ventas,
+                    
+                ]);
+        } 
 
 
-        return view('Ventas/mostrar', [
+        
+    }
+    public function fechaVista(Request $request){
+        $start = Carbon::parse($request->get('fecha_inicial'));
+        $end = Carbon::parse($request->get('fecha_final'));
+        $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
+        ->join('users', 'users.id', '=', 'ventas.user_id')
+        ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+        ->whereDate('ventas.created_at','<=',$end)
+        ->whereDate('ventas.created_at','>=',$start)
+        ->get();
+
+        return view('Ventas/mostrarbusqueda', [
             'ventas' => $ventas,
             
         ]);
@@ -101,9 +82,7 @@ class VentasController extends Controller
 
     public function create()
     {
-        $lotes = Lotes::join('precios_productos', 'precios_productos.id', '=', 'lotes.precio_id')
-            ->select('lotes.*', 'precios_productos.precio as precio')
-            ->get();
+        
 
         $stocks = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
             ->select('stock.*', 'productos.serial as producto')
@@ -113,7 +92,6 @@ class VentasController extends Controller
         $productos = Productos::all();
 
         return view('Ventas/create', [
-            'lotes'     => $lotes,
             'clientes'  => $clientes,
             'stocks'  => $stocks,
             'productos' => $productos,
@@ -125,64 +103,72 @@ class VentasController extends Controller
     {
 
         $unidades = $request->input('unidades');
-        $producto_id = $request->input('lote_id');
         $stock_id = $request->input('stock_id');
+        $cliente_id = $request->input('cliente_id');
+
 
         $venta = new Ventas();
         $venta->cliente_id = $request->input('cliente_id');
-        $venta->monto = 0;
-        $venta->impuesto = 0.13;
-        $venta->descuento = 0;
+        $venta->producto_id = $request->input('stock_id');
         $venta->user_id = Auth::user()->id;
-        $venta->save(); //se crea la venta
 
-        $i = 0;
-        $monto_final = 0;
+        
 
-        foreach ($stock_id as $stock) {
+        $stock = Stock::where('stock.id', $stock_id)
+            ->join('productos', 'productos.id', '=', 'stock.producto_id')
+            ->select('stock.*', 'productos.serial as producto')
+            ->first();
+        $compras = Compras::all()->first();
 
-            $stock = Stock::where('stock.id', $stock)
-                ->join('productos', 'productos.id', '=', 'stock.producto_id')
-                ->select('stock.*', 'productos.serial as producto')
-                ->first();
-            $compras = Compras::all()->first();
-            $lotes = Lotes::all()->first();
 
+        // condicion si no hay suficientes productos
+        if ($unidades > $stock->unidades && $unidades > $compras->unidades) {
+
+            $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
+            return redirect()->back();
+        }
+        else
+        {
+            $venta->save(); //se crea la venta
+
+            // actualizacion de estado en la tabla clientes
+            $clientes = Clientes::where('id', $cliente_id)->first();
+            $ubicacions = Ubicacion::where('id', $clientes->departamento)->first();
+            
+
+            //---------------------Descontamos del stock total 
+            $stock->unidades = $stock->unidades - $unidades;
+            $stock->estado_ubi = $ubicacions->nombre;
+            $stock->estado_id = 3;
+            $stock->save();
+
+            //---------------------Descontamos del total ingresado 
+            $compras->unidades = $compras->unidades - $unidades;
+            $compras->estado_ubi = $ubicacions->nombre;
+            $compras->save();
+            // dd($ubicacions->id);
 
             
-            if ($unidades[$i] > $stock->unidades && $unidades[$i] > $compras->unidades) {
-
-                $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
-                return redirect()->back();
-            }
-
-            $stock->unidades = $stock->unidades - $unidades[$i];
-            $stock->save();
-            $compras->unidades = $compras->unidades - $unidades[$i];
-            $compras->save();
+            $clientes->estado='entregado';
+            $clientes->save();
 
             // ---------------------factura o historial
 
             $detalle = new Detalle_ventas();
             $detalle->producto_id = $stock->producto_id;
             $detalle->venta_id = $venta->id; //usuario quien entrego
-            $detalle->lote_id = $lotes->id;
 
-            $detalle->unidades = $unidades[$i];
             $detalle->save();
 
-            $monto_final += $lotes->precio * $unidades[$i];
-
-        }        
 
 
-        $monto_impuesto = $monto_final * 0.13;
-        $monto_final = $monto_final + $monto_impuesto;
-
-        $venta->monto = $monto_final;
-        $venta->save();
-
-        $request->session()->flash('alert-success', 'Venta realizada con exito!');
-        return redirect()->route('ventas.lista', ['filtro' => 4]);
+            $request->session()->flash('alert-success', 'Venta realizada con exito!');
+            return redirect()->route('ventas.lista', ['filtro' => 4]);
+            }
+        
+       
     }
+
+    
+    
 }

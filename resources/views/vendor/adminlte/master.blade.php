@@ -2,6 +2,29 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <style>
+        @media (min-width: 360px) and (max-width: 575px) {
+            .ajustarSize {
+                float: left !important;
+                position: relative;
+                top: 2.4em;
+            }
+
+            .table-res {
+                overflow-x: auto !important;
+                display: block;
+            }
+
+        }
+        @media (min-width: 360px) and (max-width: 767px) {
+            .table-res {
+                overflow-x: auto !important;
+                display: block;
+            }
+
+        }
+
+    </style>
 
     {{-- Base Meta Tags --}}
     <meta charset="utf-8">

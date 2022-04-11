@@ -13,16 +13,31 @@ class ProveedoresController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
-    public function getProveedor()
+    public function getProveedor(Request $request)
     {
+        if($request){
 
-        $proveedor = Proveedores::all();
+            $query= trim($request->get('search'));
+            $proveedor = Proveedores::where('nombre','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->get();
 
-        return view('proveedor/lista', [
-            'proveedores' => $proveedor
-        ]);
+            return view('proveedor/lista', [
+                'proveedores' => $proveedor,
+                'search' => $query
+            ]);
+
+        }
+
+        // $proveedor = Proveedores::all();
+
+        // return view('proveedor/lista', [
+        //     'proveedores' => $proveedor
+        // ]);
     }
 
     public function create()
@@ -36,7 +51,7 @@ class ProveedoresController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required|email|unique:proveedores',
+            'remision'     => 'required|integer',
 
         ]);
 
@@ -47,7 +62,7 @@ class ProveedoresController extends Controller
         }
         $proveedor = new Proveedores;
         $proveedor->nombre = $request->input('name');
-        $proveedor->email = $request->input('email');
+        $proveedor->remision = $request->input('remision');
 
         $proveedor->save();
 
@@ -74,7 +89,7 @@ class ProveedoresController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'email'     => 'required',
+            'remision'     => 'required',
 
         ]);
 
@@ -85,7 +100,7 @@ class ProveedoresController extends Controller
         }
 
         $proveedor->nombre = $request->input('name');
-        $proveedor->email = $request->input('email');
+        $proveedor->remision = $request->input('remision');
 
         $proveedor->save();
         $request->session()->flash('alert-success', 'Proveedor actualizado con exito!');

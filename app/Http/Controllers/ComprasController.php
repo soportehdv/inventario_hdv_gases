@@ -8,6 +8,7 @@ use App\Models\Stock;
 use App\Models\Proveedores;
 use App\Models\Fracciones;
 use App\Models\Productos;
+use App\Models\Ubicacion;
 use App\Models\Estados;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,29 +20,45 @@ use Illuminate\Support\Facades\Validator;
 
 class ComprasController extends Controller
 {
+    public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('admin');
+    
+        }
 
-    public function getCompras()
+    public function getCompras(Request $request)
     {
+        if($request){
 
-        $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
-            ->join('estados', 'estados.id', '=', 'compras.estado_id')
-            ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado', 'compras.*')
-            ->get();
+            $query= trim($request->get('search'));            
+            $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
+                ->join('estados', 'estados.id', '=', 'compras.estado_id')
+                ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
+                ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->where('productos.cod_barra','LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                // ->get();
+                ->paginate(10);
 
-        return view('compras/lista', [
-            'compras' => $compras
-        ]);
+            return view('compras/lista', [
+                'compras' => $compras,
+                'search' => $query
+            ]);
+        }
     }
     public function create()
     {
         $estado = Estados::all();
         $productos = Productos::all();
-        // $fracciones = Fracciones::all();
+        $proveedores = Proveedores::all();
+        $Ubicacion = Ubicacion::all();
 
         return view('Compras/create', [
             'estado' => $estado,
             'productos' => $productos,
-            // 'fracciones' => $fracciones
+            'proveedores' => $proveedores,
+            'ubicacion' => $Ubicacion
         ]);
     }
 
@@ -60,12 +77,12 @@ class ComprasController extends Controller
 
             return redirect()->back();
         }
-
+        
 
         $Compras = new Compras();
-        $Compras->remision = $request->input('remision');
         $Compras->producto_id =  $request->input('producto_id');
         $Compras->estado_id =  $request->input('estado_id');
+        $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
@@ -107,6 +124,7 @@ class ComprasController extends Controller
         $compras = Compras::where('id', $id)->first();
         $productos = Productos::all();
         $estado = Estados::all();
+        $proveedores = Proveedores::all();
 
         // $fracciones = Fracciones::all();
 
@@ -114,6 +132,8 @@ class ComprasController extends Controller
             'compras' => $compras,
             'productos' => $productos,
             'estado' => $estado,
+            'proveedores' => $proveedores,
+
             // 'fracciones' => $fracciones
         ]);
     }
@@ -136,9 +156,9 @@ class ComprasController extends Controller
 
         //validamos los datos
         // $Compras = new Compras();
-        $Compras->remision = $request->input('remision');
         $Compras->producto_id =  $request->input('producto_id');
         $Compras->estado_id =  $request->input('estado_id');
+        $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');

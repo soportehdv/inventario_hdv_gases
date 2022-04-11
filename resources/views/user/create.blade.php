@@ -40,6 +40,10 @@
                     <input type="text" class="form-control" name="name" value="{{(isset($user))? $user->name: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
                 </div>
                 <div class="form-group">
+                  <label for="exampleInputEmail1">Cargo </label>
+                  <input type="text" class="form-control" name="cargo" value="{{(isset($user))? $user->cargo: ''}}" aria-describedby="emailHelp" placeholder="Cargo">
+              </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">Rol </label>
                     <select class="form-control" name="rol">
                       @if(isset($user))

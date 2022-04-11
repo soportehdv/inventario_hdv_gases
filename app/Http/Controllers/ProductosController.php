@@ -23,17 +23,34 @@ class ProductosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
-    public function getProductos()
+    public function getProductos(Request $request)
     {
+        if($request){
 
-        $Productos = Productos::all();
+            $query= trim($request->get('search'));
+            $Productos = Productos::where('serial','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            // ->get();
+            ->simplePaginate(10);
 
 
-        return view('productos/lista', [
-            'productos' => $Productos
-        ]);
+            return view('productos/lista', [
+                'productos' => $Productos,
+                'search' => $query
+            ]);
+
+        }
+
+        // $Productos = Productos::all();
+
+
+        // return view('productos/lista', [
+        //     'productos' => $Productos
+        // ]);
     }
 
     public function create()
@@ -61,6 +78,7 @@ class ProductosController extends Controller
         }
         $Productos = new Productos();
         $Productos->serial = $request->input('serial');
+        $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');
@@ -104,6 +122,7 @@ class ProductosController extends Controller
             return redirect()->back();
         }
         $Productos->serial = $request->input('serial');
+        $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');
         $Productos->registro = $request->input('registro');

@@ -8,13 +8,19 @@
     </div>
     
   </div>
+  @if ($search)
+        <div class="alert alert-primary" role="alert">
+            Los resultados para su busqueda '{{ $search }}' son:
+            <button type="button" class="close" data-dismiss="alert" style="color:white">&times;</button>
+        </div>
+    @endif
     
 @endsection
 
 @section('content')
 
 <div class="container">
-    <a href="{{route('proveedor.create.vista')}}" class="btn btn-primary mb-2">Añadir nuevo</a>
+    <a href="{{route('proveedor.create.vista')}}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir nuevo</a>
     
     
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
@@ -27,12 +33,12 @@
         @endif 
     @endforeach 
     <br>
-    <table class="table table-striped">
+    <table class="table table-striped table-res">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
+            <th scope="col">N° Remisión</th>
             <th scope="col">Acción</th>
 
           </tr>
@@ -42,8 +48,8 @@
             <tr>
                 <th scope="row">{{$proveedor->id}}</th>
                 <td>{{$proveedor->nombre}}</td>
-                <td>{{$proveedor->email}}</td>
-                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2">Editar</a>
+                <td>{{$proveedor->remision}}</td>
+                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                 </td>
 
             </tr>

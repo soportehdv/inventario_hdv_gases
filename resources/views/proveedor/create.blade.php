@@ -35,8 +35,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email </label>
-                    <input type="email" class="form-control" name="email" value="{{(isset($proveedor))?$proveedor->email:''}}" aria-describedby="emailHelp" placeholder="Ingresa email">
+                    <label for="exampleInputEmail1">N° remisión </label>
+                    <input type="number" class="form-control" name="remision" value="{{(isset($proveedor))?$proveedor->remision:''}}" aria-describedby="emailHelp" placeholder="Ingresa Numero de remisión">
                   </div>
                 
                 <button type="submit" class="btn btn-primary">Agregar</button>

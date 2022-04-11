@@ -14,18 +14,36 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+
     }
 
 
 
-    public function getUser()
+    public function getUser(Request $request)
     {
 
-        $user = User::all();
+        if($request){
 
-        return view('user/lista', [
-            'users' => $user
-        ]);
+            $query= trim($request->get('search'));
+            $user= User::where('name','LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            // ->get();
+            ->simplePaginate(10);
+
+
+            return view('user/lista', [
+                'users' => $user,
+                'search' => $query
+            ]);
+
+        }
+
+        // $user = User::all();
+
+        // return view('user/lista', [
+        //     'users' => $user
+        // ]);
     }
 
     public function create()
@@ -39,6 +57,7 @@ class UserController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'cargo'      => 'required',
             'email'     => 'required|email|unique:users',
             'rol'      => 'required',
             'password'  => 'required',
@@ -52,6 +71,7 @@ class UserController extends Controller
 
         $user = new User;
         $user->name = $request->input('name');
+        $user->cargo = $request->input('cargo');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');
@@ -79,6 +99,7 @@ class UserController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'cargo'      => 'required',
             'email'     => 'required',
             'rol'      => 'required',
             'password'  => 'required',
@@ -91,6 +112,7 @@ class UserController extends Controller
         }
 
         $user->name = $request->input('name');
+        $user->cargo = $request->input('cargo');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');

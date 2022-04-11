@@ -67,11 +67,20 @@
                                 <input type="date" class="form-control" name="fecha_ingreso"
                                     value="{{ $compras->fecha_ingreso }}">
                             </div>
+                            
                             <div class="col-sm-4">
                                 <label for="">N° Remisión </label>
-                                <input type="number" min="0" class="form-control" name="remision"
-                                    value="{{ $compras->remision }}" placeholder="Numero de remisión">
+                                <select id="proveedor" name="proveedor_id" class="form-control">
+                                    <option value="">Seleccioné un N° de remision</option>
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id }}"
+                                            @if ($compras->proveedor_id === $proveedor->id) selected='selected' @endif>
+                                            {{ $proveedor->nombre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            {{--  --}}
+                            
                             <div class="col-sm-4">
                                 <label for="">Lote </label>
                                 <input type="number" min="0" class="form-control" name="lote"

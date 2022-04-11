@@ -31,13 +31,18 @@
                 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="exampleInputEmail1">Serial </label>
                         <input type="text" class="form-control" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial">
 
                         </div>
+                        <div class="col-sm-4">
+                            <label for="exampleInputEmail1">Nombre </label>
+                        <input type="text" class="form-control" name="nombre" value="{{(isset($producto))? $producto->nombre: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
 
-                        <div class="col-sm-6">
+                        </div>
+
+                        <div class="col-sm-4">
                             <label for="exampleInputEmail1">Código de barras </label>
                             <input type="text" class="form-control" name="cod_barra" value="{{(isset($producto))? $producto->cod_barra: ''}}" aria-describedby="emailHelp" placeholder="Código de barras">
                         </div>

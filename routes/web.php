@@ -63,8 +63,14 @@ Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::
 Route::get('ventas/todas/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'getVentas'])->name('ventas.lista');
 Route::get('ventas/create', [App\Http\Controllers\VentasController::class, 'create'])->name('ventas.create.vista');
 Route::post('ventas/create', [App\Http\Controllers\VentasController::class, 'createVenta'])->name('ventas.create');
-Route::get('ventas/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
+
+
+
+
+
+// Route::get('ventas/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
 Route::get('ventas/descargar/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'export'])->name('ventas.descargar');
+Route::get('ventar/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
 
 //Precios
 Route::get('precios/create', [App\Http\Controllers\Precios_productosController::class, 'create'])->name('precios.create.vista');
@@ -101,7 +107,7 @@ Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesCon
 
 //Stock
 Route::get('stock/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
-// Route::get('stock/fecha', [App\Http\Controllers\StockController::class, 'fechaVista'])->name('stock.fecha');
+Route::get('stock/fecha', [App\Http\Controllers\StockController::class, 'fechaVista'])->name('stock.fecha');
 
 // ubicaciones
 Route::get('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'create'])->name('listaubicacion.create.vista');
@@ -110,3 +116,4 @@ Route::get('ubicacion/lista', [App\Http\Controllers\ubicacionController::class, 
 Route::get('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionController::class, 'update'])->name('listaubicacion.update.vista');
 Route::post('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionController::class, 'updatelistaubicacion'])->name('listaubicacion.update');
 
+Route::get('targets/target', [App\Http\Controllers\TargetController::class, 'gettarget'])->name('listatarget.target');

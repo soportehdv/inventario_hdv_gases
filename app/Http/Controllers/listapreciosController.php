@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class listapreciosController extends Controller
 {
+    public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('admin');
+    
+        }
+        
     public function getlistaprecios()
     {
         $listaprecios = listaprecios::all();

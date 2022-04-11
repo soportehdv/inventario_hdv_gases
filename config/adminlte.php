@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'targets/target',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -256,56 +256,39 @@ return [
 
         ],
         [
-            'text' => 'Responsables',
+            'text' => 'Pedidos',
             'url'  => 'clientes/list',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-chalkboard-teacher',
             'role'        => 'ventas'
 
         ],
         [
             'text' => 'Proveedores',
             'url'  => 'proveedor/list',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-truck',
             'role'        => 'admin'
 
         ],
         [
             'text' => 'Ubicaciones',
             'url'  => 'ubicacion/lista',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-map-marker-alt',
             'role'        => 'admin'
 
         ],
         [
             'text'    => 'Stock',
             'url'     => 'stock/list',
-            'icon'    => 'fas fa-fw fa-share',
-            'role'        => 'inventario',
+            'icon'    => 'fas fa-fw fa-warehouse',
+            'role'        => 'ventas',
 
         ],
 
         [
-            'text' => 'Ventas',
-            'url'  => 'ventas/list',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'ventas',
-            'submenu' => [
-                [
-                    'text' => 'Todos',
-                    'url'  => 'ventas/todas',
-                    'role' => 'ventas',
-                ],
-                [
-                    'text' => 'Por fecha',
-                    'url'  => 'ventas/fecha',
-                    'role' => 'ventas',
-                ],
-                [
-                    'text' => 'Hoy',
-                    'url'  => 'ventas/todas?filtro=6',
-                    'role' => 'ventas',
-                ],
-            ],
+            'text' => 'Entrega',
+            'url'  => 'ventas/todas',
+            'icon' => 'fas fa-fw fa-dolly',
+            'role' => 'admin'
         ],
         // [
         //     'text' => 'Lotes',
@@ -321,13 +304,13 @@ return [
         //     'role' => 'admin'
 
         // ],
-        [
-            'text' => 'Fracciones',
-            'url'  => 'fracciones/lista',
-            'icon' => 'fas fa-fw fa-lock',
-            'role' => 'admin'
+        // [
+        //     'text' => 'Fracciones',
+        //     'url'  => 'fracciones/lista',
+        //     'icon' => 'fas fa-fw fa-lock',
+        //     'role' => 'admin'
 
-        ],
+        // ],
 
 
 

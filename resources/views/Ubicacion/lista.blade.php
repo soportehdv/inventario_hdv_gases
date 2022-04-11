@@ -8,13 +8,19 @@
     </div>
     
   </div>
+  @if ($search)
+        <div class="alert alert-primary" role="alert">
+            Los resultados para su busqueda '{{ $search }}' son:
+            <button type="button" class="close" data-dismiss="alert" style="color:white">&times;</button>
+        </div>
+    @endif
     
 @endsection
 
 @section('content')
 
 <div class="container">
-    <a href="{{route('listaubicacion.create.vista')}}" class="btn btn-primary mb-2">Añadir nueva ubicación</a>
+    <a href="{{route('listaubicacion.create.vista')}}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir nueva ubicación</a>
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
       @if(Session::has('alert-' . $msg)) 
         <div class="alert {{'alert-' . $msg}} alert-dismissable">
@@ -40,7 +46,7 @@
                 <th scope="row">{{$ubi->id}}</th>
                 <td>{{$ubi->nombre}}</td>
 
-                <td><a href="{{route('listaubicacion.update.vista', $ubi->id)}}" class="btn btn-success mb-2">Editar</a>
+                <td><a href="{{route('listaubicacion.update.vista', $ubi->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                 </td>
                 
 
@@ -48,5 +54,7 @@
           @endforeach
         </tbody>
       </table>
+      {{ $ubicacion->links() }}
+
 </div>
 @endsection
