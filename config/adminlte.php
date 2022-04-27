@@ -51,6 +51,8 @@ return [
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
+    'logo_img2' => 'vendor/adminlte/dist/img/logoHDV1.png',
+
 
     /*
     |--------------------------------------------------------------------------

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Detalle_ventas;
 use App\Models\Ventas;
+use App\Models\Compras;
 use PDF;
 
 
@@ -30,19 +31,34 @@ class Detalle_ventasController extends Controller
         ]);
     }
 
-    public function imprimirFactura($venta_id)
+    public function imprimirFactura(Request $request, $venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
             ->select('detalle_ventas.id')
             ->get();
         //var_dump('dd');die();
 
-        $venta = Ventas::where('id', $venta_id)->first();
-        $pdf = PDF::loadView('factura', [
-            'venta' =>  $venta,
-            'detalles' => $detalle
-        ]);
+        $query= trim($request->get('search'));            
+            $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
+                ->join('estados', 'estados.id', '=', 'compras.estado_id')
+                ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
+                ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->where('productos.cod_barra','LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                ->get();
+                // comentado para pruebas
+                // ->paginate(22);
 
-        return $pdf->download("factura-$venta->created_at.pdf");
+        $venta = Ventas::where('id', $venta_id)->first();
+
+        $pdf = PDF::loadView('factura', [
+            'compras' => $compras,
+            'venta' =>  $venta,
+            'detalles' => $detalle,
+            'search' => $query
+
+        ])->setPaper('letter', 'landscape');
+
+        return $pdf->stream("factura-$venta->created_at.pdf");
     }
 }

@@ -33,36 +33,36 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Serial </label>
-                        <input type="text" class="form-control" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial">
+                        <input type="text" class="form-control" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial" required>
 
                         </div>
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Nombre </label>
-                        <input type="text" class="form-control" name="nombre" value="{{(isset($producto))? $producto->nombre: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
+                        <input type="text" class="form-control" name="nombre" value="{{(isset($producto))? $producto->nombre: ''}}" aria-describedby="emailHelp" placeholder="Nombre" required>
 
                         </div>
 
                         <div class="col-sm-4">
                             <label for="exampleInputEmail1">Código de barras </label>
-                            <input type="text" class="form-control" name="cod_barra" value="{{(isset($producto))? $producto->cod_barra: ''}}" aria-describedby="emailHelp" placeholder="Código de barras">
+                            <input type="text" class="form-control" name="cod_barra" value="{{(isset($producto))? $producto->cod_barra: ''}}" aria-describedby="emailHelp" placeholder="Código de barras" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="">Presentación (m3) </label>
-                        <input type="number" class="form-control" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación">
+                        <input type="number" class="form-control" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación" required>
 
                         </div>
 
                         <div class="col-sm-4">
                             <label for="">Registro sanitario </label>
-                            <input type="text" class="form-control" name="registro" value="{{(isset($producto))? $producto->registro: ''}}" placeholder="Registro sanitario">
+                            <input type="text" class="form-control" name="registro" value="{{(isset($producto))? $producto->registro: ''}}" placeholder="Registro sanitario" required>
                         </div>
 
                         <div class="col-sm-4">
                             <label for="">Color </label>
-                            <input type="text" class="form-control" name="color" value="{{(isset($producto))? $producto->color: ''}}" placeholder="Color">
+                            <input type="text" class="form-control" name="color" value="{{(isset($producto))? $producto->color: ''}}" placeholder="Color" required>
                         </div>
                     </div>
                 </div>

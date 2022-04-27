@@ -38,8 +38,9 @@ class ComprasController extends Controller
                 ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('productos.cod_barra','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
-                // ->get();
-                ->paginate(10);
+                ->get();
+                // comentado para pruebas
+                // ->paginate(10);
 
             return view('compras/lista', [
                 'compras' => $compras,

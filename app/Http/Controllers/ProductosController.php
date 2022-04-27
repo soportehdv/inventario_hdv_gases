@@ -69,6 +69,11 @@ class ProductosController extends Controller
         //validamos los datos
         $validate = Validator::make($request->all(), [
             'serial'      => 'required',
+            'nombre'      => 'required',
+            'cod_barra'      => 'required',
+            'presentacion'      => 'required',
+            'registro'      => 'required',
+            'color'      => 'required',
 
         ]);
         if ($validate->fails()) {

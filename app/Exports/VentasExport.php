@@ -31,7 +31,6 @@ class VentasExport implements FromCollection,WithHeadings
         return [
             'Id',
             'Cliente',
-            'Monto',
             'Vendedor',
             'Fecha',
         ];
@@ -41,27 +40,27 @@ class VentasExport implements FromCollection,WithHeadings
         if($this->filtro == null){//Todas
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
             ->join('users', 'users.id', '=', 'ventas.user_id')
-            ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+            ->select('ventas.id', 'clientes.nombre AS cliente',  'users.name AS Vendedor', 'ventas.created_at AS Fecha')
             ->get();
         }else
             if($this->filtro == 1){//Por cliente
                 $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+                ->select('ventas.id', 'clientes.nombre AS cliente',  'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                             ->where('ventas.cliente_id', $this->id)
                             ->get();
             }else
                 if($this->filtro == 2){//Por fecha
                     $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                     ->join('users', 'users.id', '=', 'ventas.user_id')
-                    ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+                    ->select('ventas.id', 'clientes.nombre AS cliente',  'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                         ->whereBetween('ventas.created_at', [$this->fecha_inicio, $this->fecha_final])
                         ->get();
                 }else
                     if($this->filtro == 3){//Por tipo de cliente
                         $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                         ->join('users', 'users.id', '=', 'ventas.user_id')
-                        ->select('ventas.id', 'clientes.nombre AS cliente', 'ventas.monto', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
+                        ->select('ventas.id', 'clientes.nombre AS cliente',  'users.name AS Vendedor', 'ventas.created_at AS Fecha')
                             ->where('clientes.tipo', $this->id)
                             ->get();
                     }

@@ -29,23 +29,23 @@
                 @csrf
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email </label>
-                  <input type="email" class="form-control" name="email" value="{{(isset($user))?$user->email:''}}" aria-describedby="emailHelp" placeholder="Ingresa email">
+                  <input type="email" class="form-control" name="email" value="{{(isset($user))?$user->email:''}}" aria-describedby="emailHelp" placeholder="Ingresa email" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" name="password" value="{{(isset($user))? $user->password: ''}}" id="exampleInputPassword1" placeholder="Contraseña">
+                  <input type="password" class="form-control" name="password" value="{{(isset($user))? $user->password: ''}}" id="exampleInputPassword1" placeholder="Contraseña" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nombre </label>
-                    <input type="text" class="form-control" name="name" value="{{(isset($user))? $user->name: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
+                    <input type="text" class="form-control" name="name" value="{{(isset($user))? $user->name: ''}}" aria-describedby="emailHelp" placeholder="Nombre" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Cargo </label>
-                  <input type="text" class="form-control" name="cargo" value="{{(isset($user))? $user->cargo: ''}}" aria-describedby="emailHelp" placeholder="Cargo">
+                  <input type="text" class="form-control" name="cargo" value="{{(isset($user))? $user->cargo: ''}}" aria-describedby="emailHelp" placeholder="Cargo" required>
               </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Rol </label>
-                    <select class="form-control" name="rol">
+                    <select class="form-control" name="rol" required>
                       @if(isset($user))
                         @if($user->rol == 'admin')
                           <option value="admin">Admin</option>

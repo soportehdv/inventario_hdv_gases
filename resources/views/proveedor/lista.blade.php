@@ -40,6 +40,8 @@
             <th scope="col">Nombre</th>
             <th scope="col">N° Remisión</th>
             <th scope="col">Acción</th>
+            <th scope="col">Descargas</th>
+
 
           </tr>
         </thead>
@@ -50,6 +52,8 @@
                 <td>{{$proveedor->nombre}}</td>
                 <td>{{$proveedor->remision}}</td>
                 <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
+                </td>
+                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Descargar</a>
                 </td>
 
             </tr>
