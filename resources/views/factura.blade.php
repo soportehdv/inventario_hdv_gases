@@ -152,8 +152,9 @@
                 <colgroup width="148"></colgroup>
                 <tr>
                     <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-right: 1px solid #000000;border-left: 1px solid #000000"
-                        rowspan=2 height="30" align="center" valign=middle><img
-                            src="http://www.hdv.gov.co/images/logos/logoHDV1.png" width="158" height="50"></td>
+                        rowspan=2 height="30" align="center" valign=middle>
+                        <img src="http://www.hdv.gov.co/images/logos/logoHDV1.png" width="158" height="50">
+                        </td>
                     <td style="width:65%; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                         align="center" valign=middle><b>HOSPITAL DEPARTAMENTAL DE VILLAVICENCIO E.S.E. </b></td>
                     <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"

@@ -53,7 +53,7 @@
                 <td>{{$proveedor->remision}}</td>
                 <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                 </td>
-                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Descargar</a>
+                <td><a href="{{route('detalles.descargar.factura',$proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Descargar</a>
                 </td>
 
             </tr>
