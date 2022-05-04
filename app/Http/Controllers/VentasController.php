@@ -72,9 +72,10 @@ class VentasController extends Controller
         ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha')
         ->whereDate('ventas.created_at','<=',$end)
         ->whereDate('ventas.created_at','>=',$start)
-        ->get();
+        // ->get();
+        ->paginate(50);
 
-        return view('Ventas/mostrarbusqueda', [
+        return view('Ventas/mostrar', [
             'ventas' => $ventas,
             
         ]);
