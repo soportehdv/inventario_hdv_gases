@@ -95,12 +95,17 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <label for="">Serial de producto </label>
+                                <label for="exampleInputEmail1">Serial </label>
+                                <input type="text" class="form-control" name="serial" value="">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="">Nombre </label>
                                 <select id="producto" name="producto_id" class="form-control">
-                                    <option value="">Seleccioné un serial de producto</option>
+                                    <option value="">Seleccioné un nombre de producto</option>
                                     @foreach ($productos as $producto)
                                         <option value="{{ $producto->id }}">
-                                            {{ $producto->serial }}</option>
+                                            {{ $producto->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>

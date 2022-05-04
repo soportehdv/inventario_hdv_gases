@@ -32,7 +32,7 @@ class ProductosController extends Controller
         if($request){
 
             $query= trim($request->get('search'));
-            $Productos = Productos::where('serial','LIKE', '%' . $query . '%')
+            $Productos = Productos::where('cod_barra','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
             // ->get();
             ->simplePaginate(10);
@@ -68,7 +68,6 @@ class ProductosController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'serial'      => 'required',
             'nombre'      => 'required',
             'cod_barra'      => 'required',
             'presentacion'      => 'required',
@@ -82,7 +81,6 @@ class ProductosController extends Controller
             return redirect()->back();
         }
         $Productos = new Productos();
-        $Productos->serial = $request->input('serial');
         $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');
@@ -117,7 +115,7 @@ class ProductosController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'serial'      => 'required',
+            'nombre'      => 'required',
 
         ]);
 
@@ -126,7 +124,6 @@ class ProductosController extends Controller
 
             return redirect()->back();
         }
-        $Productos->serial = $request->input('serial');
         $Productos->nombre = $request->input('nombre');
         $Productos->cod_barra = $request->input('cod_barra');
         $Productos->presentacion = $request->input('presentacion');

@@ -21,6 +21,7 @@ class CreateComprasTable extends Migration
             $table->string('estado_ubi')->nullable()->default("Bodega");
             $table->date('fecha_ingreso');
             $table->date('fecha_vencimiento');
+            $table->integer('serial');
             $table->integer('unidades');
             $table->integer('lote');
             $table->string('limpieza');

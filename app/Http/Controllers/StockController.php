@@ -25,8 +25,8 @@ class StockController extends Controller
             $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
             ->join('compras', 'compras.id', '=', 'stock.compra_id')
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
-            ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
-            ->where('productos.serial','LIKE', '%' . $query . '%')
+            ->select('stock.*','productos.nombre as producto', 'compras.lote as lote','compras.serial as serial', 'estados.estado as estados')
+            ->where('productos.nombre','LIKE', '%' . $query . '%')
             // ->get();
             ->paginate(10);
 
@@ -39,7 +39,7 @@ class StockController extends Controller
                     $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
                     ->join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
-                    ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
+                    ->select('stock.*','productos.nombre as producto', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'asc')                
                     // ->get();
                     ->paginate(10);
@@ -53,7 +53,7 @@ class StockController extends Controller
                     $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
                     ->join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
-                    ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
+                    ->select('stock.*','productos.nombre as producto', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'desc')                
                     // ->get();
                     ->paginate(10);
@@ -70,7 +70,7 @@ class StockController extends Controller
         $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
         ->join('compras', 'compras.id', '=', 'stock.compra_id')
         ->join('estados', 'estados.id', '=', 'stock.estado_id')
-        ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
+        ->select('stock.*','productos.nombre as producto', 'compras.lote as lote','compras.serial as serial', 'estados.estado as estados')
         ->whereDate('stock.fecha_ingreso','<=',$end)
         ->whereDate('stock.fecha_ingreso','>=',$start)
         ->get();

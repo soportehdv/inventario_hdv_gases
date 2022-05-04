@@ -16,6 +16,7 @@ class Compras extends Model
         'fecha_ingreso',
         'proveerdor_id',
         'fecha_vencimiento',
+        'serial',
         'unidades',
         'lote',
         'limpieza',

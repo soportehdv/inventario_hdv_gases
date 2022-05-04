@@ -10,7 +10,6 @@ class Productos extends Model
     use HasFactory;
 
     protected $fillable = [
-        'serial',
         'producto_id',
         'nombre',
         'cod_barra'

@@ -51,7 +51,7 @@ class VentasController extends Controller
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->join('productos', 'productos.id', '=', 'ventas.producto_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'productos.serial AS serial')
+                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'productos.nombre AS serial')
                 ->orderby('ventas.created_at', 'desc')
                 ->simplePaginate(10);
 
@@ -86,7 +86,7 @@ class VentasController extends Controller
         
 
         $stocks = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->select('stock.*', 'productos.serial as producto')
+            ->select('stock.*', 'productos.id as producto')
             ->get();
               
         $clientes = Clientes::all();
@@ -117,7 +117,7 @@ class VentasController extends Controller
 
         $stock = Stock::where('stock.id', $stock_id)
             ->join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->select('stock.*', 'productos.serial as producto')
+            ->select('stock.*', 'productos.nombre as producto')
             ->first();
         $compras = Compras::all()->first();
 

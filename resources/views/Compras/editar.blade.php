@@ -96,13 +96,20 @@
                                 <input type="date" class="form-control" name="fecha_vencimiento"
                                     value="{{ $compras->fecha_vencimiento }}">
                             </div>
+
                             <div class="col-sm-4">
-                                <label for="">Serial </label>
+                                <label for="exampleInputEmail1">Serial </label>
+                                <input type="text" class="form-control" name="serial"
+                                    value="{{ $compras->serial }}">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="">Nombre </label>
                                 <select id="producto" name="producto_id" class="form-control">
                                     @foreach ($productos as $producto)
                                         <option value="{{ $producto->id }}"
                                             @if ($compras->producto_id === $producto->id) selected='selected' @endif>
-                                            {{ $producto->serial }}</option>
+                                            {{ $producto->nombre }}</option>
                                     @endforeach
                                 </select>
 

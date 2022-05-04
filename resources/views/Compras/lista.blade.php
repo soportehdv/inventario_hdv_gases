@@ -39,10 +39,11 @@
                     <th>#</th>
                     <th>Ingreso</th>
                     <th>Codigo</th>
+                    <th>Serial</th>
                     <th>Remisión</th>
                     <th>Lote</th>
                     <th>Vencimiento</th>
-                    <th>Serial</th>
+                    <th>Nombre</th>
                     <th>N° Registro</th>
                     <th>m3</th>
                     <th>Color</th>
@@ -57,6 +58,7 @@
                         <th>{{ $compra->id }}</th>
                         <td>{{ $compra->fecha_ingreso }}</td>
                         <td>{{ $compra->barras }}</td>
+                        <td>{{ $compra->serial }}</td>
                         <td>{{ $compra->remision }}</td>
                         <td>{{ $compra->lote }}</td>
                         <td>{{ $compra->fecha_vencimiento }}</td>

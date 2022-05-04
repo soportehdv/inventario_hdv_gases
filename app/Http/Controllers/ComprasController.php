@@ -35,7 +35,7 @@ class ComprasController extends Controller
             $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
                 ->join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->select('productos.nombre as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('productos.cod_barra','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 // ->get();
@@ -86,6 +86,7 @@ class ComprasController extends Controller
         $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
+        $Compras->serial = $request->input('serial');
         $Compras->unidades = $request->input('unidades');
         $Compras->lote = $request->input('lote');
         $Compras->limpieza = $request->input('limpieza');
@@ -162,6 +163,7 @@ class ComprasController extends Controller
         $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->fecha_ingreso = $request->input('fecha_ingreso');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
+        $Compras->serial = $request->input('serial');
         $Compras->unidades = $request->input('unidades');
         $Compras->lote = $request->input('lote');
         $Compras->limpieza = $request->input('limpieza');
