@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="card">
         <div class="card-header">
-            <h2>Crear nuevo responsable</h2>
+            <h2>Modificar pedido</h2>
         </div>
 
     </div>
@@ -47,7 +47,18 @@
 
                             </div>
                         </div>
-                        
+                        <div class="col-sm-4">
+                            <label for="">Ubicación </label>
+                            <select id="departamento" name="departamento" class="form-control" required>
+                                <option value="">Seleccioné una ubicación</option>
+                                @foreach ($ubicacion as $ubi)
+                                    <option value="{{  $ubi->id }}" 
+                                        @if ($cliente->departamento === $ubi->id) selected='selected' @endif>
+                                        {{ $ubi->nombre }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
                         
                     </div>
                     <div class="row">
@@ -81,58 +92,20 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        
-
-                        
-                        <div class="col-sm-4">
-                            <label for="">Ubicación </label>
-                            <select id="departamento" name="departamento" class="form-control" required>
-                                <option value="">Seleccioné una ubicación</option>
-                                @foreach ($ubicacion as $ubi)
-                                    <option value="{{  $ubi->id }}" 
-                                        @if ($cliente->departamento === $ubi->id) selected='selected' @endif>
-                                        {{ $ubi->nombre }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="">Producto </label>
-                            <select id="producto" name="producto" class="form-control" required>
-                                <option value="">Seleccioné un producto</option>
-                                @foreach ($compras as $compra)
-                                    <option value="{{  $compra->id }}" 
-                                        @if ($cliente->producto === $compra->id) selected='selected' @endif>                                                                            
-                                        {{ $compra->serial }}
-                                    </option>
-                                @endforeach
-
-                            </select>
-                        </div>
-
-                        <div class="col-sm-4">
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Cantidad: </label>
-                                <input type="text" class="form-control" name="giro"
-                                    value="{{$cliente->giro}}" placeholder="Cantidad">
-                            </div>
-                        </div>
-                    </div>
+                    
                     
 
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea3">Comentario <span>(No es obligatorio)</span></label>
+                                <label for="exampleFormControlTextarea3">¿Que elementos necesita? </label>
                                 <textarea class="form-control" name="direccion" id="form"
                                     rows="4"> {{$cliente->direccion}}</textarea>
                             </div>
                         </div>
                     </div>
 
+                    
 
                     <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>

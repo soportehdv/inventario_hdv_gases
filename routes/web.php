@@ -37,13 +37,6 @@ Route::get('proveedor/update/{user_id}', [App\Http\Controllers\ProveedoresContro
 Route::post('proveedor/update/{user_id}', [App\Http\Controllers\ProveedoresController::class, 'updateProveedor'])->name('proveedor.update');
 Route::get('proveedor/list', [App\Http\Controllers\ProveedoresController::class, 'getProveedor'])->name('proveedor.lista');
 
-//Productos
-Route::get('productos/create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create.vista');
-Route::post('productos/create', [App\Http\Controllers\ProductosController::class, 'createProductos'])->name('productos.create');
-Route::get('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update.vista');
-Route::post('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'updateProductos'])->name('productos.update');
-Route::get('productos/list', [App\Http\Controllers\ProductosController::class, 'getProductos'])->name('productos.lista');
-
 //Lotes
 Route::get('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'create'])->name('lotes.create.vista');
 Route::post('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'createLotes'])->name('lotes.create');
@@ -57,6 +50,8 @@ Route::get('clientes/create', [App\Http\Controllers\ClientesController::class, '
 Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 'createClientes'])->name('clientes.create');
 Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
 Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
+Route::get('clientes/entrega/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'entrega'])->name('clientes.entrega.vista');
+Route::post('clientes/entrega/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'entregaClientes'])->name('clientes.entrega');
 Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
 
 //Ventas

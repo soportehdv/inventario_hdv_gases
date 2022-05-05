@@ -22,8 +22,8 @@ class Detalle_ventasController extends Controller
     public function getDetalle($venta_id)
     {
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
-            ->join('productos', 'productos.id', '=', 'detalle_ventas.producto_id')
-            ->select('detalle_ventas.id as id', 'productos.serial as nombre')
+            ->join('compras', 'compras.id', '=', 'detalle_ventas.producto_id')
+            ->select('detalle_ventas.id as id', 'compras.serial as nombre')
             ->get();
 
         return view('detalle/mostrar', [
@@ -42,10 +42,9 @@ class Detalle_ventasController extends Controller
         //var_dump('dd');die();
 
         $query= trim($proveedor->id);            
-            $compras = Compras::join('productos', 'productos.id', '=', 'compras.producto_id')
-                ->join('estados', 'estados.id', '=', 'compras.estado_id')
+            $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select('productos.serial as producto','productos.cod_barra as barras', 'productos.registro as sanitario', 'productos.presentacion as present', 'productos.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('compras.proveedor_id','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 ->get();

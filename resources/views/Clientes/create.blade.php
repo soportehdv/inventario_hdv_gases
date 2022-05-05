@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="card">
         <div class="card-header">
-            <h2>Crear nuevo responsable</h2>
+            <h2>Crear nuevo pedido</h2>
         </div>
 
     </div>
@@ -41,15 +41,28 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                         </div>
 
                     
+                    <div class="col-sm-4">
+                        <label for="">Ubicación </label>
+                        <select id="departamento" name="departamento" class="form-control" required>
+                            <option value="">Seleccioné una ubicación</option>
+                            @foreach ($ubicacion as $ubi)
+                                <option value="{{  $ubi->id }}" >
+                                    {{ $ubi->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nombre recibe </label>
-                                <input type="text" class="form-control" name="name"
-                                    value="" placeholder="Nombre">
-                            </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre recibe </label>
+                            <input type="text" class="form-control" name="name"
+                                value="" placeholder="Nombre">
                         </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -71,56 +84,23 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             </div>
 
                         </div>
-                    </div>
-
-                    <div class="row">
                         
-
-                        
-                        <div class="col-sm-4">
-                            <label for="">Ubicación </label>
-                            <select id="departamento" name="departamento" class="form-control" required>
-                                <option value="">Seleccioné una ubicación</option>
-                                @foreach ($ubicacion as $ubi)
-                                    <option value="{{  $ubi->id }}" >
-                                        {{ $ubi->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="">Producto </label>
-                            <select id="producto" name="producto" class="form-control" required>
-                                <option value="">Seleccioné un producto</option>
-                                @foreach ($compras as $compra)
-                                    <option value="{{  $compra->id }}" >
-                                        {{ $compra->serial }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-sm-4">
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Cantidad: </label>
-                                <input type="text" class="form-control" name="giro"
-                                    value="" placeholder="Cantidad">
-                            </div>
-                        </div>
                     </div>
-                    
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea3">Comentario <span>(No es obligatorio)</span></label>
+                                <label for="exampleFormControlTextarea3">¿Que elementos necesita? </label>
                                 <textarea class="form-control" name="direccion" id="form"
                                     rows="4"></textarea>
                             </div>
                         </div>
+                        
                     </div>
+
+                    
+                    
+                    
+                    
 
 
                     <button type="submit" class="btn btn-primary">Agregar</button>

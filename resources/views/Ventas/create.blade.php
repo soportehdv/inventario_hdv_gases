@@ -11,10 +11,13 @@
     <link rel='stylesheet prefetch'
         href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
 
 @endsection
 
 @section('content')
+
 
     <?php $i = 0; ?>
 
@@ -33,29 +36,31 @@
                     @csrf
                     <div class="row">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success mt-3"><i class="fa fa-reply-all" aria-hidden="true"></i> Finalizar entrega</button>
+                            <button type="submit" class="btn btn-success mt-3"><i class="fa fa-reply-all"
+                                    aria-hidden="true"></i> Finalizar entrega</button>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                    
+
                     </div>
                     <div class="row ">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Pendientes por entregar </label>
-                                <select class="form-control" name="cliente_id">
+                                <select class="form-control" name="cliente_id" id="select-pendiente">
+                                    <option value="">Seleccione persona para entregar producto</option>
                                     @foreach ($clientes as $cliente)
-                                        @if($cliente->estado==="pendiente")
+                                        @if ($cliente->estado === 'pendiente')
                                             <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                                        @endif    
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        
-                       
+                        <p>{{$cliente->direccion}}</p>
+
                     </div>
 
 
@@ -63,14 +68,14 @@
                         <div class="row">
 
 
-                           
+
                             <div class="col-sm-6">
                                 <label for="">Stock </label>
                                 <select class="form-control" name="stock_id">
                                     @foreach ($stocks as $stock)
-                                        @if($stock->unidades != 0)
+                                        @if ($stock->unidades != 0)
                                             <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
-                                        @endif   
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -93,5 +98,6 @@
         </div>
 
     </div>
+    
 @endsection
 

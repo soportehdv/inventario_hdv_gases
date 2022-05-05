@@ -42,7 +42,8 @@ class VentasController extends Controller
         return $pdf->download('ejemplo.pdf');
     }
 
-   
+    
+
     public function getVentas(Request $request)
     {
 
