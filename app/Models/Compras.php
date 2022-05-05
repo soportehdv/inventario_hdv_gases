@@ -28,7 +28,9 @@ class Compras extends Model
         'prueba',
         'estandar',
         'eti_lote',
-        'integridad'
+        'integridad',
+        'aprobado',
+        'rechazado',
 
         // 'costo_unitario',
         // 'precio_compra',

@@ -12,7 +12,7 @@
         href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    
+
 
 @endsection
 
@@ -58,46 +58,55 @@
                                 </select>
                             </div>
                         </div>
-
-                        <p>{{$cliente->direccion}}</p>
-
-                    </div>
-
-
-                    <div id="venta">
-                        <div class="row">
-
-
-
-                            <div class="col-sm-6">
-                                <label for="">Stock </label>
-                                <select class="form-control" name="stock_id">
-                                    @foreach ($stocks as $stock)
-                                        @if ($stock->unidades != 0)
-                                            <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                            <div class="col-sm-6">
-                                <label for="">Unidades </label>
-                                <input type="number" class="form-control" name="unidades" required>
-                            </div>
-
+                        <div class="col-sm-6">
+                            <label for="">Stock </label>
+                            <select class="form-control" name="stock_id">
+                                @foreach ($stocks as $stock)
+                                    @if ($stock->unidades != 0)
+                                        <option value="{{ $stock->id }}">{{ $stock->producto }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
+                        <div class="col-sm-6">
+                            <label for="">Unidades </label>
+                            <input type="number" class="form-control" name="unidades" required>
+                        </div>
+
                     </div>
 
 
-
-
+                   
                 </form>
+                <br>
+                <h3 align="center">Pedidos pendientes</h3>
+
+                <table class="table table-striped table-res">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Responsable</th>
+                            <th scope="col">producto</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($clientes as $cliente)
+                            @if ($cliente->estado === 'pendiente')
+                                <tr>
+                                    <th scope="row">{{ $cliente->id }}</th>
+                                    <td>{{ $cliente->cargorecibe }}</td>
+                                    <td>{{ $cliente->direccion }}</td>
+
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
 
             </div>
         </div>
 
     </div>
-    
-@endsection
 
+@endsection

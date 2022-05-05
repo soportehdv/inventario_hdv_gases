@@ -65,8 +65,6 @@
                         <th scope="col">Cargo</th>
                         <th scope="col">Ubicación</th>
                         <th scope="col">Telefono</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Comentario</th>
 
@@ -87,8 +85,6 @@
                             <td>{{ $cliente->cargorecibe }}</td>
                             <td>{{ $cliente->ubicacion }}</td>
                             <td>{{ $cliente->registro }}</td>
-                            <td>{{ $cliente->nombrep }}</td>
-                            <td>{{ $cliente->giro }}</td>
                             @if ($cliente->estado === 'pendiente')
                                 <td>
                                     <span class="badge badge-pill badge-danger">Pendiente</span>
@@ -105,7 +101,7 @@
                             text-overflow: ellipsis;">
                                 {{ $cliente->direccion }}
                             </td>
-
+                            
                             @if (Auth::user()->rol == 'admin')
                                 <td>
                                     <a href="{{ route('clientes.update.vista', $cliente->id) }}"

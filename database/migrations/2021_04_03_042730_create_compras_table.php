@@ -35,6 +35,8 @@ class CreateComprasTable extends Migration
             $table->string('estandar');
             $table->string('eti_lote');
             $table->string('integridad');
+            $table->string('aprobado');
+            $table->string('rechazado');
 
 
 

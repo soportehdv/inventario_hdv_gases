@@ -8,11 +8,6 @@
         </div>
 
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
 
 @endsection
 
@@ -67,20 +62,10 @@
             <div class="col-sm-12">
                 <a href="{{ route('ventas.create.vista') }}" class="btn btn-success mb-2"><i
                         class="fas fa-clipboard-check"></i> Entregar</a>
-                {{-- <a href="{{ route('ventas.descargar', ['filtro', 'fecha_inicio', 'fecha_final', 'id']) }}"
-                    class="btn btn-primary mb-2"><i class="fas fa-file-download"></i> Descargar</a> --}}
 <br>
             </div>
             
-            <!-- Button trigger modal -->
             <br>
-            {{-- <div class="col-sm-12" style="padding-top: 0.5em">
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                style="float: right; top:1.4em;"><i class="fas fa-filter"></i>
-                    Filtrar por fecha
-                </button>
-            </div> --}}
             </form>
 
 
