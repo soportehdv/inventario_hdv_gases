@@ -93,9 +93,9 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             <label for="">Producto </label>
                             <select id="producto" name="producto" class="form-control" required>
                                 <option value="">Seleccioné un producto</option>
-                                @foreach ($productos as $producto)
-                                    <option value="{{  $producto->id }}" >
-                                        {{ $producto->nombre }}
+                                @foreach ($compras as $compra)
+                                    <option value="{{  $compra->id }}" >
+                                        {{ $compra->serial }}
                                     </option>
                                 @endforeach
                             </select>

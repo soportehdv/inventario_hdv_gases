@@ -102,10 +102,10 @@
                             <label for="">Producto </label>
                             <select id="producto" name="producto" class="form-control" required>
                                 <option value="">Seleccioné un producto</option>
-                                @foreach ($productos as $producto)
-                                    <option value="{{  $producto->id }}" 
-                                        @if ($cliente->producto === $producto->id) selected='selected' @endif>                                                                            
-                                        {{ $producto->nombre }}
+                                @foreach ($compras as $compra)
+                                    <option value="{{  $compra->id }}" 
+                                        @if ($cliente->producto === $compra->id) selected='selected' @endif>                                                                            
+                                        {{ $compra->serial }}
                                     </option>
                                 @endforeach
 

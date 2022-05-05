@@ -16,10 +16,8 @@ class CreateStockTable extends Migration
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
             // $table->integer('fraccion_id')->unsigned();
-            $table->integer('producto_id')->unsigned();
             $table->integer('estado_id')->unsigned();
             $table->string('estado_ubi')->nullable()->default("Bodega");
-            $table->date('fecha_ingreso');
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
             $table->integer('compra_id')->unsigned();

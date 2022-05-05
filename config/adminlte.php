@@ -244,13 +244,6 @@ return [
             'role'        => 'admin'
         ],
         [
-            'text'    => 'Crear producto',
-            'url'     => 'productos/list',
-            'icon'    => 'fas fa-fw fa-plus-circle',
-            'role'        => 'inventario',
-
-        ],
-        [
             'text' => 'Ingresar producto',
             'url'  => 'compras/lista',
             'icon' => 'fas fa-fw fa-share',

@@ -11,7 +11,6 @@ use App\Models\Stock;
 use App\Models\Precios_productos;
 use App\Models\Lotes;
 use App\Models\User;
-use App\Models\Productos;
 use App\Models\Clientes;
 use App\Models\Detalle_ventas;
 use App\Models\Compras;
@@ -50,8 +49,8 @@ class VentasController extends Controller
         if ($request->get('filtro') == null) { //Todas
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
-                ->join('productos', 'productos.id', '=', 'ventas.producto_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'productos.serial AS serial')
+                ->join('compras', 'compras.id', '=', 'ventas.producto_id')
+                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'compras.serial AS serial')
                 ->orderby('ventas.created_at', 'desc')
                 ->simplePaginate(10);
 
@@ -85,17 +84,17 @@ class VentasController extends Controller
     {
         
 
-        $stocks = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->select('stock.*', 'productos.serial as producto')
+        $stocks = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
+            ->select('stock.*', 'compras.serial as producto')
             ->get();
               
         $clientes = Clientes::all();
-        $productos = Productos::all();
+        $compras = Compras::all();
 
         return view('Ventas/create', [
             'clientes'  => $clientes,
             'stocks'  => $stocks,
-            'productos' => $productos,
+            'compras' => $compras,
 
         ]);
     }
@@ -116,8 +115,8 @@ class VentasController extends Controller
         
 
         $stock = Stock::where('stock.id', $stock_id)
-            ->join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->select('stock.*', 'productos.serial as producto')
+            ->join('compras', 'compras.id', '=', 'stock.compra_id')
+            ->select('stock.*', 'compras.serial as producto')
             ->first();
         $compras = Compras::all()->first();
 
@@ -156,7 +155,7 @@ class VentasController extends Controller
             // ---------------------factura o historial
 
             $detalle = new Detalle_ventas();
-            $detalle->producto_id = $stock->producto_id;
+            $detalle->producto_id = $stock->compra_id;
             $detalle->venta_id = $venta->id; //usuario quien entrego
 
             $detalle->save();

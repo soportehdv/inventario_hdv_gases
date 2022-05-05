@@ -10,10 +10,14 @@ class Compras extends Model
     use HasFactory;
 
     protected $fillable = [
-        'producto_id',
+        'serial',
+        'presentacion',
+        'registro',
+        'color',
+
+        
         'estado_id',
         'estado_ubi',
-        'fecha_ingreso',
         'proveerdor_id',
         'fecha_vencimiento',
         'unidades',

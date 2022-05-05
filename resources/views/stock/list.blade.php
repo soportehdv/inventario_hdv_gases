@@ -116,11 +116,11 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>producto</th>
+                        <th>Serial</th>
                         <th>Fecha_ingreso</th>
-                        <th>vencimiento</th>
-                        <th>unidades</th>
-                        <th>lote</th>
+                        <th>Vencimiento</th>
+                        <th>Unidades</th>
+                        <th>Lote</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>
 
@@ -134,8 +134,8 @@
                     @foreach ($stock as $stoc)
                         <tr>
                             <th>{{ $stoc->id }}</th>
-                            <td>{{ $stoc->producto }}</td>
-                            <td>{{ $stoc->fecha_ingreso }}</td>
+                            <td>{{ $stoc->serial }}</td>
+                            <td>{{ $stoc->created_at }}</td>
                             <td>{{ $stoc->fecha_vencimiento }}</td>
                             <td>{{ $stoc->unidades }}</td>
                             <td>{{ $stoc->lote }}</td>

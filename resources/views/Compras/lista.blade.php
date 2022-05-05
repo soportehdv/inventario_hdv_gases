@@ -37,8 +37,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Ingreso</th>
-                    <th>Codigo</th>
                     <th>Remisión</th>
                     <th>Lote</th>
                     <th>Vencimiento</th>
@@ -47,7 +45,7 @@
                     <th>m3</th>
                     <th>Color</th>
                     <th>Unidades</th>
-                    <th>Acción</th>
+                    {{-- <th>Acción</th> --}}
 
                 </tr>
             </thead>
@@ -55,19 +53,17 @@
                 @foreach ($compras as $compra)
                     <tr>
                         <th>{{ $compra->id }}</th>
-                        <td>{{ $compra->fecha_ingreso }}</td>
-                        <td>{{ $compra->barras }}</td>
                         <td>{{ $compra->remision }}</td>
                         <td>{{ $compra->lote }}</td>
                         <td>{{ $compra->fecha_vencimiento }}</td>
-                        <td>{{ $compra->producto }}</td>
-                        <td>{{ $compra->sanitario }}</td>
-                        <td>{{ $compra->present }}</td>
+                        <td>{{ $compra->serial }}</td>
+                        <td>{{ $compra->registro}}</td>
+                        <td>{{ $compra->presentacion }}</td>
                         <td>{{ $compra->color }}</td>
                         <td>{{ $compra->unidades }}</td>
-                        <td><a href="{{ route('compras.update.vista', $compra->id) }}"
+                        {{-- <td><a href="{{ route('compras.update.vista', $compra->id) }}"
                                 class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
-                        </td>
+                        </td> --}}
 
                     </tr>
                 @endforeach

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Clientes;
+use App\Models\Compras;
 use App\Models\Lotes;
-use App\Models\Productos;
 use App\Models\Ubicacion;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +28,8 @@ class ClientesController extends Controller
                 $query= trim($request->get('search'));
                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
-                ->join('productos', 'productos.id', '=', 'clientes.producto')
-                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                ->join('compras', 'compras.id', '=', 'clientes.producto')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'compras.serial AS nombrep', 'clientes.*')
                 ->where('cargorecibe','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 // ->get();
@@ -46,8 +46,8 @@ class ClientesController extends Controller
             if($request->get('filtro') == 1){ //mas reciente                
                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
-                ->join('productos', 'productos.id', '=', 'clientes.producto')
-                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                ->join('compras', 'compras.id', '=', 'clientes.producto')
+                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'compras.serial AS nombrep', 'clientes.*')
                 ->orderby('updated_at', 'desc')
                 // ->get();
                 ->simplePaginate(10);
@@ -61,8 +61,8 @@ class ClientesController extends Controller
                     if ($request->get('filtro') == 2){//Alfabetico
                         $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                         ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
-                        ->join('productos', 'productos.id', '=', 'clientes.producto')
-                        ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                        ->join('compras', 'compras.id', '=', 'clientes.producto')
+                        ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'compras.serial AS nombrep', 'clientes.*')
                         ->orderby('nombre', 'asc')
                         // ->get();
                         ->simplePaginate(10);
@@ -75,8 +75,8 @@ class ClientesController extends Controller
                             if ($request->get('filtro') == 3){//Alfabetico
                                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
-                                ->join('productos', 'productos.id', '=', 'clientes.producto')
-                                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'productos.nombre AS nombrep', 'clientes.*')
+                                ->join('compras', 'compras.id', '=', 'clientes.producto')
+                                ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'compras.serial AS nombrep', 'clientes.*')
                                 ->orderby('estado', 'desc')
                                 // ->get();
                                 ->simplePaginate(10);
@@ -94,12 +94,12 @@ class ClientesController extends Controller
     {
         $ubicacion = Ubicacion::all();
         $clientes = Clientes::all();
-        $productos = Productos::all();
+        $compras = Compras::all();
 
         return view('Clientes/create', [
             'ubicacion' => $ubicacion,
             'clientes' => $clientes,
-            'productos' => $productos,
+            'compras' => $compras,
 
         ]);
     }
@@ -150,13 +150,13 @@ class ClientesController extends Controller
     {
         $clientes = Clientes::where('id', $id)->first();
         $ubicacion = Ubicacion::all();        
-        $productos = Productos::all();
+        $compras = Compras::all();
 
 
         return view('Clientes/edit', [
             'cliente' => $clientes,
             'ubicacion' => $ubicacion,
-            'productos' => $productos,
+            'compras' => $compras,
         ]);
     }
 
@@ -208,7 +208,7 @@ class ClientesController extends Controller
         $dui = $request->input('dui');
         $cliente = Clientes::where('dui', $dui)->first();
 
-        $productos = Productos::all();
+        $compras = Compras::all();
 
         $lotes = Lotes::all();
 

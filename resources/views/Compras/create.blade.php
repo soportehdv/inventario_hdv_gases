@@ -64,12 +64,6 @@
 
                     <div class="form-group">
                         <div class="row">
-
-                            <div class="col-sm-4">
-                                <label for="exampleInputEmail1">Fecha de ingreso </label>
-                                <input type="date" class="form-control" name="fecha_ingreso" value="">
-                            </div>
-                           
                             <div class="col-sm-4">
                                 <label for="">N° Remisión </label>
                                 <select id="proveedor" name="proveedor_id" class="form-control">
@@ -80,35 +74,66 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="col-sm-4">
                                 <label for="">Lote </label>
                                 <input type="number" min="0" class="form-control" name="lote" value="" placeholder="Lote">
                             </div>
 
-                        </div>
-                        <br>
-
-                        <div class="row">
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha Vencimiento </label>
                                 <input type="date" class="form-control" name="fecha_vencimiento" value="">
+                            </div>                   
+                                                    
+                            
+
+                        </div>
+                        <br>
+                        
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="exampleInputEmail1">Serial </label>
+                        <input type="text" class="form-control" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial" required>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Registro sanitario </label>
+                            <input type="text" class="form-control" name="registro" value="{{(isset($producto))? $producto->registro: ''}}" placeholder="Registro sanitario" required>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Presentación (m3) </label>
+                        <input type="number" class="form-control" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación" required>
+
+                        </div>
+
+                        
+
+                        
+                    </div>
+                    <br>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="">Color </label>
+                                <input type="text" class="form-control" name="color" value="{{(isset($producto))? $producto->color: ''}}" placeholder="Color" required>
                             </div>
 
-                            <div class="col-sm-4">
-                                <label for="">Serial de producto </label>
-                                <select id="producto" name="producto_id" class="form-control">
-                                    <option value="">Seleccioné un serial de producto</option>
-                                    @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}">
-                                            {{ $producto->serial }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Cantidades </label>
                                 <input type="number" min="0" class="form-control" name="unidades" value=""
                                     placeholder="Unidades">
 
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="">Estado </label>
+                                <select id="estado_id" name="estado_id" class="form-control">
+                                    <option value="">Seleccioné una estado del producto</option>
+                                    @foreach ($estado as $estad)
+                                        <option value="{{ $estad->id }}">
+                                            {{ $estad->estado }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
@@ -251,16 +276,7 @@
 
                         </div>
                         <br>
-                        <div class="col-sm-4">
-                            <label for="">Estado </label>
-                            <select id="estado_id" name="estado_id" class="form-control">
-                                <option value="">Seleccioné una estado del producto</option>
-                                @foreach ($estado as $estad)
-                                    <option value="{{ $estad->id }}">
-                                        {{ $estad->estado }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        
 
 
 

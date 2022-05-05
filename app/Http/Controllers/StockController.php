@@ -22,11 +22,10 @@ class StockController extends Controller
 
         if ($request->get('filtro') == null) { //Todas las busquedas
             $query= trim($request->get('search'));            
-            $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-            ->join('compras', 'compras.id', '=', 'stock.compra_id')
+            $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
-            ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
-            ->where('productos.serial','LIKE', '%' . $query . '%')
+            ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
+            ->where('compras.serial','LIKE', '%' . $query . '%')
             // ->get();
             ->paginate(10);
 
@@ -36,10 +35,9 @@ class StockController extends Controller
             ]);
         }  else
                 if ($request->get('filtro') == 1) { //Más recientes
-                    $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-                    ->join('compras', 'compras.id', '=', 'stock.compra_id')
+                    $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
-                    ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
+                    ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'asc')                
                     // ->get();
                     ->paginate(10);
@@ -50,10 +48,9 @@ class StockController extends Controller
                     ]);
         } else
                 if ($request->get('filtro') == 2) { // Más antiguos
-                    $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-                    ->join('compras', 'compras.id', '=', 'stock.compra_id')
+                    $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
-                    ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
+                    ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
                     ->orderby('stock.created_at', 'desc')                
                     // ->get();
                     ->paginate(10);
@@ -67,12 +64,11 @@ class StockController extends Controller
     public function fechaVista(Request $request){
         $start = Carbon::parse($request->get('fecha_inicial'));
         $end = Carbon::parse($request->get('fecha_final'));
-        $stock = Stock::join('productos', 'productos.id', '=', 'stock.producto_id')
-        ->join('compras', 'compras.id', '=', 'stock.compra_id')
+        $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
         ->join('estados', 'estados.id', '=', 'stock.estado_id')
-        ->select('stock.*','productos.serial as producto', 'compras.lote as lote', 'estados.estado as estados')
-        ->whereDate('stock.fecha_ingreso','<=',$end)
-        ->whereDate('stock.fecha_ingreso','>=',$start)
+        ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
+        ->whereDate('stock.created_at','<=',$end)
+        ->whereDate('stock.created_at','>=',$start)
         ->get();
 
         return view('stock/listfiltro', [
