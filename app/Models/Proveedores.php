@@ -12,6 +12,9 @@ class Proveedores extends Model
     protected $fillable = [
         'nombre',
         'remision',
+        'Ncilindros',
+        'persona',
+        'contador',
         
     ];
 }

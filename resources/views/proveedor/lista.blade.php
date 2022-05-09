@@ -37,9 +37,12 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre</th>
+            <th scope="col">Empresa</th>
             <th scope="col">N° Remisión</th>
-            <th scope="col">Acción</th>
+            <th scope="col">Persona</th>
+            <th scope="col">Cilindros</th>
+            {{-- <th scope="col">Acción</th> --}}
+            <th scope="col">Ver</th>
             <th scope="col">Descargas</th>
 
 
@@ -51,9 +54,13 @@
                 <th scope="row">{{$proveedor->id}}</th>
                 <td>{{$proveedor->nombre}}</td>
                 <td>{{$proveedor->remision}}</td>
-                <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
+                <td>{{$proveedor->persona}}</td>
+                <td>{{$proveedor->Ncilindros}}</td>
+                {{-- <td><a href="{{route('proveedor.update.vista', $proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
+                </td> --}}
+                <td><a href="{{route('detalles.ver.remision',$proveedor->id)}}" class="btn btn-success mb-2"><i class="fas fa-edit"></i> Ver</a>
                 </td>
-                <td><a href="{{route('detalles.descargar.factura',$proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Descargar</a>
+                <td><a href="{{route('detalles.descargar.factura',$proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> PDF</a>
                 </td>
 
             </tr>

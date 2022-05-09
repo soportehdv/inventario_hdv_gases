@@ -52,10 +52,13 @@ class ComprasController extends Controller
         $proveedores = Proveedores::all();
         $Ubicacion = Ubicacion::all();
 
+        
+
         return view('Compras/create', [
             'estado' => $estado,
             'proveedores' => $proveedores,
-            'ubicacion' => $Ubicacion
+            'ubicacion' => $Ubicacion,
+
         ]);
     }
 
@@ -101,6 +104,13 @@ class ComprasController extends Controller
         $Compras->eti_lote = $request->input('eti_lote');
         $Compras->integridad = $request->input('integridad');
 
+        if ($Compras->limpieza == "C" && $Compras->sello == "C" && $Compras->eti_producto == "C" && $Compras->prueba == "C" && $Compras->estandar == "C" && $Compras->eti_lote == "C" && $Compras->integridad == "C"){
+            $Compras->aprobado = "X";
+        }else{
+            $Compras->rechazado = "X";
+        }
+
+
         $Compras->save();
 
         //Guardamos en el stock
@@ -110,8 +120,12 @@ class ComprasController extends Controller
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');        
         $stock->compra_id = $Compras->id;
-
         $stock->save();
+
+        
+        $proveedores = Proveedores::where('id', $request->input('proveedor_id'))->first();
+        $proveedores->contador = $request->input('contador') + 1;
+        $proveedores->save();
 
         $request->session()->flash('alert-success', 'Producto registrado con exito!');
 
@@ -187,5 +201,56 @@ class ComprasController extends Controller
 
         return redirect()->route('compras.lista');
     }
- 
+    public function updateProducto($id)
+    {
+        $compras = Compras::where('id', $id)->first();
+        $estado = Estados::all();
+        $proveedores = Proveedores::all();
+        $ubicacion = Ubicacion::all();
+
+        // $fracciones = Fracciones::all();
+
+        return view('Compras/editarProducto', [
+            'compras' => $compras,
+            'estado' => $estado,
+            'proveedores' => $proveedores,
+            'ubicacion' => $ubicacion,
+
+
+            // 'fracciones' => $fracciones
+        ]);
+    }
+    public function updatecomprasProducto(Request $request, $compra_id)
+    {
+
+        $Compras = Compras::where('id', $compra_id)->first();
+        $stock = Stock::where('id', $compra_id)->first();
+
+
+        $validate = Validator::make($request->all(), [
+            'estado_id'      => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            $request->session()->flash('alert-danger', 'Error al actualizar producto');
+
+            return redirect()->back();
+        }
+
+        //validamos los datos
+        
+        $Compras->estado_id =  $request->input('estado_id');
+        $Compras->save();
+
+
+        //Guardamos en el stock
+
+        $stock->estado_id =  $request->input('estado_id');
+        $stock->estado_ubi =  $request->input('ubicacion');
+        $stock->save();
+
+        $request->session()->flash('alert-success', 'Ingreso actualizado con exito!');
+
+        return redirect()->route('stock.list');
+    }
 }

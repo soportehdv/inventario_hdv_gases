@@ -57,10 +57,42 @@ class Detalle_ventasController extends Controller
             'compras' => $compras,
             'venta' =>  $venta,
             'detalles' => $detalle,
-            'search' => $query
+            'search' => $query,
+            'proveedor' =>$proveedor,
 
         ])->setPaper('letter', 'landscape');
 
-        return $pdf->stream("factura-$venta->created_at.pdf");
+        return $pdf->stream("factura-$proveedor->created_at.pdf");
+    }
+
+    public function getRemision(Request $request, $venta_id)
+    {
+        $proveedor = Proveedores::where('id', $venta_id)->first();
+
+        $detalle = Detalle_ventas::where('venta_id', $venta_id)
+            ->select('detalle_ventas.id')
+            ->get();
+        //var_dump('dd');die();
+
+        $query= trim($proveedor->id);            
+            $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
+                ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
+                ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->where('compras.proveedor_id','LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                ->get();
+                // comentado para pruebas
+                // ->paginate(22);
+
+        $venta = Ventas::where('id', $venta_id)->first();
+
+         return view('proveedor/cilindros', [
+            'compras' => $compras,
+            'venta' =>  $venta,
+            'detalles' => $detalle,
+            'search' => $query,
+            'proveedor' =>$proveedor,
+
+        ]);
     }
 }

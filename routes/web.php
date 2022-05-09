@@ -60,9 +60,6 @@ Route::get('ventas/create', [App\Http\Controllers\VentasController::class, 'crea
 Route::post('ventas/create', [App\Http\Controllers\VentasController::class, 'createVenta'])->name('ventas.create');
 
 
-
-
-
 // Route::get('ventas/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
 Route::get('ventas/descargar/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'export'])->name('ventas.descargar');
 Route::get('ventar/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
@@ -77,12 +74,16 @@ Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productos
 //Detalle de ventas
 Route::get('ventas/detalle/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getDetalle'])->name('ventas.detalle');
 Route::get('detalles/descargar/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'imprimirFactura'])->name('detalles.descargar.factura');
+Route::get('detalles/remision/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getRemision'])->name('detalles.ver.remision');
+
 
 //Compras
 Route::get('compras/create', [App\Http\Controllers\ComprasController::class, 'create'])->name('compras.create.vista');
 Route::post('compras/create', [App\Http\Controllers\ComprasController::class, 'createCompras'])->name('compras.create');
 Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'update'])->name('compras.update.vista');
 Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
+Route::get('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updateProducto'])->name('compras.updateProducto.vista');
+Route::post('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecomprasProducto'])->name('compras.updateProducto');
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
 
 
@@ -103,6 +104,11 @@ Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesCon
 //Stock
 Route::get('stock/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
 Route::get('stock/fecha', [App\Http\Controllers\StockController::class, 'fechaVista'])->name('stock.fecha');
+
+//devolicion
+Route::get('devolucion/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\DevolucionController::class, 'getDevolucion'])->name('devolucion.list');
+Route::get('devolucion/fecha', [App\Http\Controllers\DevolucionController::class, 'fechaVista'])->name('devolucion.fecha');
+
 
 // ubicaciones
 Route::get('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'create'])->name('listaubicacion.create.vista');

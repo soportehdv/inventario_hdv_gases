@@ -95,7 +95,7 @@
                             @if ($cliente->estado === 'pendiente')
                                 <tr>
                                     <th scope="row">{{ $cliente->id }}</th>
-                                    <td>{{ $cliente->cargorecibe }}</td>
+                                    <td>{{ $cliente->nombre }}</td>
                                     <td>{{ $cliente->direccion }}</td>
 
                                 </tr>

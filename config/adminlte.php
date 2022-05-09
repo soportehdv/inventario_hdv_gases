@@ -251,6 +251,13 @@ return [
 
         ],
         [
+            'text' => 'Devolución de productos',
+            'url'  => 'devolucion/list',
+            'icon' => 'fas fa-fw fa-share fa-flip-horizontal',
+            'role'        => 'inventario'
+
+        ],
+        [
             'text' => 'Pedidos',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-chalkboard-teacher',

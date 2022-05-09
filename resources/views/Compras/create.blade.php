@@ -66,23 +66,25 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="">N° Remisión </label>
-                                <select id="proveedor" name="proveedor_id" class="form-control">
+                                <select id="proveedor" name="proveedor_id" class="form-control" required>
                                     <option value="">Seleccioné un N° de remision</option>
-                                    @foreach ($proveedores as $proveedor)
-                                        <option value="{{ $proveedor->id }}">
-                                            {{ $proveedor->remision }}</option>
+                                    @foreach ($proveedores as $proveedor)                                    
+                                        @if($proveedor->Ncilindros != $proveedor->contador)
+                                                <option value="{{ $proveedor->id }}">
+                                                    {{ $proveedor->remision }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="">Lote </label>
-                                <input type="number" min="0" class="form-control" name="lote" value="" placeholder="Lote">
+                                <input type="number" min="0" class="form-control" name="lote" value="" placeholder="Lote" required>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Fecha Vencimiento </label>
-                                <input type="date" class="form-control" name="fecha_vencimiento" value="">
+                                <input type="date" class="form-control" name="fecha_vencimiento" value="" required>
                             </div>                   
                                                     
                             
@@ -103,8 +105,14 @@
                         </div>
                         <div class="col-sm-4">
                             <label for="">Presentación (m3) </label>
-                        <input type="number" class="form-control" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación" required>
+                        <input type="number" class="form-control" step="0.1" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación" required>
 
+                        </div>
+                        <div class="col-sm-4">
+                            @foreach ($proveedores as $pro)
+
+                            <input type="hidden" class="form-control"  name="contador" value="{{$pro->contador}}">
+                            @endforeach
                         </div>
 
                         
@@ -122,12 +130,12 @@
                             <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Cantidades </label>
                                 <input type="number" min="0" class="form-control" name="unidades" value=""
-                                    placeholder="Unidades">
+                                    placeholder="Unidades" required>
 
                             </div>
                             <div class="col-sm-4">
                                 <label for="">Estado </label>
-                                <select id="estado_id" name="estado_id" class="form-control">
+                                <select id="estado_id" name="estado_id" class="form-control" required>
                                     <option value="">Seleccioné una estado del producto</option>
                                     @foreach ($estado as $estad)
                                         <option value="{{ $estad->id }}">
@@ -146,13 +154,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="C" id="radiolim" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="C" id="radiolim" name="limpieza" required>
                                         <label class="form-check-label" for="radiolim">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="NC" id="radiolim2" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="NC" id="radiolim2" name="limpieza" required>
                                         <label class="form-check-label" for="radiolim2">
                                             NC
                                         </label>
@@ -165,13 +173,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="C" id="radioSello" name="sello">
+                                        <input class="form-check-input" type="radio" value="C" id="radioSello" name="sello" required>
                                         <label class="form-check-label" for="radioSello">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="NC" id="radioSello2" name="sello">
+                                        <input class="form-check-input" type="radio" value="NC" id="radioSello2" name="sello" required>
                                         <label class="form-check-label" for="radioSello2">
                                             NC
                                         </label>
@@ -184,13 +192,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto" required>
                                     <label class="form-check-label" for="radioEtiP">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiP2" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiP2" name="eti_producto" re<input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto" required>
                                     <label class="form-check-label" for="radioEtiP2">
                                         NC
                                     </label>
@@ -203,13 +211,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioPrueba" name="prueba">
+                                    <input class="form-check-input" type="radio" value="C" id="radioPrueba" name="prueba" required>
                                     <label class="form-check-label" for="radioPrueba">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioPrueba2" name="prueba">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioPrueba2" name="prueba" required>
                                     <label class="form-check-label" for="radioPrueba2">
                                         NC
                                     </label>
@@ -222,13 +230,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEstandar" name="estandar">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEstandar" name="estandar" required>
                                     <label class="form-check-label" for="radioEstandar">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEstandar2" name="estandar">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEstandar2" name="estandar" required>
                                     <label class="form-check-label" for="radioEstandar2">
                                         NC
                                     </label>
@@ -241,13 +249,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiLote" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEtiLote" name="eti_lote" required>
                                     <label class="form-check-label" for="radioEtiLote">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiLote2" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiLote2" name="eti_lote" required>
                                     <label class="form-check-label" for="radioEtiLote2">
                                         NC
                                     </label>
@@ -260,13 +268,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="C" id="radioIntegridad" name="integridad">
+                                    <input class="form-check-input" type="radio" value="C" id="radioIntegridad" name="integridad" required>
                                     <label class="form-check-label" for="radioIntegridad">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioIntegridad2" name="integridad">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioIntegridad2" name="integridad" required>
                                     <label class="form-check-label" for="radioIntegridad2">
                                         NC
                                     </label>

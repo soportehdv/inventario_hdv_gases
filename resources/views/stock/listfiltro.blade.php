@@ -124,9 +124,9 @@
                         <th>Ubicacion</th>
                         <th>Estado</th>
 
-                        @if (Auth::user()->rol == "admin")                        
+                        {{-- @if (Auth::user()->rol == "admin")                        
                         <th>Acción</th>
-                        @endif
+                        @endif --}}
 
                     </tr>
                 </thead>
@@ -164,11 +164,11 @@
                                 </td>
                             @endif
 
-                            @if (Auth::user()->rol == "admin")               
+                            {{-- @if (Auth::user()->rol == "admin")               
                             <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
                             </td>
-                            @endif
+                            @endif --}}
 
                         </tr>
                     @endforeach

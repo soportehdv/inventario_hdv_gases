@@ -174,14 +174,14 @@
             </tr>
         </table>
         <br>
-        <div style="left"><b>FECHA (dd-mm-aaaa): _______________</b></div>
+        <div style="left;"><b>FECHA (dd-mm-aaaa): </b> <b style="text-decoration:underline">{{ $proveedor->created_at }}</b></div>
         <br>
         <table style="width: 100%">
             <tr>
-                <td><b>GAS MEDICINAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: _______________</b></td>
-                <td><b>N° DE CILINDROS: _______________</b></td>
-                <td><b>EMPRESA QUE ENTREGA: _______________</b></td>
-                <td><b>NOMBRE DE QUIEN ENTREGA: _______________</b></td>
+                <td><b>GAS MEDICINAL </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: _______________</td>
+                <td><b>N° DE CILINDROS: </b><b style="text-decoration:underline">{{ $proveedor->Ncilindros }}</b></td>
+                <td><b>EMPRESA QUE ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->nombre }}</b></td>
+                <td><b>NOMBRE DE QUIEN ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->persona }}</b></td>
             </tr>
         </table>
     </header>
@@ -503,24 +503,13 @@
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle>{{ $compra->unidades }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle></td>
+                            align="center" valign=middle>{{ Auth::user()->name }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle></td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle>
-                            @if ($compra->limpieza == "C" && $compra->sello == "C" && $compra->eti_producto == "C" && $compra->prueba == "C" && $compra->estandar == "C" && $compra->eti_lote == "C" && $compra->integridad == "C" && $compra->unidades == "C")
-                                X
-                            @else
-                            @endif
-                        </td>
+                            align="center" valign=middle>{{ $compra->aprobado }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle>
-                            @if ($compra->limpieza == "C" || $compra->sello == "C" || $compra->eti_producto == "C" || $compra->prueba == "C" || $compra->estandar == "C" || $compra->eti_lote == "C" || $compra->integridad == "C" || $compra->unidades == "C")
-                                X
-                            @else
-
-                            @endif
-                        </td>
+                            align="center" valign=middle>{{ $compra->rechazado }}</td>
                     </tr>
                 @endforeach
             </tbody>

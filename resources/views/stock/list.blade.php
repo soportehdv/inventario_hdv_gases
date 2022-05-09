@@ -24,14 +24,14 @@
 
 
     <div class="container">
-        @if (Auth::user()->rol == "admin")
+        {{-- @if (Auth::user()->rol == "admin")
         <div class="row">
             <div class="col-sm-12">
                 <a href="{{ route('ventas.create.vista') }}" class="btn btn-success mb-2"><i class="fas fa-clipboard-check"></i> Entregar</a>
                
             </div>
         </div>
-        @endif
+        @endif --}}
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -99,18 +99,11 @@
 
 
         <div class="container">
-            @if (Auth::user()->rol == "admin")
+            {{-- @if (Auth::user()->rol == "admin")
             <a href="{{ route('compras.create.vista') }}" class="btn btn-success mb-2" style="float: right"><i class="fas fa-plus-circle"></i> Añadir
                 nuevo</a>
-            @endif
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                @if (Session::has('alert-' . $msg))
-                    <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        {{ Session::get('alert-' . $msg) }}
-                    </div>
-                @endif
-            @endforeach
+            @endif --}}
+            
             <br>
             <table class="table table-res table-striped">
                 <thead>
@@ -124,9 +117,9 @@
                         <th>Ubicacion</th>
                         <th>Estado</th>
 
-                        @if (Auth::user()->rol == "admin")                        
+                        {{-- @if (Auth::user()->rol == "admin")                        
                         <th>Acción</th>
-                        @endif
+                        @endif --}}
 
                     </tr>
                 </thead>
@@ -165,11 +158,11 @@
                             @endif
                             {{-- <td>{{ $stoc->estados }}</td> --}}
 
-                            @if (Auth::user()->rol == "admin")               
+                            {{-- @if (Auth::user()->rol == "admin")               
                             <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
                             </td>
-                            @endif
+                            @endif --}}
 
                         </tr>
                     @endforeach

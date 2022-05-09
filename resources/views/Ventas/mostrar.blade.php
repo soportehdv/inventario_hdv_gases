@@ -69,19 +69,7 @@
             </form>
 
 
-        </div>
-
-
-
-
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if (Session::has('alert-' . $msg))
-                <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ Session::get('alert-' . $msg) }}
-                </div>
-            @endif
-        @endforeach
+        </div>        
         <br>
         <table class="table table-striped table-res">
             <thead>
@@ -90,7 +78,9 @@
                     <th scope="col">Responsable</th>
                     <th scope="col">producto</th>
                     <th scope="col">Fecha entrega</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Ubicacion</th>
+
+                    {{-- <th scope="col">Acción</th> --}}
 
                 </tr>
             </thead>
@@ -101,10 +91,15 @@
                         <td>{{ $venta->cliente }}</td>
                         <td>{{ $venta->serial }}</td>
                         <td>{{ $venta->Fecha }}</td>
-
-                        <td><a href="{{ route('ventas.detalle', $venta->id) }}" class="btn btn-success mb-2"> <i
+                        @foreach($ubicacion as $ubi)
+                            @if($ubi->id == $venta->ubicacion)
+                            <td>{{ $ubi->nombre }}</td>
+                            @endif
+                        
+                        @endforeach
+                        {{-- <td><a href="{{ route('ventas.detalle', $venta->id) }}" class="btn btn-success mb-2"> <i
                                     class="fas fa-ete"></i> Detalle</a>
-                        </td>
+                        </td> --}}
 
                     </tr>
                 @endforeach

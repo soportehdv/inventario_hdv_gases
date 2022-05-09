@@ -48,14 +48,18 @@ class VentasController extends Controller
     {
 
         if ($request->get('filtro') == null) { //Todas
+            $ubicacion = Ubicacion::all();
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->join('compras', 'compras.id', '=', 'ventas.producto_id')
-                ->select('ventas.id', 'clientes.nombre AS cliente', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'compras.serial AS serial')
+                ->select('ventas.id', 'clientes.nombre AS cliente', 'clientes.departamento AS ubicacion', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'compras.serial AS serial')
                 ->orderby('ventas.created_at', 'desc')
                 ->simplePaginate(10);
+            
+            
 
                 return view('Ventas/mostrar', [
+                    'ubicacion' => $ubicacion,
                     'ventas' => $ventas,
                     
                 ]);
