@@ -18,6 +18,8 @@ class Clientes extends Model
         'cargorecibe',   
         'departamento',
         'telefono',
+        'tipo',
+        'cantidad',
         
     ];
 }

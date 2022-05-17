@@ -8,6 +8,7 @@ use App\Models\Clientes;
 use App\Models\Compras;
 use App\Models\Lotes;
 use App\Models\Stock;
+use App\Models\User;
 use App\Models\Ubicacion;
 use Illuminate\Support\Facades\Auth;
 
@@ -129,6 +130,8 @@ class ClientesController extends Controller
         $clientes->cargorecibe =  $request->input('cargorecibe');
         $clientes->departamento = $request->input('departamento');
         $clientes->registro = $request->input('registro');
+        $clientes->tipo = $request->input('tipo');
+        $clientes->cantidad = $request->input('cantidad');
         $clientes->direccion = $request->input('direccion');
 
 
@@ -145,12 +148,14 @@ class ClientesController extends Controller
         $clientes = Clientes::where('id', $id)->first();
         $ubicacion = Ubicacion::all();        
         $compras = Compras::all();
+        $user = User::all();
 
 
         return view('Clientes/edit', [
             'cliente' => $clientes,
             'ubicacion' => $ubicacion,
             'compras' => $compras,
+            'user' => $user,
         ]);
     }
     
@@ -162,9 +167,7 @@ class ClientesController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'name'      => 'required',
-            'departamento'      => 'required',
-            'producto'      => 'required',
+            
             'estado'      => 'required',
 
 
@@ -178,13 +181,15 @@ class ClientesController extends Controller
         }
         $ubicacion = Ubicacion::all();
 
-
-        $clientes->responsable_id = Auth::user()->id;
+        
+        // $clientes->responsable_id = $request->input('responsable');
         $clientes->nombre =  $request->input('name');
         $clientes->estado =  $request->input('estado');
         $clientes->cargorecibe =  $request->input('cargorecibe');
         $clientes->departamento = $request->input('departamento');
         $clientes->registro = $request->input('registro');
+        $clientes->tipo = $request->input('tipo');
+        $clientes->cantidad = $request->input('cantidad');
         $clientes->direccion = $request->input('direccion');
         $clientes->save();
 

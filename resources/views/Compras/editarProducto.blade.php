@@ -2,7 +2,7 @@
 @section('title', 'Productos')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Devolucion de producto</h2>
         </div>

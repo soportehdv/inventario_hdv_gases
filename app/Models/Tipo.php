@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class Tipo extends Model
 {
     use HasFactory;
 
-    protected $table = "stock";
+    protected $table = "tipos";
 
     protected $fillable = [
-        'estado_id',
-        'fecha_vencimiento',
-        'unidades',
-        'compra_id',
-        'tipo',
+        'nombre',
 
     ];
 }

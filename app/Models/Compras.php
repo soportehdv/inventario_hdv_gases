@@ -19,6 +19,7 @@ class Compras extends Model
         'estado_id',
         'estado_ubi',
         'proveerdor_id',
+        'tipo',
         'fecha_vencimiento',
         'unidades',
         'lote',

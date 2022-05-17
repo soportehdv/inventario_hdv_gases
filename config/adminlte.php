@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'targets/target',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -238,6 +238,12 @@ return [
         ],
         ['header' => 'Menú'],
         [
+            'text'        => 'Inicio',
+            'url'         => 'targets/target',
+            'icon'        => 'fa fa-fw fa-home',
+            'role'        => 'admin'
+        ],
+        [
             'text'        => 'Usuarios',
             'url'         => 'user/list',
             'icon'        => 'far fa-fw fa-user',
@@ -247,21 +253,21 @@ return [
             'text' => 'Ingresar producto',
             'url'  => 'compras/lista',
             'icon' => 'fas fa-fw fa-share',
-            'role'        => 'inventario'
+            'role'        => 'admin'
 
         ],
         [
             'text' => 'Devolución de productos',
             'url'  => 'devolucion/list',
             'icon' => 'fas fa-fw fa-share fa-flip-horizontal',
-            'role'        => 'inventario'
+            'role'        => 'admin'
 
         ],
         [
             'text' => 'Pedidos',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-chalkboard-teacher',
-            'role'        => 'ventas'
+            'role'        => 'servicios'
 
         ],
         [
@@ -282,7 +288,7 @@ return [
             'text'    => 'Stock',
             'url'     => 'stock/list',
             'icon'    => 'fas fa-fw fa-warehouse',
-            'role'        => 'ventas',
+            'role'        => 'admin',
 
         ],
 

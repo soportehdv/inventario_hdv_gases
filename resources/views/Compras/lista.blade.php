@@ -2,7 +2,7 @@
 @section('title', 'Productos')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Ingreso de productos</h2>
         </div>
@@ -38,6 +38,7 @@
                 <tr>
                     <th>#</th>
                     <th>Remisión</th>
+                    <th>Tipo</th>
                     <th>Lote</th>
                     <th>Vencimiento</th>
                     <th>Serial</th>
@@ -54,6 +55,7 @@
                     <tr>
                         <th>{{ $compra->id }}</th>
                         <td>{{ $compra->remision }}</td>
+                        <td>{{ $compra->tipos }}</td>
                         <td>{{ $compra->lote }}</td>
                         <td>{{ $compra->fecha_vencimiento }}</td>
                         <td>{{ $compra->serial }}</td>

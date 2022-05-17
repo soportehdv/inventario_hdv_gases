@@ -2,7 +2,7 @@
 @section('title', 'Usuarios')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2 style="float:left">Usuarios</h2>
 
@@ -26,13 +26,15 @@
                     </div>
                 @endif
             @endforeach
-            <div>
+            {{-- <div>
                 <div align="justify"><b><h3>¿ A donde se va a devolver el producto ?</h3></b></div>
                 <input type="radio" name="paciente" value="Si" onChange="mostrar(this.value);"> Al almacen&nbsp;&nbsp;&nbsp;
                 <input type="radio" name="paciente" value="No" onChange="mostrar(this.value);"> Al proveedor
-            </div>
+            </div> --}}
             <br>
-            <table class="table table-res table-striped" id="Si" style="display: none;">
+            {{-- <table class="table table-res table-striped" id="Si" style="display: none;"> --}}
+            <table class="table table-res table-striped">
+
                 <thead>
                     <tr>
                         <th>id</th>
@@ -43,7 +45,9 @@
                         <th>Lote</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+                        <th>Bodega</th>
+                        <th>Proveedor</th>
+
 
                         {{-- @if (Auth::user()->rol == "admin")                        
                         <th>Acción</th>
@@ -85,8 +89,9 @@
                                 </td>
                             @endif
                             <td><a href="{{ route('compras.updateProducto.vista', $stoc->id) }}"
-                                class="btn btn-primary mb-2"><i class="fas fa-edit"></i>Recibir</a>
+                                class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                             </td>
+                            <td></td>
 
                             {{-- @if (Auth::user()->rol == "admin")               
                             <td><a href="{{ route('compras.update.vista', $stoc->id) }}"

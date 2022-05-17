@@ -3,7 +3,7 @@
 
 @section('content_header')
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="height:4em;">
             <h2>Modificar producto</h2>
         </div>
 
@@ -79,6 +79,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            
                             {{--  --}}
                             
                             <div class="col-sm-4">

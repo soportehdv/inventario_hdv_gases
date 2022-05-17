@@ -24,7 +24,7 @@ class StockController extends Controller
             $query= trim($request->get('search'));            
             $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
-            ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
+            ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'compras.tipo as tipo', 'estados.estado as estados')
             ->where('compras.serial','LIKE', '%' . $query . '%')
             // ->get();
             ->paginate(10);

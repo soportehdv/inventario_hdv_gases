@@ -503,7 +503,7 @@
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle>{{ $compra->unidades }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle>{{ Auth::user()->name }}</td>
+                            align="center" valign=middle></td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle></td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"

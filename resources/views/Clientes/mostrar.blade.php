@@ -2,7 +2,7 @@
 @section('title', 'Responsables')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Lista de responsables</h2>
         </div>
@@ -66,6 +66,8 @@
                         <th scope="col">Ubicación</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Cantidad</th>
                         <th scope="col">Comentario</th>
 
 
@@ -94,6 +96,9 @@
                                     <span class="badge badge-pill badge-success">Entregado</span>
                                 </td>
                             @endif
+                            
+                            <td>{{$cliente->tipo}}</td>
+                            <td>{{$cliente->cantidad}}</td>
                             <td style="max-width: 100px;
                             font-size: 16px;
                             overflow: hidden;
@@ -139,9 +144,9 @@
                         <th scope="col">Cargo</th>
                         <th scope="col">Ubicación</th>
                         <th scope="col">Telefono</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Cantidad</th>
                         <th scope="col">Observación</th>
 
 
@@ -162,8 +167,6 @@
                                 <td>{{ $cliente->cargorecibe }}</td>
                                 <td>{{ $cliente->ubicacion }}</td>
                                 <td>{{ $cliente->registro }}</td>
-                                <td>{{ $cliente->nombrep }}</td>
-                                <td>{{ $cliente->giro }}</td>
                                 @if ($cliente->estado === 'pendiente')
                                     <td>
                                         <span class="badge badge-pill badge-danger">Pendiente</span>
@@ -173,6 +176,8 @@
                                         <span class="badge badge-pill badge-success">Entregado</span>
                                     </td>
                                 @endif
+                                <td>{{$cliente->tipo}}</td>
+                                <td>{{$cliente->cantidad}}</td>
                                 <td style="max-width: 100px;
                             font-size: 16px;
                             overflow: hidden;

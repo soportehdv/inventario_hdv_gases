@@ -9,6 +9,7 @@ use App\Models\Proveedores;
 use App\Models\Fracciones;
 use App\Models\Ubicacion;
 use App\Models\Estados;
+use App\Models\Tipo;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -32,8 +33,9 @@ class ComprasController extends Controller
 
             $query= trim($request->get('search'));            
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
+                ->join('tipos', 'tipos.id', '=', 'compras.tipo')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select(  'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->select(  'estados.estado as estado','proveedores.remision as remision', 'tipos.nombre as tipos', 'compras.*')
                 ->where('serial','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 // ->get();
@@ -51,6 +53,7 @@ class ComprasController extends Controller
         $estado = Estados::all();
         $proveedores = Proveedores::all();
         $Ubicacion = Ubicacion::all();
+        $tipo = Tipo::all();
 
         
 
@@ -58,6 +61,7 @@ class ComprasController extends Controller
             'estado' => $estado,
             'proveedores' => $proveedores,
             'ubicacion' => $Ubicacion,
+            'tipo' => $tipo,
 
         ]);
     }
@@ -93,6 +97,7 @@ class ComprasController extends Controller
         
         $Compras->estado_id =  $request->input('estado_id');
         $Compras->proveedor_id =  $request->input('proveedor_id');
+        $Compras->tipo =  $request->input('tipo');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
         $Compras->lote = $request->input('lote');
@@ -118,7 +123,8 @@ class ComprasController extends Controller
         $stock = new Stock();
         $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
-        $stock->unidades = $request->input('unidades');        
+        $stock->unidades = $request->input('unidades');     
+        $stock->tipo =  $request->input('tipo');
         $stock->compra_id = $Compras->id;
         $stock->save();
 
@@ -193,6 +199,7 @@ class ComprasController extends Controller
         $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');
+        $stock->tipo =  $request->input('tipo');
         $stock->compra_id = $Compras->id;
 
         $stock->save();

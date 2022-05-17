@@ -2,7 +2,7 @@
 @section('title', 'fraccions')
 
 @section('content_header')
-<div class="card">
+<div class="card" style="height:4em;">
     <div class="card-header">
       <h2>Lista precios</h2>
     </div>

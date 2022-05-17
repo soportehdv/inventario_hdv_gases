@@ -15,8 +15,10 @@ use App\Models\Clientes;
 use App\Models\Detalle_ventas;
 use App\Models\Compras;
 use App\Models\Ubicacion;
+use App\Models\Tipo;
 use PDF;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -95,82 +97,85 @@ class VentasController extends Controller
               
         $clientes = Clientes::all();
         $compras = Compras::all();
+        $tipo = Tipo::all();
+
 
         return view('Ventas/create', [
             'clientes'  => $clientes,
             'stocks'  => $stocks,
             'compras' => $compras,
+            'tipo' => $tipo,
 
         ]);
     }
 
     public function createVenta(Request $request)
     {
-
         $unidades = $request->input('unidades');
         $stock_id = $request->input('stock_id');
         $cliente_id = $request->input('cliente_id');
+        $user_id = $request->input('user');        
+ 
+            // enviamos varios datos de ventas
+            for ($i=0; $i < count($cliente_id); $i++){
+                
+                $stock   = Stock::where('id', $stock_id[$i])->first();
+                $compras = Compras::where('id', $stock_id[$i])->first();
+                // dd($stock->id);
 
+                // condicion si no hay suficientes productos
+                if ($unidades[$i] > $stock->unidades) {
 
-        $venta = new Ventas();
-        $venta->cliente_id = $request->input('cliente_id');
-        $venta->producto_id = $request->input('stock_id');
-        $venta->user_id = Auth::user()->id;
+                    $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
+                    return redirect()->back();
+                }
+                else
+                {
+                    $clientes = Clientes::where('id', $cliente_id[$i])->first();
+                    $ubicacions = Ubicacion::where('id', $clientes->departamento)->first();
 
-        
+                    $datasave =[
+                        'cliente_id'  => $cliente_id[$i],
+                        'producto_id' => $stock_id[$i],
+                        'user_id'     => $user_id[$i],
+                        'created_at'  => Carbon::now()->toDateTimeString(),
+                        'updated_at'  => Carbon::now()->toDateTimeString()
+                    ];
+                // enviamos varios datos al stock
+                    $datasave2 =[
+                        'unidades'    => $stock->unidades - $unidades[$i],
+                        'estado_ubi'  => $ubicacions->nombre,
+                        'estado_id'   => 3,
+                    ];
+                // enviamos varios datos al stock
+                    $datasave3 =[
+                        'unidades'    => $compras->unidades - $unidades[$i],
+                        'estado_ubi'  => $ubicacions->nombre,
+                    ];
+                // Cambiamos el estado
+                    $datasave4 =[
+                        'estado'    => 'entregado',
+                    ];
+                // factura o historial
+                    $datasave5 =[
+                        'producto_id' => $stock_id[$i],
+                        'venta_id'     => $user_id[$i], //usuario quien entrega
+                        'created_at'  => Carbon::now()->toDateTimeString(),
+                        'updated_at'  => Carbon::now()->toDateTimeString()
+                    ];
 
-        $stock = Stock::where('stock.id', $stock_id)
-            ->join('compras', 'compras.id', '=', 'stock.compra_id')
-            ->select('stock.*', 'compras.serial as producto')
-            ->first();
-        $compras = Compras::all()->first();
+                // envio a la base de datos
+                    DB::table('ventas')->insert($datasave);
+                    DB::table('stock')->where('stock.id', $stock_id[$i])->update($datasave2);
+                    DB::table('compras')->where('compras.id', $stock_id[$i])->update($datasave3);
+                    DB::table('clientes')->where('clientes.id', $cliente_id[$i])->update($datasave4);
+                    DB::table('detalle_ventas')->insert($datasave5);
 
-
-        // condicion si no hay suficientes productos
-        if ($unidades > $stock->unidades && $unidades > $compras->unidades) {
-
-            $request->session()->flash('alert-danger', "No hay suficientes $stock->producto, quedan solo $stock->unidades ");
-            return redirect()->back();
-        }
-        else
-        {
-            $venta->save(); //se crea la venta
-
-            // actualizacion de estado en la tabla clientes
-            $clientes = Clientes::where('id', $cliente_id)->first();
-            $ubicacions = Ubicacion::where('id', $clientes->departamento)->first();
-            
-
-            //---------------------Descontamos del stock total 
-            $stock->unidades = $stock->unidades - $unidades;
-            $stock->estado_ubi = $ubicacions->nombre;
-            $stock->estado_id = 3;
-            $stock->save();
-
-            //---------------------Descontamos del total ingresado 
-            $compras->unidades = $compras->unidades - $unidades;
-            $compras->estado_ubi = $ubicacions->nombre;
-            $compras->save();
-            // dd($ubicacions->id);
-
-            
-            $clientes->estado='entregado';
-            $clientes->save();
-
-            // ---------------------factura o historial
-
-            $detalle = new Detalle_ventas();
-            $detalle->producto_id = $stock->compra_id;
-            $detalle->venta_id = $venta->id; //usuario quien entrego
-
-            $detalle->save();
-
-
-
-            $request->session()->flash('alert-success', 'Venta realizada con exito!');
-            return redirect()->route('ventas.lista', ['filtro' => 4]);
             }
-        
+           
+            $request->session()->flash('alert-success', 'Entrega realizada con exito!');
+            return redirect()->route('ventas.lista', ['filtro' => 4]);           
+        }
        
     }
 

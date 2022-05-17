@@ -20,6 +20,7 @@ class CreateStockTable extends Migration
             $table->string('estado_ubi')->nullable()->default("Bodega");
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
+            $table->integer('tipo');
             $table->integer('compra_id')->unsigned();
             $table->timestamps();
         });

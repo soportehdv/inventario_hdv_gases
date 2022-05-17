@@ -24,10 +24,11 @@ class CreateComprasTable extends Migration
             
             $table->integer('estado_id')->unsigned();
             $table->integer('proveedor_id')->unsigned();
+            $table->integer('tipo');
             $table->string('estado_ubi')->nullable()->default("Bodega");
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
-            $table->integer('lote');
+            $table->string('lote');
             $table->string('limpieza');
             $table->string('sello');
             $table->string('eti_producto');

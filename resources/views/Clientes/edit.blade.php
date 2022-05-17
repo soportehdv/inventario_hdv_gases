@@ -3,7 +3,7 @@
 @section('title', 'Responsables')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Modificar pedido</h2>
         </div>
@@ -32,8 +32,13 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Responsable </label>
-                                <input type="text" class="form-control" name="responsable"
-                                    value="{{ Auth::user()->name }}" placeholder="" disabled>
+                                @foreach ($user as $u)
+                                        @if ($cliente->responsable_id === $u->id)
+                                            <input type="text" class="form-control" name="responsable"
+                                            value="{{ $u->name }}" placeholder="" disabled>                                               
+                                        @endif
+                                @endforeach
+                                
                             </div>
                         </div>
 
@@ -91,8 +96,30 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="">Tipo de gas </label>
+                            <select id="tipo" name="tipo" class="form-control" required>
+                                <option value="">Seleccioné un tipo de gas</option>        
+                                <option value="oxigeno_8.5">Oxigeno 8.5</option>
+                                <option value="aire_medicinal">Aire medicinal</option>
+                                <option value="oxigeno_1m3">Oxigeno 1m3</option>
+                                <option value="nitrogeno">Nitrogeno</option>
+                                <option value="oxido_nitrico">Oxido nitrico</option>
+                                <option value="dioxido_carbono">Dioxido carbono</option>
+                                <option value="helontix">Helontix</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Cantidad </label>
+                                <input type="number" min="1" max="100" class="form-control" name="cantidad"
+                                    value="{{ $cliente->cantidad}}" placeholder="Cantidad" required>
+                            </div>
 
-                    
+                        </div>
+                    </div>
+
                     
 
                     <div class="row">

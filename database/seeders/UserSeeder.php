@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'cargo' => 'jefe enfermeria',
             'email' => 'andreosorio@pedidos.com',
             'password' => bcrypt('1234'),
-            'rol' => 'ventas'
+            'rol' => 'servicios'
         ]);
         //guardar 20 registros
         

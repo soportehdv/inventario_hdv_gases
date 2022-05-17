@@ -2,7 +2,7 @@
 @section('title', 'Usuarios')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Usuarios</h2>
         </div>
@@ -121,6 +121,7 @@
                         <th>vencimiento</th>
                         <th>Unidades</th>
                         <th>Lote</th>
+                        <th>Tipo</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>
 
@@ -139,6 +140,7 @@
                             <td>{{ $stoc->fecha_vencimiento }}</td>
                             <td>{{ $stoc->unidades }}</td>
                             <td>{{ $stoc->lote }}</td>
+                            <td>{{ $stoc->tipo }}</td>
                             @if ($stoc->estado_ubi === 'Bodega')
                                 <td>
                                     <span class="badge badge-pill badge-success">{{$stoc->estado_ubi}}</span>
