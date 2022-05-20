@@ -132,6 +132,7 @@ class ClientesController extends Controller
         $clientes->registro = $request->input('registro');
         $clientes->tipo = $request->input('tipo');
         $clientes->cantidad = $request->input('cantidad');
+        $clientes->entregado = $request->input('cantidad');
         $clientes->direccion = $request->input('direccion');
 
 
@@ -190,6 +191,7 @@ class ClientesController extends Controller
         $clientes->registro = $request->input('registro');
         $clientes->tipo = $request->input('tipo');
         $clientes->cantidad = $request->input('cantidad');
+        $clientes->entregado = $request->input('cantidad');
         $clientes->direccion = $request->input('direccion');
         $clientes->save();
 

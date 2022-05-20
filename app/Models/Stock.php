@@ -15,8 +15,12 @@ class Stock extends Model
         'estado_id',
         'fecha_vencimiento',
         'unidades',
+        'uni',
         'compra_id',
         'tipo',
+
+        'status',
+
 
     ];
 }

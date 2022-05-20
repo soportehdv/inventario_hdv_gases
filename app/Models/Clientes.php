@@ -20,6 +20,7 @@ class Clientes extends Model
         'telefono',
         'tipo',
         'cantidad',
+        'entregado',
         
     ];
 }

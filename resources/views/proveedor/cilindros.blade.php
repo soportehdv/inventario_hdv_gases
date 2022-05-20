@@ -69,7 +69,7 @@
                 <td>{{ $compra->estandar }}</td>
                 <td>{{ $compra->eti_lote }}</td>
                 <td>{{ $compra->integridad }}</td>
-                <td>{{ $compra->unidades }}</td>
+                <td>{{ $compra->uni }}</td>
 
             </tr>
           @endforeach

@@ -84,6 +84,9 @@ Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController
 Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
 Route::get('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updateProducto'])->name('compras.updateProducto.vista');
 Route::post('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecomprasProducto'])->name('compras.updateProducto');
+
+Route::get('compras/updateCar/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecomprasCar'])->name('compras.update.Car');
+
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
 
 

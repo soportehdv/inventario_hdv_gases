@@ -138,7 +138,7 @@
                             <td>{{ $stoc->serial }}</td>
                             <td>{{ $stoc->created_at }}</td>
                             <td>{{ $stoc->fecha_vencimiento }}</td>
-                            <td>{{ $stoc->unidades }}</td>
+                            <td>{{ $stoc->uni }}</td>
                             <td>{{ $stoc->lote }}</td>
                             <td>{{ $stoc->tipo }}</td>
                             @if ($stoc->estado_ubi === 'Bodega')

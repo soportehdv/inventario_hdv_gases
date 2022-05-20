@@ -26,6 +26,7 @@ class StockController extends Controller
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
             ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'compras.tipo as tipo', 'estados.estado as estados')
             ->where('compras.serial','LIKE', '%' . $query . '%')
+            ->where('compras.status','LIKE', '%' . 1 . '%')
             // ->get();
             ->paginate(10);
 

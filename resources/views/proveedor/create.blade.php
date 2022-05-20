@@ -21,7 +21,7 @@
           {{ Session::get('alert-' . $msg) }} 
         </div>
         
-        @endif 
+      @endif 
     @endforeach 
     <div class="card">
         <div class="card-body">

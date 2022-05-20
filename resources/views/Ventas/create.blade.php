@@ -49,8 +49,8 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>Se entrega a :</th>
                                 <th>Producto</th>
-                                <th>Stock</th>
                                 <th>Unidades</th>
                                 <th><a href="javascript:void(0)" class="btn btn-success addRow">+</a></th>
                             </tr>
@@ -60,7 +60,7 @@
                                 <th>
                                     <select class="form-control" name="cliente_id[]" id="select-pendiente" required>
                                         @foreach ($clientes as $cliente)
-                                            @if ($cliente->estado === 'pendiente')
+                                            @if ($cliente->entregado != 0)
                                                 <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                                             @endif
                                         @endforeach
@@ -138,12 +138,12 @@
                         <div class="row">
                     
                         @foreach ($clientes as $cliente)
-                            @if ($cliente->estado === 'pendiente')
+                            @if ($cliente->entregado != 0)
                                 {{-- <tr> --}}
                                     <div class="col-sm-3">{{ $cliente->id }}</div>
                                     <div class="col-sm-3">{{ $cliente->nombre }}</div>
                                     <div class="col-sm-3">{{ $cliente->tipo }}</div>
-                                    <div class="col-sm-3">{{ $cliente->cantidad }}</div>
+                                    <div class="col-sm-3">{{ $cliente->entregado }}</div>
 
 
                                 {{-- </tr> --}}

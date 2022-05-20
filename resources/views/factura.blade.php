@@ -179,7 +179,7 @@
         <table style="width: 100%">
             <tr>
                 <td><b>GAS MEDICINAL </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: _______________</td>
-                <td><b>N° DE CILINDROS: </b><b style="text-decoration:underline">{{ $proveedor->Ncilindros }}</b></td>
+                <td><b>N° DE CILINDROS: </b><b style="text-decoration:underline">{{ $conteo }}</b></td>
                 <td><b>EMPRESA QUE ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->nombre }}</b></td>
                 <td><b>NOMBRE DE QUIEN ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->persona }}</b></td>
             </tr>
@@ -501,7 +501,7 @@
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle>{{ $compra->integridad }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle>{{ $compra->unidades }}</td>
+                            align="center" valign=middle>{{ $compra->uni }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle></td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"

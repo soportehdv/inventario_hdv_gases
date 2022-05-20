@@ -37,6 +37,7 @@ class ComprasController extends Controller
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
                 ->select(  'estados.estado as estado','proveedores.remision as remision', 'tipos.nombre as tipos', 'compras.*')
                 ->where('serial','LIKE', '%' . $query . '%')
+                ->where('status','LIKE', '%' . 1 . '%')
                 ->orderBy('id', 'asc')
                 // ->get();
                 // comentado para pruebas
@@ -100,6 +101,7 @@ class ComprasController extends Controller
         $Compras->tipo =  $request->input('tipo');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
+        $Compras->uni = $request->input('unidades');
         $Compras->lote = $request->input('lote');
         $Compras->limpieza = $request->input('limpieza');
         $Compras->sello = $request->input('sello');
@@ -108,6 +110,8 @@ class ComprasController extends Controller
         $Compras->estandar = $request->input('estandar');
         $Compras->eti_lote = $request->input('eti_lote');
         $Compras->integridad = $request->input('integridad');
+
+        $Compras->status = 1;
 
         if ($Compras->limpieza == "C" && $Compras->sello == "C" && $Compras->eti_producto == "C" && $Compras->prueba == "C" && $Compras->estandar == "C" && $Compras->eti_lote == "C" && $Compras->integridad == "C"){
             $Compras->aprobado = "X";
@@ -124,8 +128,12 @@ class ComprasController extends Controller
         $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');     
+        $stock->uni = $request->input('unidades');     
         $stock->tipo =  $request->input('tipo');
         $stock->compra_id = $Compras->id;
+
+        $Compras->status = 1;
+
         $stock->save();
 
         
@@ -181,6 +189,7 @@ class ComprasController extends Controller
         $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
         $Compras->unidades = $request->input('unidades');
+        $Compras->uni = $request->input('unidades');
         $Compras->lote = $request->input('lote');
         $Compras->limpieza = $request->input('limpieza');
         $Compras->sello = $request->input('sello');
@@ -199,6 +208,7 @@ class ComprasController extends Controller
         $stock->estado_id =  $request->input('estado_id');
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
         $stock->unidades = $request->input('unidades');
+        $stock->uni = $request->input('unidades');
         $stock->tipo =  $request->input('tipo');
         $stock->compra_id = $Compras->id;
 
@@ -239,7 +249,7 @@ class ComprasController extends Controller
         ]);
 
         if ($validate->fails()) {
-            $request->session()->flash('alert-danger', 'Error al actualizar producto');
+            $request->session()->flash('alert-danger', 'Error al devolver producto');
 
             return redirect()->back();
         }
@@ -247,6 +257,8 @@ class ComprasController extends Controller
         //validamos los datos
         
         $Compras->estado_id =  $request->input('estado_id');
+        $Compras->estado_ubi =  $request->input('ubicacion');
+        $Compras->unidades =  $Compras->unidades + 1;
         $Compras->save();
 
 
@@ -254,10 +266,30 @@ class ComprasController extends Controller
 
         $stock->estado_id =  $request->input('estado_id');
         $stock->estado_ubi =  $request->input('ubicacion');
+        $stock->unidades =  $stock->unidades + 1;
         $stock->save();
 
-        $request->session()->flash('alert-success', 'Ingreso actualizado con exito!');
+        $request->session()->flash('alert-success', 'Devolución con exito!');
 
-        return redirect()->route('stock.list');
+        return redirect()->route('devolucion.list');
+    }
+    public function updatecomprasCar($id){
+        $compras = Compras::where('id', $id)->first();
+        $stock   = Stock  ::where('id', $id)->first();
+
+        //validamos los datos
+        
+        $compras->status =  0;
+        $compras->save();
+
+
+        //Guardamos en el stock
+
+        $stock->status =  0;
+        $stock->save();
+
+        return redirect()->back();
+
+
     }
 }

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Inventarios-HDV',
+    'title' => 'Inventario-HDV',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Inventarios</b>-Gases',
+    'logo' => '<b>Inventario</b>-Gases',
     'logo_img' => 'vendor/adminlte/dist/img/logoHDV.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,

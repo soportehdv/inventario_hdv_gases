@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proveedores;
+use App\Models\Tipo;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -19,8 +20,8 @@ class ProveedoresController extends Controller
 
     public function getProveedor(Request $request)
     {
+        $tipo = Tipo::all();
         if($request){
-
             $query= trim($request->get('search'));
             $proveedor = Proveedores::where('nombre','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
@@ -28,7 +29,8 @@ class ProveedoresController extends Controller
 
             return view('proveedor/lista', [
                 'proveedores' => $proveedor,
-                'search' => $query
+                'tipo' => $tipo,
+                'search' => $query,
             ]);
 
         }
@@ -53,11 +55,7 @@ class ProveedoresController extends Controller
             'name'      => 'required',
             'remision'     => 'required|integer',
             'Ncilindros'     => 'required|integer',
-            'persona'      => 'required',
-
-            
-
-
+            'persona'      => 'required',          
         ]);
 
         if ($validate->fails()) {

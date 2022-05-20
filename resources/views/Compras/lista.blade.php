@@ -4,7 +4,7 @@
 @section('content_header')
     <div class="card" style="height:4em;">
         <div class="card-header">
-            <h2>Ingreso de productos</h2>
+            <h2>Productos</h2>
         </div>
 
     </div>
@@ -62,7 +62,7 @@
                         <td>{{ $compra->registro}}</td>
                         <td>{{ $compra->presentacion }}</td>
                         <td>{{ $compra->color }}</td>
-                        <td>{{ $compra->unidades }}</td>
+                        <td>{{ $compra->uni }}</td>
                         {{-- <td><a href="{{ route('compras.update.vista', $compra->id) }}"
                                 class="btn btn-success mb-2"><i class="fas fa-edit"></i> Editar</a>
                         </td> --}}

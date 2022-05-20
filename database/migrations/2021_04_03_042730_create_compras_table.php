@@ -28,6 +28,7 @@ class CreateComprasTable extends Migration
             $table->string('estado_ubi')->nullable()->default("Bodega");
             $table->date('fecha_vencimiento');
             $table->integer('unidades');
+            $table->integer('uni');
             $table->string('lote');
             $table->string('limpieza');
             $table->string('sello');
@@ -38,6 +39,8 @@ class CreateComprasTable extends Migration
             $table->string('integridad');
             $table->string('aprobado');
             $table->string('rechazado');
+
+            $table->integer('status');//activo o inactivo
 
 
 

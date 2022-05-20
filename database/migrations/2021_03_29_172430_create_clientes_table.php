@@ -24,6 +24,7 @@ class CreateClientesTable extends Migration
                 $table->string('registro')->nullable();
                 $table->string('tipo')->nullable();
                 $table->integer('cantidad')->unsigned();
+                $table->integer('entregado')->unsigned();
 
                
                 $table->timestamps();

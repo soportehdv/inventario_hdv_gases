@@ -94,8 +94,7 @@
                         @foreach($ubicacion as $ubi)
                             @if($ubi->id == $venta->ubicacion)
                             <td>{{ $ubi->nombre }}</td>
-                            @endif
-                        
+                            @endif                        
                         @endforeach
                         {{-- <td><a href="{{ route('ventas.detalle', $venta->id) }}" class="btn btn-success mb-2"> <i
                                     class="fas fa-ete"></i> Detalle</a>

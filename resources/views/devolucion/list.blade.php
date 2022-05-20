@@ -4,7 +4,7 @@
 @section('content_header')
     <div class="card" style="height:4em;">
         <div class="card-header">
-            <h2 style="float:left">Usuarios</h2>
+            <h2 style="float:left">Devoluciones</h2>
 
 
 
@@ -57,49 +57,51 @@
                 </thead>
                 <tbody>
                     @foreach ($stock as $stoc)
-                        <tr>
-                            <th>{{ $stoc->id }}</th>
-                            <td>{{ $stoc->serial }}</td>
-                            <td>{{ $stoc->created_at }}</td>
-                            <td>{{ $stoc->fecha_vencimiento }}</td>
-                            <td>{{ $stoc->unidades }}</td>
-                            <td>{{ $stoc->lote }}</td>
-                            @if ($stoc->estado_ubi === 'Bodega')
-                                <td>
-                                    <span class="badge badge-pill badge-success">{{$stoc->estado_ubi}}</span>
-                                </td>
-                            @else ()
-                                <td>
-                                    <span class="badge badge-pill badge-danger">{{$stoc->estado_ubi}}</span>
-                                </td>                            
-                            @endif
+                        @if ($stoc->unidades === 0)
+                            <tr>
+                                <th>{{ $stoc->id }}</th>
+                                <td>{{ $stoc->serial }}</td>
+                                <td>{{ $stoc->created_at }}</td>
+                                <td>{{ $stoc->fecha_vencimiento }}</td>
+                                <td>{{ $stoc->unidades }}</td>
+                                <td>{{ $stoc->lote }}</td>
+                                @if ($stoc->estado_ubi === 'Bodega')
+                                    <td>
+                                        <span class="badge badge-pill badge-success">{{$stoc->estado_ubi}}</span>
+                                    </td>
+                                @else ()
+                                    <td>
+                                        <span class="badge badge-pill badge-danger">{{$stoc->estado_ubi}}</span>
+                                    </td>                            
+                                @endif
 
 
-                            @if ($stoc->estados === 'Vacio')
-                                <td>
-                                    <span class="badge badge-pill badge-danger">Vacio</span>
+                                @if ($stoc->estados === 'Vacio')
+                                    <td>
+                                        <span class="badge badge-pill badge-danger">Vacio</span>
+                                    </td>
+                                @elseif ($stoc->estados === 'Lleno')
+                                    <td>
+                                        <span class="badge badge-pill badge-success">Lleno</span>
+                                    </td>
+                                @elseif ($stoc->estados === 'En servicio')
+                                    <td>
+                                        <span class="badge badge-pill badge-warning">En servicio</span>
+                                    </td>
+                                @endif
+                                <td><a href="{{ route('compras.updateProducto.vista', $stoc->id) }}"
+                                    class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                                 </td>
-                            @elseif ($stoc->estados === 'Lleno')
-                                <td>
-                                    <span class="badge badge-pill badge-success">Lleno</span>
-                                </td>
-                            @elseif ($stoc->estados === 'En servicio')
-                                <td>
-                                    <span class="badge badge-pill badge-warning">En servicio</span>
-                                </td>
-                            @endif
-                            <td><a href="{{ route('compras.updateProducto.vista', $stoc->id) }}"
-                                class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
-                            </td>
-                            <td></td>
+                                <td></td>
 
-                            {{-- @if (Auth::user()->rol == "admin")               
-                            <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
-                                    class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
-                            </td>
-                            @endif --}}
+                                {{-- @if (Auth::user()->rol == "admin")               
+                                <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
+                                        class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
+                                </td>
+                                @endif --}}
 
-                        </tr>
+                            </tr>
+                        @endif
                     @endforeach
 
                 </tbody>

@@ -60,14 +60,15 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Responsable</th>
-                        <th scope="col">Cargo</th>
+                        {{-- <th scope="col">Cargo</th> --}}
                         <th scope="col">Recibió</th>
-                        <th scope="col">Cargo</th>
+                        {{-- <th scope="col">Cargo</th> --}}
                         <th scope="col">Ubicación</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">Cantidad</th>
+                        <th scope="col">Cant.</th>
+                        <th scope="col">Pend.</th>
                         <th scope="col">Comentario</th>
 
 
@@ -82,12 +83,12 @@
                         <tr>
                             <th scope="row">{{ $cliente->id }}</th>
                             <td>{{ $cliente->responsable }}</td>
-                            <td>{{ $cliente->cargo }}</td>
+                            {{-- <td>{{ $cliente->cargo }}</td> --}}
                             <td>{{ $cliente->nombre }}</td>
-                            <td>{{ $cliente->cargorecibe }}</td>
+                            {{-- <td>{{ $cliente->cargorecibe }}</td> --}}
                             <td>{{ $cliente->ubicacion }}</td>
                             <td>{{ $cliente->registro }}</td>
-                            @if ($cliente->estado === 'pendiente')
+                            @if ($cliente->entregado != 0)
                                 <td>
                                     <span class="badge badge-pill badge-danger">Pendiente</span>
                                 </td>
@@ -99,6 +100,7 @@
                             
                             <td>{{$cliente->tipo}}</td>
                             <td>{{$cliente->cantidad}}</td>
+                            <td>{{$cliente->entregado}}</td>
                             <td style="max-width: 100px;
                             font-size: 16px;
                             overflow: hidden;
@@ -110,7 +112,7 @@
                             @if (Auth::user()->rol == 'admin')
                                 <td>
                                     <a href="{{ route('clientes.update.vista', $cliente->id) }}"
-                                        class="btn btn-success mb-2"><i class="fas fa-edit"></i></a>
+                                        class="btn btn-success mb-2"><i class="fas fa-eye"></i></a>
 
                                 </td>
                             @endif

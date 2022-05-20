@@ -154,7 +154,8 @@ class VentasController extends Controller
                     ];
                 // Cambiamos el estado
                     $datasave4 =[
-                        'estado'    => 'entregado',
+                        // 'estado'    => 'entregado',
+                        'entregado' => $clientes->entregado - $unidades[$i] //descontamos de la tabla de entregados
                     ];
                 // factura o historial
                     $datasave5 =[

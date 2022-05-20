@@ -22,6 +22,7 @@ class Compras extends Model
         'tipo',
         'fecha_vencimiento',
         'unidades',
+        'uni',
         'lote',
         'limpieza',
         'sello',
@@ -32,6 +33,9 @@ class Compras extends Model
         'integridad',
         'aprobado',
         'rechazado',
+
+        'status',
+
 
         // 'costo_unitario',
         // 'precio_compra',

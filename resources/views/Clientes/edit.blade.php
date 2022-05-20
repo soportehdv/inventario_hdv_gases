@@ -123,18 +123,24 @@
                     
 
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-8">
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea3">¿Que elementos necesita? </label>
                                 <textarea class="form-control" name="direccion" id="form"
                                     rows="4"> {{$cliente->direccion}}</textarea>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <a style="float:right" class="btn btn-primary" href="{{ URL::previous() }}">Regresar</a>
+                        </div>
+                        
+
                     </div>
 
                     
 
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    {{-- <button type="submit" class="btn btn-primary">Agregar</button> --}}
+
                 </form>
 
             </div>

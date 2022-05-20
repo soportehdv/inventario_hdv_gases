@@ -34,6 +34,7 @@ class Detalle_ventasController extends Controller
 
     public function imprimirFactura(Request $request, $venta_id)
     {
+        $ti= trim($request->get('tipo'));
         $proveedor = Proveedores::where('id', $venta_id)->first();
 
         $detalle = Detalle_ventas::where('venta_id', $venta_id)
@@ -46,11 +47,14 @@ class Detalle_ventasController extends Controller
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
                 ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('compras.proveedor_id','LIKE', '%' . $query . '%')
-                ->where('compras.tipo','LIKE', '%' . 1 . '%')
+                ->where('compras.tipo','LIKE', '%' . $ti . '%')
                 ->orderBy('id', 'asc')
                 ->get();
+            
+            $conteo = count($compras);
                 // comentado para pruebas
                 // ->paginate(22);
+                // dd($conteo);
 
         $venta = Ventas::where('id', $venta_id)->first();
 
@@ -59,6 +63,7 @@ class Detalle_ventasController extends Controller
             'venta' =>  $venta,
             'detalles' => $detalle,
             'search' => $query,
+            'conteo' => $conteo,
             'proveedor' =>$proveedor,
 
         ])->setPaper('letter', 'landscape');
