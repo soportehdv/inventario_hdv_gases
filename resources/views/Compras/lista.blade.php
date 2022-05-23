@@ -41,7 +41,7 @@
                     <th>Tipo</th>
                     <th>Lote</th>
                     <th>Vencimiento</th>
-                    <th>Serial</th>
+                    <th style="background-color:#343a40; color:white;">Serial</th>
                     <th>N° Registro</th>
                     <th>m3</th>
                     <th>Color</th>

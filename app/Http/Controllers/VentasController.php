@@ -51,10 +51,12 @@ class VentasController extends Controller
 
         if ($request->get('filtro') == null) { //Todas
             $ubicacion = Ubicacion::all();
+            $query= trim($request->get('search'));
             $ventas = Ventas::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
                 ->join('users', 'users.id', '=', 'ventas.user_id')
                 ->join('compras', 'compras.id', '=', 'ventas.producto_id')
                 ->select('ventas.id', 'clientes.nombre AS cliente', 'clientes.departamento AS ubicacion', 'users.name AS Vendedor', 'ventas.created_at AS Fecha', 'compras.serial AS serial')
+                ->where('serial','LIKE', '%' . $query . '%')
                 ->orderby('ventas.created_at', 'desc')
                 ->simplePaginate(10);
             

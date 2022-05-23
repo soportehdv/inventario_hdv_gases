@@ -31,7 +31,7 @@ class ClientesController extends Controller
                 $clientes = Clientes::join('users', 'users.id', '=', 'clientes.responsable_id')
                 ->join('ubicacions', 'ubicacions.id', '=', 'clientes.departamento')
                 ->select('users.name AS responsable', 'users.cargo AS cargo', 'ubicacions.nombre AS ubicacion', 'clientes.*')
-                ->where('cargorecibe','LIKE', '%' . $query . '%')
+                ->where('clientes.nombre','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
                 // ->get();
                 ->simplePaginate(10);

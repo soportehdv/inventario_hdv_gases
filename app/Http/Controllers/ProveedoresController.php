@@ -23,7 +23,7 @@ class ProveedoresController extends Controller
         $tipo = Tipo::all();
         if($request){
             $query= trim($request->get('search'));
-            $proveedor = Proveedores::where('nombre','LIKE', '%' . $query . '%')
+            $proveedor = Proveedores::where('remision','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
             ->get();
 

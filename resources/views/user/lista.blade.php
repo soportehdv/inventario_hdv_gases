@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
+                    <th style="background-color:#343a40; color:white;">Nombre</th>
                     <th>Cargo</th>
                     <th>Email</th>
                     <th>Rol</th>

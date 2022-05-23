@@ -39,7 +39,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Empresa</th>
-                    <th scope="col">N° Remisión</th>
+                    <th scope="col" style="background-color:#343a40; color:white">N° Remisión</th>
                     <th scope="col">Persona</th>
                     <th scope="col">Cilindros</th>
                     {{-- <th scope="col">Acción</th> --}}

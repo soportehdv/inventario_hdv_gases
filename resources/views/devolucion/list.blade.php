@@ -38,7 +38,7 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>Serial</th>
+                        <th style="background-color:#343a40; color:white;">Serial</th>
                         <th>Fecha_ingreso</th>
                         <th>Vencimiento</th>
                         <th>Unidades</th>

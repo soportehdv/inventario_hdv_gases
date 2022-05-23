@@ -61,7 +61,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Responsable</th>
                         {{-- <th scope="col">Cargo</th> --}}
-                        <th scope="col">Recibió</th>
+                        <th scope="col" style="background-color:#343a40; color:white;">Recibió</th>
                         {{-- <th scope="col">Cargo</th> --}}
                         <th scope="col">Ubicación</th>
                         <th scope="col">Telefono</th>

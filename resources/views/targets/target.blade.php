@@ -50,12 +50,12 @@
                         $j=0;
                     @endphp
                     @foreach ($stock as $stoc)
-                        {{-- @if($cliente->estado === 'pendiente')                     --}}
+                        @if($stoc->status != 0)                    
                             @php
                                 // $i= $loop->count
                                 $j=$j+1
                             @endphp
-                        {{-- @endif --}}
+                        @endif
 
                     @endforeach
                     <h3>{{$j}}</h3>
