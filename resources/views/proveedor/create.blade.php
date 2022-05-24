@@ -2,7 +2,7 @@
 @section('title', 'Proveedores')
 
 @section('content_header')
-<div class="card">
+<div class="card" style="height:4em;">
     <div class="card-header">
       <h2>Proveedores</h2>
     </div>
@@ -21,7 +21,7 @@
           {{ Session::get('alert-' . $msg) }} 
         </div>
         
-        @endif 
+      @endif 
     @endforeach 
     <div class="card">
         <div class="card-body">
@@ -30,7 +30,7 @@
                 
                 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre </label>
+                    <label for="exampleInputEmail1">Nombre empresa</label>
                     <input type="text" class="form-control" name="name" value="{{(isset($proveedor))? $proveedor->nombre: ''}}" aria-describedby="emailHelp" placeholder="Nombre">
                 </div>
 
@@ -38,6 +38,16 @@
                     <label for="exampleInputEmail1">N° remisión </label>
                     <input type="number" class="form-control" name="remision" value="{{(isset($proveedor))?$proveedor->remision:''}}" aria-describedby="emailHelp" placeholder="Ingresa Numero de remisión">
                   </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre quien entrega </label>
+                    <input type="text" class="form-control" name="persona" value="{{(isset($proveedor))? $proveedor->persona: ''}}" aria-describedby="emailHelp" placeholder="Nombre quien entrega">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">N° de cilindros </label>
+                  <input type="number" class="form-control" name="Ncilindros" value="{{(isset($proveedor))?$proveedor->Ncilindros:''}}" aria-describedby="emailHelp" placeholder="Cantidad de cilindros">
+                </div>
                 
                 <button type="submit" class="btn btn-primary">Agregar</button>
               </form>

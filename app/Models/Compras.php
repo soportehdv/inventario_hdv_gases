@@ -10,13 +10,19 @@ class Compras extends Model
     use HasFactory;
 
     protected $fillable = [
-        'producto_id',
+        'serial',
+        'presentacion',
+        'registro',
+        'color',
+
+        
         'estado_id',
         'estado_ubi',
-        'fecha_ingreso',
         'proveerdor_id',
+        'tipo',
         'fecha_vencimiento',
         'unidades',
+        'uni',
         'lote',
         'limpieza',
         'sello',
@@ -24,7 +30,12 @@ class Compras extends Model
         'prueba',
         'estandar',
         'eti_lote',
-        'integridad'
+        'integridad',
+        'aprobado',
+        'rechazado',
+
+        'status',
+
 
         // 'costo_unitario',
         // 'precio_compra',

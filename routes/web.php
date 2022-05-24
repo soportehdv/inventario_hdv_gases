@@ -37,13 +37,6 @@ Route::get('proveedor/update/{user_id}', [App\Http\Controllers\ProveedoresContro
 Route::post('proveedor/update/{user_id}', [App\Http\Controllers\ProveedoresController::class, 'updateProveedor'])->name('proveedor.update');
 Route::get('proveedor/list', [App\Http\Controllers\ProveedoresController::class, 'getProveedor'])->name('proveedor.lista');
 
-//Productos
-Route::get('productos/create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create.vista');
-Route::post('productos/create', [App\Http\Controllers\ProductosController::class, 'createProductos'])->name('productos.create');
-Route::get('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update.vista');
-Route::post('productos/update/{user_id}', [App\Http\Controllers\ProductosController::class, 'updateProductos'])->name('productos.update');
-Route::get('productos/list', [App\Http\Controllers\ProductosController::class, 'getProductos'])->name('productos.lista');
-
 //Lotes
 Route::get('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'create'])->name('lotes.create.vista');
 Route::post('lotes/create/{producto_id}', [App\Http\Controllers\LotesController::class, 'createLotes'])->name('lotes.create');
@@ -57,15 +50,14 @@ Route::get('clientes/create', [App\Http\Controllers\ClientesController::class, '
 Route::post('clientes/create', [App\Http\Controllers\ClientesController::class, 'createClientes'])->name('clientes.create');
 Route::get('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'update'])->name('clientes.update.vista');
 Route::post('clientes/update/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'updateClientes'])->name('clientes.update');
+Route::get('clientes/entrega/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'entrega'])->name('clientes.entrega.vista');
+Route::post('clientes/entrega/{cliente_id}', [App\Http\Controllers\ClientesController::class, 'entregaClientes'])->name('clientes.entrega');
 Route::get('clientes/list/{filtro?}', [App\Http\Controllers\ClientesController::class, 'getClientes'])->name('clientes.lista');
 
 //Ventas
 Route::get('ventas/todas/{filtro?}/{fecha_inicio?}/{fecha_final?}/{id?}', [App\Http\Controllers\VentasController::class, 'getVentas'])->name('ventas.lista');
 Route::get('ventas/create', [App\Http\Controllers\VentasController::class, 'create'])->name('ventas.create.vista');
 Route::post('ventas/create', [App\Http\Controllers\VentasController::class, 'createVenta'])->name('ventas.create');
-
-
-
 
 
 // Route::get('ventas/fecha', [App\Http\Controllers\VentasController::class, 'fechaVista'])->name('ventas.fecha');
@@ -82,12 +74,19 @@ Route::get('precios/update/{precio_id}', [App\Http\Controllers\Precios_productos
 //Detalle de ventas
 Route::get('ventas/detalle/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getDetalle'])->name('ventas.detalle');
 Route::get('detalles/descargar/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'imprimirFactura'])->name('detalles.descargar.factura');
+Route::get('detalles/remision/{venta_id}', [App\Http\Controllers\Detalle_ventasController::class, 'getRemision'])->name('detalles.ver.remision');
+
 
 //Compras
 Route::get('compras/create', [App\Http\Controllers\ComprasController::class, 'create'])->name('compras.create.vista');
 Route::post('compras/create', [App\Http\Controllers\ComprasController::class, 'createCompras'])->name('compras.create');
 Route::get('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'update'])->name('compras.update.vista');
 Route::post('compras/update/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecompras'])->name('compras.update');
+Route::get('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updateProducto'])->name('compras.updateProducto.vista');
+Route::post('compras/updateProducto/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecomprasProducto'])->name('compras.updateProducto');
+
+Route::get('compras/updateCar/{compra_id}', [App\Http\Controllers\ComprasController::class, 'updatecomprasCar'])->name('compras.update.Car');
+
 Route::get('compras/lista', [App\Http\Controllers\ComprasController::class, 'getCompras'])->name('compras.lista');
 
 
@@ -109,6 +108,11 @@ Route::post('fracciones/update/{precio_id}', [App\Http\Controllers\FraccionesCon
 Route::get('stock/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\StockController::class, 'getStock'])->name('stock.list');
 Route::get('stock/fecha', [App\Http\Controllers\StockController::class, 'fechaVista'])->name('stock.fecha');
 
+//devolicion
+Route::get('devolucion/list/{filtro?}/{fecha_inicio?}/{id?}', [App\Http\Controllers\DevolucionController::class, 'getDevolucion'])->name('devolucion.list');
+Route::get('devolucion/fecha', [App\Http\Controllers\DevolucionController::class, 'fechaVista'])->name('devolucion.fecha');
+
+
 // ubicaciones
 Route::get('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'create'])->name('listaubicacion.create.vista');
 Route::post('ubicacion/create', [App\Http\Controllers\ubicacionController::class, 'createlistaubicacion'])->name('listaubicacion.create');
@@ -117,3 +121,6 @@ Route::get('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionCon
 Route::post('ubicacion/update/{ubicacion_id}', [App\Http\Controllers\ubicacionController::class, 'updatelistaubicacion'])->name('listaubicacion.update');
 
 Route::get('targets/target', [App\Http\Controllers\TargetController::class, 'gettarget'])->name('listatarget.target');
+
+
+Route::get('ventas/admin/invoice/{categoria}',[App\Http\Controllers\InvoiceController::class, 'sacaSub']);

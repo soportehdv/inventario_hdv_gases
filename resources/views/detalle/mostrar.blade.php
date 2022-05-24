@@ -2,7 +2,7 @@
 @section('title', 'detalles')
 
 @section('content_header')
-<div class="card">
+<div class="card" style="height:4em;">
     <div class="card-header">
       <h2>detalles</h2>
     </div>
@@ -14,7 +14,7 @@
 @section('content')
 
 <div class="container">
-    <a href="{{ route('detalles.descargar.factura',$venta_id)}}" class="btn btn-primary mb-2">Descargar factura</a>
+    {{-- <a href="{{ route('detalles.descargar.factura',$venta_id)}}" class="btn btn-primary mb-2">Descargar factura</a> --}}
 
   
     @foreach (['danger', 'warning', 'success', 'info'] as $msg) 

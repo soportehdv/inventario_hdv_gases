@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EstadoSeeder::class,
             UbicacionSeeder::class,
+            TiposSeeder::class,
+            // CompraSeeder::class,
           ]);
 
     }

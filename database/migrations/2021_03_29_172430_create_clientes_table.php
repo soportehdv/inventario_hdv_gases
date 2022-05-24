@@ -21,9 +21,11 @@ class CreateClientesTable extends Migration
                 $table->string('cargorecibe')->nullable();
                 $table->string('direccion')->nullable();
                 $table->integer('departamento')->unsigned();
-                $table->integer('producto')->unsigned();
                 $table->string('registro')->nullable();
-                $table->string('giro')->nullable();
+                $table->string('tipo')->nullable();
+                $table->integer('cantidad')->unsigned();
+                $table->integer('entregado')->unsigned();
+
                
                 $table->timestamps();
             

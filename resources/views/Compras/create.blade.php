@@ -2,7 +2,7 @@
 @section('title', 'Productos')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Crear nuevo producto</h2>
         </div>
@@ -17,8 +17,6 @@
 
     <div class="container">
         <br>
-
-
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
@@ -37,6 +35,9 @@
                         }
                         .texto_radio{
                             text-align: center;        
+                        }
+                        .upper{
+                            text-transform: uppercase;
                         }
                         @media (min-width: 360px) and (max-width: 767px){
                             .padding_center{
@@ -61,58 +62,103 @@
                             
                         }
                     </style>
+                    
 
                     <div class="form-group">
                         <div class="row">
-
-                            <div class="col-sm-4">
-                                <label for="exampleInputEmail1">Fecha de ingreso </label>
-                                <input type="date" class="form-control" name="fecha_ingreso" value="">
-                            </div>
-                           
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <label for="">N° Remisión </label>
-                                <select id="proveedor" name="proveedor_id" class="form-control">
-                                    <option value="">Seleccioné un N° de remision</option>
-                                    @foreach ($proveedores as $proveedor)
-                                        <option value="{{ $proveedor->id }}">
-                                            {{ $proveedor->remision }}</option>
+                                <select id="proveedor" name="proveedor_id" class="form-control" required>
+                                    <option value="">N° de remision</option>
+                                    @foreach ($proveedores as $proveedor)                                    
+                                        @if($proveedor->Ncilindros != $proveedor->contador)
+                                                <option value="{{ $proveedor->id }}">
+                                                    {{ $proveedor->remision }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-4">
-                                <label for="">Lote </label>
-                                <input type="number" min="0" class="form-control" name="lote" value="" placeholder="Lote">
+
+                            <div class="col-sm-3">
+                                <label for="">Tipos </label>
+                                <select id="tipo" name="tipo" class="form-control" required>
+                                    <option value="">Seleccioné un tipo</option>
+                                    @foreach ($tipo as $tip)
+                                        <option value="{{ $tip->id }}">
+                                            {{ $tip->nombre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+
+                            <div class="col-sm-3">
+                                <label for="">Lote </label>
+                                <input type="text" class="form-control upper" name="lote" value="" placeholder="Lote" required>
+                            </div>                                          
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">Fecha Vencimiento </label>
+                                <input type="date" class="form-control upper" name="fecha_vencimiento" value="" required>
+                            </div>                         
+                            
 
                         </div>
                         <br>
+                        
 
+                    <div class="row">
+                        
+                        <div class="col-sm-3">
+                            <label for="exampleInputEmail1">Serial </label>
+                        <input type="text" autocomplete="on" class="form-control upper" name="serial" value="{{(isset($producto))? $producto->serial: ''}}" aria-describedby="emailHelp" placeholder="Serial" required>
+                        <ul id="lista_id"></ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="">Registro sanitario </label>
+                            <input type="text" class="form-control upper" name="registro" value="{{(isset($producto))? $producto->registro: ''}}" placeholder="Registro sanitario" required>
+                        </div>
+                        
+                        <div>
+                            @foreach ($proveedores as $pro)
+
+                            <input type="hidden" class="form-control upper"  name="contador" value="{{$pro->contador}}">
+                            @endforeach
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="">Presentación (m3) </label>
+                        <input type="number" class="form-control upper" step="0.1" name="presentacion" value="{{(isset($producto))? $producto->presentacion: ''}}" placeholder="Presentación" required>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="">Color </label>
+                            <input type="text" class="form-control upper" name="color" value="{{(isset($producto))? $producto->color: ''}}" placeholder="Color" required>
+                        </div>
+                        
+
+                        
+                    </div>
+                    {{-- <br> --}}
                         <div class="row">
-                            <div class="col-sm-4">
-                                <label for="exampleInputEmail1">Fecha Vencimiento </label>
-                                <input type="date" class="form-control" name="fecha_vencimiento" value="">
-                            </div>
+                            
 
-                            <div class="col-sm-4">
-                                <label for="">Serial de producto </label>
-                                <select id="producto" name="producto_id" class="form-control">
-                                    <option value="">Seleccioné un serial de producto</option>
-                                    @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}">
-                                            {{ $producto->serial }}</option>
+                    
+                            <div class="col-sm-3">
+                                <label for="exampleInputEmail1">Cantidades </label>
+                                <input type="number" min="1" max="1" class="form-control upper" name="unidades" value=""
+                                    placeholder="Unidades" required>
+
+                            </div>                          
+
+                            <div class="col-sm-3">
+                                <label for="">Estado </label>
+                                <select id="estado_id" name="estado_id" class="form-control" required>
+                                    <option value="">Seleccioné una estado del producto</option>
+                                    @foreach ($estado as $estad)
+                                        <option value="{{ $estad->id }}">
+                                            {{ $estad->estado }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-4">
-                                <label for="exampleInputEmail1">Cantidades </label>
-                                <input type="number" min="0" class="form-control" name="unidades" value=""
-                                    placeholder="Unidades">
-
-                            </div>
-
-
                         </div>
+                       
                         <br>
                         <div class="row">
                             <div class="col-md-1 two-column">
@@ -121,13 +167,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="C" id="radiolim" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="C" id="radiolim" name="limpieza" required>
                                         <label class="form-check-label" for="radiolim">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control">
-                                        <input class="form-check-input" type="radio" value="NC" id="radiolim2" name="limpieza">
+                                        <input class="form-check-input" type="radio" value="NC" id="radiolim2" name="limpieza" required>
                                         <label class="form-check-label" for="radiolim2">
                                             NC
                                         </label>
@@ -140,13 +186,13 @@
                                 </div>
                                 <div class="padding_center">
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="C" id="radioSello" name="sello">
+                                        <input class="form-check-input" type="radio" value="C" id="radioSello" name="sello" required>
                                         <label class="form-check-label" for="radioSello">
                                             C
                                         </label>
                                     </div>
                                     <div class="custom-control custom-switch">
-                                        <input class="form-check-input" type="radio" value="NC" id="radioSello2" name="sello">
+                                        <input class="form-check-input" type="radio" value="NC" id="radioSello2" name="sello" required>
                                         <label class="form-check-label" for="radioSello2">
                                             NC
                                         </label>
@@ -159,13 +205,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto" required>
                                     <label class="form-check-label" for="radioEtiP">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiP2" name="eti_producto">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiP2" name="eti_producto" re<input class="form-check-input" type="radio" value="C" id="radioEtiP" name="eti_producto" required>
                                     <label class="form-check-label" for="radioEtiP2">
                                         NC
                                     </label>
@@ -178,13 +224,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioPrueba" name="prueba">
+                                    <input class="form-check-input" type="radio" value="C" id="radioPrueba" name="prueba" required>
                                     <label class="form-check-label" for="radioPrueba">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioPrueba2" name="prueba">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioPrueba2" name="prueba" required>
                                     <label class="form-check-label" for="radioPrueba2">
                                         NC
                                     </label>
@@ -197,13 +243,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEstandar" name="estandar">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEstandar" name="estandar" required>
                                     <label class="form-check-label" for="radioEstandar">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEstandar2" name="estandar">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEstandar2" name="estandar" required>
                                     <label class="form-check-label" for="radioEstandar2">
                                         NC
                                     </label>
@@ -216,13 +262,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="C" id="radioEtiLote" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="C" id="radioEtiLote" name="eti_lote" required>
                                     <label class="form-check-label" for="radioEtiLote">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control custom-switch">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiLote2" name="eti_lote">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioEtiLote2" name="eti_lote" required>
                                     <label class="form-check-label" for="radioEtiLote2">
                                         NC
                                     </label>
@@ -235,13 +281,13 @@
                                 </div>
                                 <div class="padding_center">
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="C" id="radioIntegridad" name="integridad">
+                                    <input class="form-check-input" type="radio" value="C" id="radioIntegridad" name="integridad" required>
                                     <label class="form-check-label" for="radioIntegridad">
                                         C
                                     </label>
                                 </div>
                                 <div class="custom-control ">
-                                    <input class="form-check-input" type="radio" value="NC" id="radioIntegridad2" name="integridad">
+                                    <input class="form-check-input" type="radio" value="NC" id="radioIntegridad2" name="integridad" required>
                                     <label class="form-check-label" for="radioIntegridad2">
                                         NC
                                     </label>
@@ -251,16 +297,7 @@
 
                         </div>
                         <br>
-                        <div class="col-sm-4">
-                            <label for="">Estado </label>
-                            <select id="estado_id" name="estado_id" class="form-control">
-                                <option value="">Seleccioné una estado del producto</option>
-                                @foreach ($estado as $estad)
-                                    <option value="{{ $estad->id }}">
-                                        {{ $estad->estado }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        
 
 
 

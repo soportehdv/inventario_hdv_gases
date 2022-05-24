@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proveedores;
+use App\Models\Tipo;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -19,16 +20,17 @@ class ProveedoresController extends Controller
 
     public function getProveedor(Request $request)
     {
+        $tipo = Tipo::all();
         if($request){
-
             $query= trim($request->get('search'));
-            $proveedor = Proveedores::where('nombre','LIKE', '%' . $query . '%')
+            $proveedor = Proveedores::where('remision','LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
             ->get();
 
             return view('proveedor/lista', [
                 'proveedores' => $proveedor,
-                'search' => $query
+                'tipo' => $tipo,
+                'search' => $query,
             ]);
 
         }
@@ -52,7 +54,8 @@ class ProveedoresController extends Controller
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
             'remision'     => 'required|integer',
-
+            'Ncilindros'     => 'required|integer',
+            'persona'      => 'required',          
         ]);
 
         if ($validate->fails()) {
@@ -63,6 +66,8 @@ class ProveedoresController extends Controller
         $proveedor = new Proveedores;
         $proveedor->nombre = $request->input('name');
         $proveedor->remision = $request->input('remision');
+        $proveedor->Ncilindros = $request->input('Ncilindros');
+        $proveedor->persona = $request->input('persona');
 
         $proveedor->save();
 
@@ -90,6 +95,8 @@ class ProveedoresController extends Controller
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
             'remision'     => 'required',
+            'Ncilindros'     => 'required|integer',
+            'persona'      => 'required',
 
         ]);
 
@@ -101,6 +108,8 @@ class ProveedoresController extends Controller
 
         $proveedor->nombre = $request->input('name');
         $proveedor->remision = $request->input('remision');
+        $proveedor->Ncilindros = $request->input('Ncilindros');
+        $proveedor->persona = $request->input('persona');
 
         $proveedor->save();
         $request->session()->flash('alert-success', 'Proveedor actualizado con exito!');

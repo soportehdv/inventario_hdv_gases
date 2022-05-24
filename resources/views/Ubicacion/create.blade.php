@@ -2,9 +2,9 @@
 @section('title', 'Ubicaciones')
 
 @section('content_header')
-<div class="card">
+<div class="card" style="height:4em;">
     <div class="card-header">
-      <h2>Lista ubicaciones</h2>
+      <h2>Ubicaciones</h2>
     </div>
     
   </div>

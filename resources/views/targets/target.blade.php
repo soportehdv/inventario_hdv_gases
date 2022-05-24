@@ -2,7 +2,7 @@
 @section('title', 'Inicio')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Inicio</h2>
         </div>
@@ -39,8 +39,8 @@
                 <div class="icon">
                     <i class="fas fa-fw fa-chalkboard-teacher"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
+                <a href="{{ route('clientes.lista') }}" class="small-box-footer">
+                    Ver <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
 
@@ -50,12 +50,12 @@
                         $j=0;
                     @endphp
                     @foreach ($stock as $stoc)
-                        {{-- @if($cliente->estado === 'pendiente')                     --}}
+                        @if($stoc->status != 0)                    
                             @php
                                 // $i= $loop->count
                                 $j=$j+1
                             @endphp
-                        {{-- @endif --}}
+                        @endif
 
                     @endforeach
                     <h3>{{$j}}</h3>
@@ -64,8 +64,8 @@
                 <div class="icon">
                     <i class="fas fa-fw fa-warehouse"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
+                <a href="{{ route('stock.list') }}" class="small-box-footer">
+                    Ver <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
 
@@ -90,7 +90,7 @@
                     <i class="fas fa-fw fa-dolly"></i>
                 </div>
                 <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
+                    Ver <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>

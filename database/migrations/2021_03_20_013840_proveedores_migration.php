@@ -17,6 +17,9 @@ class ProveedoresMigration extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('remision');
+            $table->integer('Ncilindros');
+            $table->string('persona');
+            $table->integer('contador');
             
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 @section('title', 'Usuarios')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Usuarios</h2>
         </div>
@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
+                    <th style="background-color:#343a40; color:white;">Nombre</th>
                     <th>Cargo</th>
                     <th>Email</th>
                     <th>Rol</th>
@@ -60,6 +60,8 @@
 
             </tbody>
         </table>
+      {{ $users->links() }}
+
     </div>
 
 

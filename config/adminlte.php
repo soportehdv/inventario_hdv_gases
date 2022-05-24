@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Inventarios-HDV',
+    'title' => 'Inventario-HDV',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,14 @@ return [
     |
     */
 
-    'logo' => '<b>Inventarios</b>-Gases',
+    'logo' => '<b>Inventario</b>-Gases',
     'logo_img' => 'vendor/adminlte/dist/img/logoHDV.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
+    'logo_img2' => 'vendor/adminlte/dist/img/logoHDV1.png',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'targets/target',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -236,30 +238,36 @@ return [
         ],
         ['header' => 'Menú'],
         [
+            'text'        => 'Inicio',
+            'url'         => 'targets/target',
+            'icon'        => 'fa fa-fw fa-home',
+            'role'        => 'admin'
+        ],
+        [
             'text'        => 'Usuarios',
             'url'         => 'user/list',
             'icon'        => 'far fa-fw fa-user',
             'role'        => 'admin'
         ],
         [
-            'text'    => 'Crear producto',
-            'url'     => 'productos/list',
-            'icon'    => 'fas fa-fw fa-plus-circle',
-            'role'        => 'inventario',
-
-        ],
-        [
             'text' => 'Ingresar producto',
             'url'  => 'compras/lista',
             'icon' => 'fas fa-fw fa-share',
-            'role'        => 'inventario'
+            'role'        => 'admin'
+
+        ],
+        [
+            'text' => 'Devolución de productos',
+            'url'  => 'devolucion/list',
+            'icon' => 'fas fa-fw fa-share fa-flip-horizontal',
+            'role'        => 'admin'
 
         ],
         [
             'text' => 'Pedidos',
             'url'  => 'clientes/list',
             'icon' => 'fas fa-fw fa-chalkboard-teacher',
-            'role'        => 'ventas'
+            'role'        => 'servicios'
 
         ],
         [
@@ -280,7 +288,7 @@ return [
             'text'    => 'Stock',
             'url'     => 'stock/list',
             'icon'    => 'fas fa-fw fa-warehouse',
-            'role'        => 'ventas',
+            'role'        => 'admin',
 
         ],
 

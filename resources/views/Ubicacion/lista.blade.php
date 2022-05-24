@@ -2,7 +2,7 @@
 @section('title', 'Ubicaciones')
 
 @section('content_header')
-<div class="card">
+<div class="card" style="height:4em;">
     <div class="card-header">
       <h2>Ubicaciones</h2>
     </div>
@@ -35,7 +35,7 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
+            <th scope="col" style="background-color:#343a40; color:white;">Nombre</th>
             <th scope="col">Acción</th>
 
           </tr>

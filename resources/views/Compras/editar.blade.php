@@ -3,8 +3,8 @@
 
 @section('content_header')
     <div class="card">
-        <div class="card-header">
-            <h2>Crear nuevo producto</h2>
+        <div class="card-header" style="height:4em;">
+            <h2>Modificar producto</h2>
         </div>
 
     </div>
@@ -79,6 +79,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            
                             {{--  --}}
                             
                             <div class="col-sm-4">
@@ -96,15 +97,11 @@
                                 <input type="date" class="form-control" name="fecha_vencimiento"
                                     value="{{ $compras->fecha_vencimiento }}">
                             </div>
+                            
                             <div class="col-sm-4">
                                 <label for="">Serial </label>
-                                <select id="producto" name="producto_id" class="form-control">
-                                    @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}"
-                                            @if ($compras->producto_id === $producto->id) selected='selected' @endif>
-                                            {{ $producto->serial }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text"  class="form-control" name="serial"
+                                    value="{{ $compras->serial }}" placeholder="Serial">
 
                             </div>
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use \Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 use Illuminate\Database\Seeder;
 
@@ -26,7 +27,20 @@ class UserSeeder extends Seeder
             'cargo' => 'jefe enfermeria',
             'email' => 'andreosorio@pedidos.com',
             'password' => bcrypt('1234'),
-            'rol' => 'ventas'
+            'rol' => 'servicios'
         ]);
+        //guardar 20 registros
+        
+        // $arrays = range(0,20);
+        // foreach ($arrays as $valor) {
+        //   DB::table('users')->insert([	
+        //     'name' => Str::random(10),
+        //     'cargo' => Str::random(10),
+        //     'email' => Str::random(10).'@gmail.com',            
+        //     'password' => bcrypt('1234'),
+        //     'rol' => 'ventas',          
+
+        //   ]);
+        // }
     }
 }

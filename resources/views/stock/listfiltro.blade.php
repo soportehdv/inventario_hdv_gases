@@ -2,7 +2,7 @@
 @section('title', 'Usuarios')
 
 @section('content_header')
-    <div class="card">
+    <div class="card" style="height:4em;">
         <div class="card-header">
             <h2>Usuarios</h2>
         </div>
@@ -116,17 +116,18 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>producto</th>
+                        <th>Serial</th>
                         <th>Fecha_ingreso</th>
                         <th>vencimiento</th>
-                        <th>unidades</th>
-                        <th>lote</th>
+                        <th>Unidades</th>
+                        <th>Lote</th>
+                        <th>Tipo</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>
 
-                        @if (Auth::user()->rol == "admin")                        
+                        {{-- @if (Auth::user()->rol == "admin")                        
                         <th>Acción</th>
-                        @endif
+                        @endif --}}
 
                     </tr>
                 </thead>
@@ -134,11 +135,12 @@
                     @foreach ($stock as $stoc)
                         <tr>
                             <th>{{ $stoc->id }}</th>
-                            <td>{{ $stoc->producto }}</td>
-                            <td>{{ $stoc->fecha_ingreso }}</td>
+                            <td>{{ $stoc->serial }}</td>
+                            <td>{{ $stoc->created_at }}</td>
                             <td>{{ $stoc->fecha_vencimiento }}</td>
-                            <td>{{ $stoc->unidades }}</td>
+                            <td>{{ $stoc->uni }}</td>
                             <td>{{ $stoc->lote }}</td>
+                            <td>{{ $stoc->tipo }}</td>
                             @if ($stoc->estado_ubi === 'Bodega')
                                 <td>
                                     <span class="badge badge-pill badge-success">{{$stoc->estado_ubi}}</span>
@@ -163,13 +165,12 @@
                                     <span class="badge badge-pill badge-warning">En servicio</span>
                                 </td>
                             @endif
-                            {{-- <td>{{ $stoc->estados }}</td> --}}
 
-                            @if (Auth::user()->rol == "admin")               
+                            {{-- @if (Auth::user()->rol == "admin")               
                             <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
                             </td>
-                            @endif
+                            @endif --}}
 
                         </tr>
                     @endforeach
