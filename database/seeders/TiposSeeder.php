@@ -16,25 +16,39 @@ class TiposSeeder extends Seeder
     public function run()
     {
         DB::table('tipos')->insert([
-            'nombre' => 'Oxigeno 8.5',
+            'nombre_id'            => 'OXIGENO 8.5',
+            'presentacion_m3_id'=> '8.5',
+            'color_id'          => 'BLANCO',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Aire medicinal',
+            'nombre_id'            => 'AIRE MEDICINAL',
+            'presentacion_m3_id'=> '6.5',
+            'color_id'          => 'NEGRO-BLANCO',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Oxigeno 1 m3',
+            'nombre_id'            => 'OXIGENO 1M3',
+            'presentacion_m3_id'=> '1',
+            'color_id'          => 'BLANCO',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Nitrogeno',
+            'nombre_id'            => 'NITROGENO',
+            'presentacion_m3_id'=> '5.8',
+            'color_id'          => 'NEGRO',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Oxido nitrico',
+            'nombre_id'            => 'OXIDO NITRICO',
+            'presentacion_m3_id'=> '1.535',
+            'color_id'          => 'VERDE-BLANCO',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Dioxido carbono',
+            'nombre_id'            => 'DIOXIDO CARBONO',
+            'presentacion_m3_id'=> '25',
+            'color_id'          => 'VERDE',
         ]);
         DB::table('tipos')->insert([
-            'nombre' => 'Helontix',
+            'nombre_id'            => 'HELONTIX',
+            'presentacion_m3_id'=> '6.5',
+            'color_id'          => 'CAFE-BLANCO',
         ]);
     }
 }

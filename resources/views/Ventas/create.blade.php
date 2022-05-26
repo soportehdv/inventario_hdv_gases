@@ -87,42 +87,38 @@
                     </table>
                     <script>
                         $('thead').on('click', '.addRow', function(){
-                            var tr = "<tr>"+
-                                        "<th>"+
-                                            "<select class='form-control' name='cliente_id[]' id='select-pendiente' required>"+
-                                                "@foreach ($clientes as $cliente)"+
-                                                    "@if ($cliente->estado === 'pendiente')"+
-                                                        "<option value='{{ $cliente->id }}'>{{ $cliente->nombre }}</option>"+
-                                                    "@endif"+
-                                                "@endforeach"+
-                                            "</select>"+
-                                        "</th>"+
-                                        "<th>"+
-                                            "<select class='form-control' name='stock_id[]' required>"+
-                                                "@foreach ($stocks as $stock)"+
-                                                    "@if ($stock->unidades != 0)"+
-                                                        "<option value='{{ $stock->id }}'>{{ $stock->producto }}</option>"+
-                                                    "@endif"+
-                                                "@endforeach"+
-                                            "</select>"+
-                                        "</th>"+
-                                        "<th>"+
-                                            "<input type='number' min='1' max='1' class='form-control' name='unidades[]' required>"+
-                                        "</th>"+
-                                        "<input type='hidden' class='form-control' name='user[]' value='{{Auth::user()->id}}'required>"+
-                                        "<th><a href='javascript:void(0)' class='btn btn-danger deleteRow'>-</a></th>"+
-                                    "</tr>"
+                            var tr = 
+                            "<tr>"+
+                            "    <th>"+
+                            "        <select class='form-control' name='cliente_id[]' id='select-pendiente' required>"+
+                            "            @foreach ($clientes as $cliente)"+
+                            "                @if ($cliente->entregado != 0)"+
+                            "                    <option value='{{ $cliente->id }}'>{{ $cliente->nombre }}</option>"+
+                            "                @endif"+
+                            "            @endforeach"+
+                            "        </select>"+
+                            "    </th>"+
+                            "    <th>"+
+                            "        <select class='form-control' name='stock_id[]' required>"+
+                            "            @foreach ($stocks as $stock)"+
+                            "                @if ($stock->unidades != 0)"+
+                            "                    <option value='{{ $stock->id }}'>{{ $stock->producto }}</option>"+
+                            "                @endif"+
+                            "            @endforeach"+
+                            "        </select>"+
+                            "    </th>"+
+                            "    <th>"+
+                            "        <input type='number' min='1' max='1' class='form-control' name='unidades[]' required>"+
+                            "    </th>"+
+                            "    <input type='hidden' class='form-control' name='user[]' value='{{Auth::user()->id}}'required>"+
+                            "    <th><a href='javascript:void(0)' class='btn btn-danger deleteRow'>-</a></th>                                "+
+                            "</tr>"
                             $('tbody').append(tr);
                         });
                         $('tbody').on('click', '.deleteRow', function(){
                             $(this).parent().parent().remove();
                         });
                     </script>
-
-
-
-
-
                 </form>
                 <br>
                 <h3 align="center">Pedidos pendientes</h3>
@@ -149,8 +145,7 @@
                                 {{-- </tr> --}}
                             @endif
                         @endforeach
-                        </div>
-                
+                        </div>               
 
             </div>
         </div>
