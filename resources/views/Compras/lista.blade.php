@@ -22,10 +22,11 @@
 
 
     <div class="">
-        <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir nuevo</a>
+        <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir
+            nuevo</a>
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
-            <br>
+                <br>
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ Session::get('alert-' . $msg) }}
@@ -59,7 +60,7 @@
                         <td>{{ $compra->lote }}</td>
                         <td>{{ $compra->fecha_vencimiento }}</td>
                         <td>{{ $compra->serial }}</td>
-                        <td>{{ $compra->registro}}</td>
+                        <td>{{ $compra->registro }}</td>
                         <td>{{ $compra->presentacion }}</td>
                         <td>{{ $compra->color }}</td>
                         <td>{{ $compra->uni }}</td>
@@ -69,6 +70,7 @@
 
                     </tr>
                 @endforeach
+                
 
             </tbody>
         </table>

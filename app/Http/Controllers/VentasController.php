@@ -117,10 +117,11 @@ class VentasController extends Controller
         $stock_id = $request->input('stock_id');
         $cliente_id = $request->input('cliente_id');
         $user_id = $request->input('user');        
+        // dd($cliente_id);
  
             // enviamos varios datos de ventas
             for ($i=0; $i < count($cliente_id); $i++){
-                
+                // dd(count($cliente_id));
                 $stock   = Stock::where('id', $stock_id[$i])->first();
                 $compras = Compras::where('id', $stock_id[$i])->first();
                 // dd($stock->id);
@@ -176,9 +177,9 @@ class VentasController extends Controller
 
             }
            
-            $request->session()->flash('alert-success', 'Entrega realizada con exito!');
-            return redirect()->route('ventas.lista', ['filtro' => 4]);           
         }
+        $request->session()->flash('alert-success', 'Entrega realizada con exito!');
+        return redirect()->route('ventas.lista', ['filtro' => 4]);           
        
     }
 

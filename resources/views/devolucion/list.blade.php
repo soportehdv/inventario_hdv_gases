@@ -46,7 +46,6 @@
                         <th>Ubicacion</th>
                         <th>Estado</th>
                         <th>Bodega</th>
-                        <th>Proveedor</th>
 
 
                         {{-- @if (Auth::user()->rol == "admin")                        
@@ -92,7 +91,6 @@
                                 <td><a href="{{ route('compras.updateProducto.vista', $stoc->id) }}"
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                                 </td>
-                                <td></td>
 
                                 {{-- @if (Auth::user()->rol == "admin")               
                                 <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
