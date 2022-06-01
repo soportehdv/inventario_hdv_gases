@@ -11,13 +11,13 @@
         </div>
 
     </div>
-   
+
 
 @endsection
 
-@section('content')  
-    <div class="container">   
-        <div class="container">            
+@section('content')
+    <div class="container">
+        <div class="container">
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if (Session::has('alert-' . $msg))
                     <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
@@ -48,7 +48,7 @@
                         <th>Bodega</th>
 
 
-                        {{-- @if (Auth::user()->rol == "admin")                        
+                        {{-- @if (Auth::user()->rol == "admin")
                         <th>Acción</th>
                         @endif --}}
 
@@ -71,7 +71,7 @@
                                 @else ()
                                     <td>
                                         <span class="badge badge-pill badge-danger">{{$stoc->estado_ubi}}</span>
-                                    </td>                            
+                                    </td>
                                 @endif
 
 
@@ -92,7 +92,7 @@
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                                 </td>
 
-                                {{-- @if (Auth::user()->rol == "admin")               
+                                {{-- @if (Auth::user()->rol == "admin")
                                 <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
                                         class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
                                 </td>
@@ -111,23 +111,4 @@
 
 
     @endsection
-    <script>
-        $(function() {
-            $('#accordion-container').accordion();
-            $('.breadcrumb').breadcrumb();
-        });
-    </script>
-    {{-- <script type="text/javascript" src="js/jquery.js"></script> --}}
-    <script type="text/javascript">
-    function mostrar(id) {
-        if (id == "Si") {
-            $("#Si").show();
-            $("#No").hide();
-        }
-    
-        if (id == "No") {
-            $("#Si").hide();
-            // $("#No").show();
-        }
-    }
-    </script>
+

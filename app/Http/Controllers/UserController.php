@@ -55,19 +55,21 @@ class UserController extends Controller
     {
 
         //validamos los datos
-        $validate = Validator::make($request->all(), [
+        $validate = request()->validate( [
             'name'      => 'required',
-            'cargo'      => 'required',
-            'email'     => 'required|email|unique:users',
-            'rol'      => 'required',
-            'password'  => 'required',
+            'cargo'     => 'required',
+            'email'     => 'required',
+            'rol'       => 'required',
+            'password'  => ['required','min:6','confirmed'],
+        ],[
+            'name.required'      => 'El campo nombre es obligatorio',
+            'cargo.required'      => 'El campo cargo es obligatorio',
+            'email.required'      => 'El campo correo es obligatorio',
+            'rol.required'      => 'El campo rol es obligatorio',
+            'password.required'  => 'El campo contraseña es obligatorio',
+            'password.min'  => 'La contraseña debe tener al menos 6 caracteres',
+            'password.confirmed'  => 'Las contraseñas no coinciden',
         ]);
-
-        if ($validate->fails()) {
-            $request->session()->flash('alert-danger', 'Error al ingresar usuario');
-
-            return redirect()->back();
-        }
 
         $user = new User;
         $user->name = $request->input('name');
@@ -86,7 +88,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        return view('user/create', [
+        return view('user/edit', [
             'user' => $user
         ]);
     }
@@ -96,20 +98,23 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)->first();
 
-        //validamos los datos
-        $validate = Validator::make($request->all(), [
+         //validamos los datos
+         $validate = request()->validate( [
             'name'      => 'required',
-            'cargo'      => 'required',
+            'cargo'     => 'required',
             'email'     => 'required',
-            'rol'      => 'required',
-            'password'  => 'required',
+            'rol'       => 'required',
+            'password'  => ['required','min:6','confirmed'],
+        ],[
+            'name.required'      => 'El campo nombre es obligatorio',
+            'cargo.required'      => 'El campo cargo es obligatorio',
+            'email.required'      => 'El campo correo es obligatorio',
+            'rol.required'      => 'El campo rol es obligatorio',
+            'password.required'  => 'El campo contraseña es obligatorio',
+            'password.min'  => 'La contraseña debe tener al menos 6 caracteres',
+            'password.confirmed'  => 'Las contraseñas no coinciden',
         ]);
 
-        if ($validate->fails()) {
-            $request->session()->flash('alert-danger', 'Error al ingresar usuario');
-
-            return redirect()->back();
-        }
 
         $user->name = $request->input('name');
         $user->cargo = $request->input('cargo');

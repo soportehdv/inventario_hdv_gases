@@ -19,20 +19,19 @@
         <div class="flexbox-container">
             <div class="small-box bg-red" style="margin-right: 10px;">
                 <div class="inner">
-                      
+
                     @php
-                        $i=0;
+                        $i = 0;
                     @endphp
                     @foreach ($clientes as $cliente)
-                        @if($cliente->estado === 'pendiente')                    
+                        @if ($cliente->estado === 'pendiente')
                             @php
                                 // $i= $loop->count
-                                $i=$i+1
+                                $i = $i + 1;
                             @endphp
                         @endif
-
                     @endforeach
-                    <h3>{{$i}}</h3>
+                    <h3>{{ $i }}</h3>
 
                     <p>Pedidos</p>
                 </div>
@@ -47,18 +46,17 @@
             <div class="small-box bg-info" style="margin-right: 10px;">
                 <div class="inner">
                     @php
-                        $j=0;
+                        $jj = 0;
                     @endphp
                     @foreach ($stock as $stoc)
-                        @if($stoc->status != 0)                    
+                        @if ($stoc->status === 1)
                             @php
                                 // $i= $loop->count
-                                $j=$j+1
+                                $jj = $jj + 1;
                             @endphp
                         @endif
-
                     @endforeach
-                    <h3>{{$j}}</h3>
+                    <h3>{{ $jj }}</h3>
                     <p>Stock</p>
                 </div>
                 <div class="icon">
@@ -72,43 +70,155 @@
             <div class="small-box bg-warning" style="margin-right: 10px;">
                 <div class="inner">
                     @php
-                        $k=0;
+                        $k = 0;
                     @endphp
                     @foreach ($stock as $stoc)
-                        @if($stoc->estado_id === 3)                    
+                        @if ($stoc->estado_id === 3)
                             @php
                                 // $i= $loop->count
-                                $k=$k+1
+                                $k = $k + 1;
                             @endphp
                         @endif
-
                     @endforeach
-                    <h3>{{$k}}</h3>
+                    <h3>{{ $k }}</h3>
                     <p>En servicio</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-fw fa-dolly"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ route('stock.list') }}" class="small-box-footer">
                     Ver <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
-                <style>
-                    .flexbox-container {
-                        display: -ms-flex;
-                        display: -webkit-flex;
-                        display: flex;
-                    }
+        <br>
+        <br>
+        <h2 align="center"><b>Cantidad en tipos</b></h2>
+        <table class="table table-striped table-res">
+            <thead align="center">
+                <tr>
+                    <th>OXIGENO 8.5</th>
+                    <th>AIRE MEDICINAL</th>
+                    <th>OXIGENO 1M3</th>
+                    <th>NITROGENO</th>
+                    <th>OXIDO NITRICO</th>
+                    <th>DIOXIDO CARBONO</th>
+                    <th>HELONTIX</th>
 
-                    .flexbox-container>div {
-                        width: 33.3%;
-                        padding: 10px;
-                    }
+                </tr>
+            </thead>
+            <tbody align="center">
+                <tr>
+                    <th>
+                        @php
+                            $a = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 1)
+                                @php
+                                    $a = $a + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $a }}</h3>
+                    </th>
+                    <td>
+                        @php
+                            $b = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 2)
+                                @php
+                                    $b = $b + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $b }}</h3>
+                    </td>
+                    <td>
+                        @php
+                            $c = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 3)
+                                @php
+                                    $c = $c + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $c }}</h3>
+                    </td>
+                    <td>
+                        @php
+                            $d = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 4)
+                                @php
+                                    $d = $d + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $d }}</h3>
+                    </td>
+                    <td>
+                        @php
+                            $e = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 5)
+                                @php
+                                    $e = $e + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $e }}</h3>
+                    </td>
+                    <td>
+                        @php
+                            $f = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 6)
+                                @php
+                                    $f = $f + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $f }}</h3>
+                    </td>
+                    <td>
+                        @php
+                            $g = 0;
+                        @endphp
+                        @foreach ($compras as $compra)
+                            @if ($compra->tipo === 7)
+                                @php
+                                    $g = $g + 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        <h3>{{ $g }}</h3>
+                    </td>
+                </tr>
 
-                    
-                </style>
 
-            
+            </tbody>
+        </table>
+        <style>
+            .flexbox-container {
+                display: -ms-flex;
+                display: -webkit-flex;
+                display: flex;
+            }
 
-        @endsection
+            .flexbox-container>div {
+                width: 33.3%;
+                padding: 10px;
+            }
+
+        </style>
+
+    </div>
+
+@endsection

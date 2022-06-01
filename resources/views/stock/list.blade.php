@@ -100,7 +100,7 @@
                         <th>Fecha_ingreso</th>
                         <th>Vencimiento</th>
                         <th>Un.</th>
-                        <th>Lote</th>
+                        {{-- <th>Lote</th> --}}
                         <th>Tipo</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>
@@ -116,12 +116,12 @@
                     @foreach ($stock as $stoc)
                         <tr>
                             <th>{{ $stoc->id }}</th>
-                            <td>{{ $stoc->serial }}</td>
+                            <td style="text-transform: uppercase">{{ $stoc->serial }}</td>
                             <td>{{ $stoc->created_at }}</td>
                             <td>{{ $stoc->fecha_vencimiento }}</td>
                             <td>{{ $stoc->uni }}</td>
-                            <td>{{ $stoc->lote }}</td>
-                            <td>{{ $stoc->tipo }}</td>
+                            {{-- <td>{{ $stoc->lote }}</td> --}}
+                            <td>{{ $stoc->tipos_n }}</td>
                             @if ($stoc->estado_ubi === 'Bodega')
                                 <td>
                                     <span class="badge badge-pill badge-success">{{ $stoc->estado_ubi }}</span>
@@ -146,7 +146,7 @@
                                     <span class="badge badge-pill badge-warning">En servicio</span>
                                 </td>
                             @endif
-                            @if (Auth::user()->rol == 'admin')                                
+                            @if (Auth::user()->rol == 'admin')
                                 <td>
                                     <a href="{{ route('compras.update.Car', $stoc->id) }}" onclick="return confirm('¿Esta seguro que dese entregar al proveedor el cilindo con seria: ?{{$stoc->serial}}')"
                                         class="btn btn-primary mb-2"><i class="fas fa-shipping-fast"></i></a>
@@ -159,7 +159,7 @@
                 </tbody>
             </table>
             {{ $stock->links() }}
-            
+
 
         </div>
 

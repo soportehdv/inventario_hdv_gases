@@ -64,13 +64,13 @@
                         </td>
                         <td>
                             {{-- <a href="{{route('detalles.descargar.factura',$proveedor->id)}}" class="btn btn-primary mb-2"><i class="fas fa-edit"></i> PDF</a> --}}
-                            <form method="GET" action="{{ route('detalles.descargar.factura',$proveedor->id) }}">
+                            <form method="GET" action="{{ route('detalles.descargar.factura',$proveedor->id) }}" target="_blank">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <select class="form-control" name="tipo" required>
                                             @foreach ($tipo as $tip)
-                                                <option value="{{ $tip->id }}">{{ $tip->nombre }}</option>
+                                                <option value="{{ $tip->id }}">{{ $tip->nombre_id }}</option>
                                             @endforeach
                                         </select>
                                     </div>

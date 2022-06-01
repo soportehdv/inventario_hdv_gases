@@ -18,10 +18,8 @@ class CreateComprasTable extends Migration
 
             $table->string('serial');
             $table->string('registro');
-            $table->decimal('presentacion');
-            $table->string('color');
 
-            
+
             $table->integer('estado_id')->unsigned();
             $table->integer('proveedor_id')->unsigned();
             $table->integer('tipo');

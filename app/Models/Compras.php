@@ -11,11 +11,9 @@ class Compras extends Model
 
     protected $fillable = [
         'serial',
-        'presentacion',
         'registro',
-        'color',
 
-        
+
         'estado_id',
         'estado_ubi',
         'proveerdor_id',

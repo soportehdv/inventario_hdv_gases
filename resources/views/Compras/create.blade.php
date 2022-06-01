@@ -16,7 +16,7 @@
 
 
     <div class="container">
-        <br>
+        {{-- <br> --}}
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <div class="alert {{ 'alert-' . $msg }} alert-dismissable">
@@ -74,7 +74,7 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <label for="">N° Remisión </label>
                                 <select id="proveedor" name="proveedor_id" class="form-control" required>
                                     <option value="">N° de remision</option>
@@ -86,8 +86,7 @@
                                     @endforeach
                                 </select>
                             </div>
-
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <label for="">Tipos </label>
                                 <select id="tipo" name="tipo" class="form-control" required>
                                     <option value="">Seleccioné un tipo</option>
@@ -97,46 +96,28 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- scripts para selects --}}
-                            <script>
-                                $("#select").onchange(function() {
-                                    $.ajax({
-                                        url: "provider/" + id,
-                                        type: 'GET',
-                                        success: function(result) {
-                                            $("#address").val(result.address);
-                                            $("#email").html(result.email);
-                                        }
-                                    })
-
-                                });
-                            </script>
-
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <label for="">Lote </label>
                                 <input type="text" class="form-control upper" name="lote" value="" placeholder="Lote"
                                     required>
                             </div>
-                            <div class="col-sm-3">
-                                <label for="exampleInputEmail1">Fecha Vencimiento </label>
-                                <input type="date" class="form-control upper" name="fecha_vencimiento" value="" required>
-                            </div>
-
-
                         </div>
                         <br>
 
 
                         <div class="row">
-
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
+                                <label for="exampleInputEmail1">Fecha Vencimiento </label>
+                                <input type="date" class="form-control upper" name="fecha_vencimiento" value="" required>
+                            </div>
+                            <div class="col-sm-4">
                                 <label for="exampleInputEmail1">Serial </label>
                                 <input type="text" autocomplete="on" class="form-control upper" name="serial"
                                     value="{{ isset($producto) ? $producto->serial : '' }}" aria-describedby="emailHelp"
                                     placeholder="Serial" required>
                                 <ul id="lista_id"></ul>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <label for="">Registro sanitario </label>
                                 <input type="text" class="form-control upper" name="registro"
                                     value="{{ isset($producto) ? $producto->registro : '' }}"
@@ -148,44 +129,6 @@
                                     <input type="hidden" class="form-control upper" name="contador"
                                         value="{{ $pro->contador }}">
                                 @endforeach
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="">Presentación (m3) </label>
-                                <input type="number" class="form-control upper" step="0.1" name="presentacion"
-                                    value="{{ isset($producto) ? $producto->presentacion : '' }}"
-                                    placeholder="Presentación" required>
-
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="">Color </label>
-                                <input type="text" class="form-control upper" name="color"
-                                    value="{{ isset($producto) ? $producto->color : '' }}" placeholder="Color" required>
-                            </div>
-
-
-
-                        </div>
-                        {{-- <br> --}}
-                        <div class="row">
-
-
-
-                            <div class="col-sm-3">
-                                <label for="exampleInputEmail1">Cantidades </label>
-                                <input type="number" min="1" max="1" class="form-control upper" name="unidades" value="1"
-                                    placeholder="Unidades" required disabled>
-
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="">Estado </label>
-                                <select id="estado_id" name="estado_id" class="form-control" required>
-                                    <option value="1" selected disabled>Lleno</option>
-                                    {{-- @foreach ($estado as $estad)
-                                        <option value="{{ $estad->id }}">
-                                            {{ $estad->estado }}</option>
-                                    @endforeach --}}
-                                </select>
                             </div>
                         </div>
 
@@ -341,17 +284,9 @@
                             </div>
 
                         </div>
-                        <br>
-
-
-
-
                     </div>
-
-
-                    <br>
-                    <input class="btn btn-success" type="submit" value="Ingresar" />
-
+                    <input class="btn btn-success float-right" type="submit" value="Ingresar" />
+                    <a class="btn btn-danger float-left" href="{{ URL::previous() }}">Atras</a>
                 </form>
 
 
@@ -366,8 +301,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-<script>
+{{-- <script>
     $('.selectpicker').selectpicker({
         style: 'btn-default'
     });
-</script>
+</script> --}}
