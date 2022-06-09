@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Compras;
 use App\Models\Clientes;
+use App\Models\Tipo;
 use App\Models\Ubicacion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -18,13 +19,14 @@ class StockController extends Controller
 {
     public function getStock(Request $request)
     {
-        
+
 
         if ($request->get('filtro') == null) { //Todas las busquedas
-            $query= trim($request->get('search'));            
+            $query= trim($request->get('search'));
             $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
             ->join('estados', 'estados.id', '=', 'stock.estado_id')
-            ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'compras.tipo as tipo', 'estados.estado as estados')
+            ->join('tipos', 'tipos.id', '=', 'stock.tipo')
+            ->select('stock.*','compras.serial as serial', 'compras.lote as lote','tipos.nombre_id as tipos_n', 'compras.tipo as tipo', 'estados.estado as estados')
             ->where('compras.serial','LIKE', '%' . $query . '%')
             ->where('compras.status','LIKE', '%' . 1 . '%')
             // ->get();
@@ -39,7 +41,7 @@ class StockController extends Controller
                     $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
                     ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
-                    ->orderby('stock.created_at', 'asc')                
+                    ->orderby('stock.created_at', 'asc')
                     // ->get();
                     ->paginate(10);
 
@@ -52,15 +54,15 @@ class StockController extends Controller
                     $stock = Stock::join('compras', 'compras.id', '=', 'stock.compra_id')
                     ->join('estados', 'estados.id', '=', 'stock.estado_id')
                     ->select('stock.*','compras.serial as serial', 'compras.lote as lote', 'estados.estado as estados')
-                    ->orderby('stock.created_at', 'desc')                
+                    ->orderby('stock.created_at', 'desc')
                     // ->get();
                     ->paginate(10);
 
                     return view('stock/list', [
                         'stock' => $stock
                     ]);
-        } 
-        
+        }
+
     }
     public function fechaVista(Request $request){
         $start = Carbon::parse($request->get('fecha_inicial'));

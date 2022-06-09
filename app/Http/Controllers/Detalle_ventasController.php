@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Detalle_ventas;
+use PDF;
+use App\Models\Tipo;
 use App\Models\Ventas;
 use App\Models\Compras;
 use App\Models\Proveedores;
-use PDF;
+use Illuminate\Http\Request;
+use App\Models\Detalle_ventas;
 
 
 
@@ -34,6 +35,7 @@ class Detalle_ventasController extends Controller
 
     public function imprimirFactura(Request $request, $venta_id)
     {
+        // dd($request->all());
         $ti= trim($request->get('tipo'));
         $proveedor = Proveedores::where('id', $venta_id)->first();
 
@@ -42,15 +44,19 @@ class Detalle_ventasController extends Controller
             ->get();
         //var_dump('dd');die();
 
-        $query= trim($proveedor->id);            
+        $tipo = Tipo::where('id', $ti)->first();
+        // dd($tipo->nombre_id);
+
+        $query= trim($proveedor->id);
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->join('tipos', 'tipos.id', '=', 'compras.tipo')
+                ->select('compras.serial as producto', 'compras.registro as sanitario','tipos.color_id as color','tipos.presentacion_m3_id as presentacion', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
                 ->where('compras.proveedor_id','LIKE', '%' . $query . '%')
                 ->where('compras.tipo','LIKE', '%' . $ti . '%')
                 ->orderBy('id', 'asc')
                 ->get();
-            
+
             $conteo = count($compras);
                 // comentado para pruebas
                 // ->paginate(22);
@@ -59,12 +65,13 @@ class Detalle_ventasController extends Controller
         $venta = Ventas::where('id', $venta_id)->first();
 
         $pdf = PDF::loadView('factura', [
-            'compras' => $compras,
-            'venta' =>  $venta,
+            'compras'  => $compras,
+            'venta'    => $venta,
             'detalles' => $detalle,
-            'search' => $query,
-            'conteo' => $conteo,
-            'proveedor' =>$proveedor,
+            'search'   => $query,
+            'conteo'   => $conteo,
+            'proveedor'=> $proveedor,
+            'tipo'     => $tipo,
 
         ])->setPaper('letter', 'landscape');
 
@@ -80,7 +87,7 @@ class Detalle_ventasController extends Controller
             ->get();
         //var_dump('dd');die();
 
-        $query= trim($proveedor->id);            
+        $query= trim($proveedor->id);
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
                 ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
@@ -112,15 +119,16 @@ class Detalle_ventasController extends Controller
             ->get();
         //var_dump('dd');die();
 
-        $query= trim($proveedor->id);            
+        $query= trim($proveedor->id);
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select('compras.serial as producto', 'compras.registro as sanitario', 'compras.presentacion as present', 'compras.color as color', 'estados.estado as estado','proveedores.remision as remision', 'compras.*')
+                ->join('tipos', 'tipos.id', '=', 'compras.tipo')
+                ->select('compras.serial as producto', 'compras.registro as sanitario', 'estados.estado as estado','proveedores.remision as remision','tipos.presentacion_m3_id as presentacion', 'tipos.color_id as color', 'compras.*')
                 ->where('compras.proveedor_id','LIKE', '%' . $query . '%')
                 ->orderBy('id', 'asc')
-                ->get();
+                // ->get();
                 // comentado para pruebas
-                // ->paginate(22);
+                ->paginate(10);
 
         $venta = Ventas::where('id', $venta_id)->first();
 

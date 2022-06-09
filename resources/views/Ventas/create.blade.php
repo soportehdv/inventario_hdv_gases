@@ -38,11 +38,17 @@
                     @csrf
                     <div class="row">
                         <div class="col-sm-3">
-                            <button type="submit" class="btn btn-success mt-3"><i class="fa fa-reply-all"
+                            <button type="submit" class="btn btn-success mt-3 float-left"><i class="fa fa-reply-all"
                                     aria-hidden="true"></i> Finalizar entrega</button>
+
                         </div>
-                        
+
+                        <div class="col-sm-9">
+
+                            <a class="btn btn-danger mt-3 float-right" href="{{ URL::previous() }}">Atras</a>
+                        </div>
                     </div>
+
                     <br>
 
 
@@ -79,7 +85,7 @@
                                     <input type="number" min="1" max="1" class="form-control" name="unidades[]" required>
                                 </th>
                                 <input type="hidden" class="form-control" name="user[]" value='{{Auth::user()->id}}'required>
-                                <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></th>                                
+                                <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></th>
                             </tr>
 
                         </tbody>
@@ -87,7 +93,7 @@
                     </table>
                     <script>
                         $('thead').on('click', '.addRow', function(){
-                            var tr = 
+                            var tr =
                             "<tr>"+
                             "    <th>"+
                             "        <select class='form-control' name='cliente_id[]' id='select-pendiente' required>"+
@@ -123,16 +129,16 @@
                 <br>
                 <h3 align="center">Pedidos pendientes</h3>
 
-                        <div class="row" style="font-weight: 700">
+                        <div class="row" style="font-weight: 700" align="center">
                             <div class="col-sm-3">ID</div>
                             <div class="col-sm-3">Responsable</div>
                             <div class="col-sm-3">Producto</div>
                             <div class="col-sm-3">Cantidad</div>
                         </div>
-                       
-                    
-                        <div class="row">
-                    
+
+
+                        <div class="row" align="center">
+
                         @foreach ($clientes as $cliente)
                             @if ($cliente->entregado != 0)
                                 {{-- <tr> --}}
@@ -145,7 +151,7 @@
                                 {{-- </tr> --}}
                             @endif
                         @endforeach
-                        </div>               
+                        </div>
 
             </div>
         </div>

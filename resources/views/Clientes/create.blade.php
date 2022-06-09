@@ -40,7 +40,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                             </div>
                         </div>
 
-                    
+
                     <div class="col-sm-4">
                         <label for="">Ubicación </label>
                         <select id="departamento" name="departamento" class="form-control" required>
@@ -62,7 +62,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                 </div>
 
                     <div class="row">
-                        
+
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -88,7 +88,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                         <div class="col-sm-4">
                             <label for="">Tipo de gas </label>
                             <select id="tipo" name="tipo" class="form-control" required>
-                                <option value="">Seleccioné un tipo de gas</option>        
+                                <option value="">Seleccioné un tipo de gas</option>
                                 <option value="oxigeno_8.5">Oxigeno 8.5</option>
                                 <option value="aire_medicinal">Aire medicinal</option>
                                 <option value="oxigeno_1m3">Oxigeno 1m3</option>
@@ -98,7 +98,7 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                                 <option value="helontix">Helontix</option>
                             </select>
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
@@ -118,9 +118,11 @@ $array = ['Coordinador', 'Camillero', 'Emfermero', 'administracion', 'otros'];
                                     rows="4"></textarea>
                             </div>
                         </div>
-                        
+
                     </div>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="submit" class="btn btn-primary float-right">Agregar</button>
+                    <a class="btn btn-danger float-left" href="{{ URL::previous() }}">Atras</a>
+
                 </form>
 
             </div>

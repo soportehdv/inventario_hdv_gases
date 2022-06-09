@@ -21,7 +21,7 @@
 
 
 
-    <div class="">
+    <div class="container">
         <a href="{{ route('compras.create.vista') }}" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> Añadir
             nuevo</a>
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -57,10 +57,10 @@
                         <th>{{ $compra->id }}</th>
                         <td>{{ $compra->remision }}</td>
                         <td>{{ $compra->tipos }}</td>
-                        <td>{{ $compra->lote }}</td>
+                        <td style="text-transform: uppercase">{{ $compra->lote }}</td>
                         <td>{{ $compra->fecha_vencimiento }}</td>
-                        <td>{{ $compra->serial }}</td>
-                        <td>{{ $compra->registro }}</td>
+                        <td style="text-transform: uppercase">{{ $compra->serial }}</td>
+                        <td style="text-transform: uppercase">{{ $compra->registro }}</td>
                         <td>{{ $compra->presentacion }}</td>
                         <td>{{ $compra->color }}</td>
                         <td>{{ $compra->uni }}</td>
@@ -70,7 +70,7 @@
 
                     </tr>
                 @endforeach
-                
+
 
             </tbody>
         </table>

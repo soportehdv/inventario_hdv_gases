@@ -6,30 +6,14 @@
     <div class="card-header">
       <h2>Proveedores</h2>
     </div>
-    
+
   </div>
-  @if ($search)
-        <div class="alert alert-primary" role="alert">
-            Los resultados para su busqueda '{{ $search }}' son:
-            <button type="button" class="close" data-dismiss="alert" style="color:white">&times;</button>
-        </div>
-    @endif
-    
+
 @endsection
 
 @section('content')
 
 <div class="container">
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
-      @if(Session::has('alert-' . $msg)) 
-        <div class="alert {{'alert-' . $msg}} alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          {{ Session::get('alert-' . $msg) }} 
-        </div>
-        
-        @endif 
-    @endforeach 
-    <br>
     <table class="table table-striped table-res">
         <thead>
           <tr>
@@ -60,7 +44,7 @@
                 <td>{{ $compra->fecha_vencimiento }}</td>
                 <td>{{ $compra->producto }}</td>
                 <td>{{ $compra->sanitario }}</td>
-                <td>{{ $compra->present }}</td>
+                <td>{{ $compra->presentacion }}</td>
                 <td>{{ $compra->color }}</td>
                 <td>{{ $compra->limpieza }}</td>
                 <td>{{ $compra->sello }}</td>
@@ -75,5 +59,7 @@
           @endforeach
         </tbody>
       </table>
+      {{ $compras->links() }}
+
 </div>
 @endsection

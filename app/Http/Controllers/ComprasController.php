@@ -24,21 +24,21 @@ class ComprasController extends Controller
         {
             $this->middleware('auth');
             $this->middleware('admin');
-    
+
         }
 
     public function getCompras(Request $request)
     {
         if($request){
 
-            $query= trim($request->get('search'));            
+            $query= trim($request->get('search'));
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('tipos', 'tipos.id', '=', 'compras.tipo')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select(  'estados.estado as estado','proveedores.remision as remision', 'tipos.nombre as tipos', 'compras.*')
+                ->select('estados.estado as estado','proveedores.remision as remision', 'tipos.nombre_id as tipos','tipos.presentacion_m3_id as presentacion', 'tipos.color_id as color', 'compras.*')
                 ->where('serial','LIKE', '%' . $query . '%')
                 ->where('status','LIKE', '%' . 1 . '%')
-                ->orderBy('id', 'asc')
+                ->orderBy('id', 'desc')
                 // ->get();
                 // comentado para pruebas
                 ->paginate(10);
@@ -56,7 +56,7 @@ class ComprasController extends Controller
         $Ubicacion = Ubicacion::all();
         $tipo = Tipo::all();
 
-        
+
 
         return view('Compras/create', [
             'estado' => $estado,
@@ -73,11 +73,8 @@ class ComprasController extends Controller
 
         //validamos los datos
         $validate = Validator::make($request->all(), [
-            'unidades'      => 'required',
             'serial'      => 'required',
-            'presentacion'      => 'required',
             'registro'      => 'required',
-            'color'      => 'required',
 
         ]);
 
@@ -86,22 +83,20 @@ class ComprasController extends Controller
 
             return redirect()->back();
         }
-        
+
 
         $Compras = new Compras();
 
         $Compras->serial = $request->input('serial');
-        $Compras->presentacion = $request->input('presentacion');
         $Compras->registro = $request->input('registro');
-        $Compras->color = $request->input('color');
 
-        
-        $Compras->estado_id =  $request->input('estado_id');
+
+        $Compras->estado_id =  1;
         $Compras->proveedor_id =  $request->input('proveedor_id');
         $Compras->tipo =  $request->input('tipo');
         $Compras->fecha_vencimiento = $request->input('fecha_vencimiento');
-        $Compras->unidades = $request->input('unidades');
-        $Compras->uni = $request->input('unidades');
+        $Compras->unidades = 1;
+        $Compras->uni = 1;
         $Compras->lote = $request->input('lote');
         $Compras->limpieza = $request->input('limpieza');
         $Compras->sello = $request->input('sello');
@@ -125,18 +120,18 @@ class ComprasController extends Controller
         //Guardamos en el stock
 
         $stock = new Stock();
-        $stock->estado_id =  $request->input('estado_id');
+        $stock->estado_id =  1;
         $stock->fecha_vencimiento = $request->input('fecha_vencimiento');
-        $stock->unidades = $request->input('unidades');     
-        $stock->uni = $request->input('unidades');     
+        $stock->unidades = 1;
+        $stock->uni = 1;
         $stock->tipo =  $request->input('tipo');
         $stock->compra_id = $Compras->id;
 
-        $Compras->status = 1;
+        $stock->status = 1;
 
         $stock->save();
 
-        
+
         $proveedores = Proveedores::where('id', $request->input('proveedor_id'))->first();
         $proveedores->contador = $request->input('contador') + 1;
         $proveedores->save();
@@ -181,9 +176,7 @@ class ComprasController extends Controller
         //validamos los datos
         // $Compras = new Compras();
         $Compras->serial = $request->input('serial');
-        $Compras->presentacion = $request->input('presentacion');
         $Compras->registro = $request->input('registro');
-        $Compras->color = $request->input('color');
 
         $Compras->estado_id =  $request->input('estado_id');
         $Compras->proveedor_id =  $request->input('proveedor_id');
@@ -255,7 +248,7 @@ class ComprasController extends Controller
         }
 
         //validamos los datos
-        
+
         $Compras->estado_id =  $request->input('estado_id');
         $Compras->estado_ubi =  $request->input('ubicacion');
         $Compras->unidades =  $Compras->unidades + 1;
@@ -278,7 +271,7 @@ class ComprasController extends Controller
         $stock   = Stock  ::where('id', $id)->first();
 
         //validamos los datos
-        
+
         $compras->status =  0;
         $compras->save();
 

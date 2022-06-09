@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <style type="text/css">
+    <title>N° {{ $proveedor->nombre }}</title>
+    <style>
         body,
         div,
         table,
@@ -67,9 +65,9 @@
 
         /** Defina ahora los márgenes reales de cada página en el PDF **/
         body {
-            margin-top: 4cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-top: 4.1cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
             margin-bottom: 6cm;
         }
 
@@ -80,7 +78,6 @@
             left: 1cm;
             right: 1cm;
             height: 4cm;
-
             /** Estilos extra personales **/
         }
 
@@ -91,8 +88,11 @@
             left: 1cm;
             right: 1cm;
             height: 6cm;
-
             /** Estilos extra personales **/
+        }
+        main{
+            left: 1cm;
+            right: 1cm;
         }
 
         .center-ajuste {
@@ -101,12 +101,10 @@
             line-height: 150%;
         }
 
-
         .rotate {
             text-align: center;
             /* white-space: normal; */
             white-space: nowrap;
-
             vertical-align: middle;
             width: 3em;
             height: 7em;
@@ -143,7 +141,7 @@
 <body>
     {{-- HEADER PDF --}}
     {{-- <header>
-        
+
     </header> --}}
     <header>
         <table style="width: 100%">
@@ -158,7 +156,8 @@
                     <img src="http://www.hdv.gov.co/images/logos/logoHDV1.png" width="158" height="50">
                 </td>
                 <td style="width:65%; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-                    align="center" valign=middle><b>HOSPITAL DEPARTAMENTAL DE VILLAVICENCIO E.S.E. </b></td>
+                    align="center" valign=middle><b style="font-size: 10px">HOSPITAL DEPARTAMENTAL DE VILLAVICENCIO
+                        E.S.E. </b></td>
                 <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     align="center" valign=middle><b>CÓDIGO FR-SF-149</b></td>
                 <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
@@ -168,26 +167,37 @@
             </tr>
             <tr>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
-                    align="center" valign=middle><b>FORMATO DE RECEPCIÓN TECNICA DE GASES </b></td>
+                    align="center" valign=middle><b style="font-size: 10px">FORMATO DE RECEPCIÓN TECNICA DE GASES </b>
+                </td>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     colspan=3 align="center" valign=middle><b>FECHA DE VIGENCIA 19/01/2021</b></td>
             </tr>
         </table>
         <br>
-        <div style="left;"><b>FECHA (dd-mm-aaaa): </b> <b style="text-decoration:underline">{{ $proveedor->created_at }}</b></div>
+        <div style="left;"><b style="font_size:10px">FECHA (dd-mm-aaaa): </b> <b
+                style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $proveedor->created_at }}</b>
+        </div>
         <br>
         <table style="width: 100%">
             <tr>
-                <td><b>GAS MEDICINAL </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: _______________</td>
-                <td><b>N° DE CILINDROS: </b><b style="text-decoration:underline">{{ $conteo }}</b></td>
-                <td><b>EMPRESA QUE ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->nombre }}</b></td>
-                <td><b>NOMBRE DE QUIEN ENTREGA: </b><b style="text-decoration:underline">{{ $proveedor->persona }}</b></td>
+                <td><b style="font_size:10px">GAS MEDICINAL </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<b
+                        style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $tipo->nombre_id }}</b>
+                </td>
+                <td><b style="font_size:10px">N° DE CILINDROS: </b><b
+                        style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $conteo }}</b>
+                </td>
+                <td><b style="font_size:10px">EMPRESA QUE ENTREGA: </b><b
+                        style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $proveedor->nombre }}</b>
+                </td>
+                <td><b style="font_size:10px">NOMBRE DE QUIEN ENTREGA: </b><b
+                        style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $proveedor->persona }}</b>
+                </td>
             </tr>
         </table>
     </header>
 
     <footer>
-        <table style="width: 100%">
+        <table style="width: 100%;">
 
             <tr>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
@@ -370,6 +380,13 @@
                     align="center"><br></td>
             </tr>
         </table>
+        <div style="position:fixed; bottom: 0cm; right: 2cm;left: 2cm;">
+            <p>
+                C=CONFORME
+                <br>
+                NC=NO CONFORME
+            </p>
+        </div>
     </footer>
 
     <br>
@@ -483,7 +500,7 @@
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle>{{ $compra->sanitario }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
-                            align="center" valign=middle>{{ $compra->present }}</td>
+                            align="center" valign=middle>{{ $compra->presentacion }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
                             align="center" valign=middle>{{ $compra->color }}</td>
                         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000;"
@@ -514,15 +531,12 @@
                 @endforeach
             </tbody>
         </table>
-
     </main>
     {{-- FOOTER PDF --}}
     {{-- <footer>
-        
+
     </footer> --}}
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
 </html>
