@@ -5,14 +5,8 @@
     <div class="card" style="height:4em;">
         <div class="card-header">
             <h2 style="float:left">Devoluciones</h2>
-
-
-
         </div>
-
     </div>
-
-
 @endsection
 
 @section('content')
@@ -26,15 +20,8 @@
                     </div>
                 @endif
             @endforeach
-            {{-- <div>
-                <div align="justify"><b><h3>¿ A donde se va a devolver el producto ?</h3></b></div>
-                <input type="radio" name="paciente" value="Si" onChange="mostrar(this.value);"> Al almacen&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="paciente" value="No" onChange="mostrar(this.value);"> Al proveedor
-            </div> --}}
             <br>
-            {{-- <table class="table table-res table-striped" id="Si" style="display: none;"> --}}
             <table class="table table-res table-striped">
-
                 <thead>
                     <tr>
                         <th>id</th>
@@ -46,12 +33,6 @@
                         <th>Ubicacion</th>
                         <th>Estado</th>
                         <th>Bodega</th>
-
-
-                        {{-- @if (Auth::user()->rol == "admin")
-                        <th>Acción</th>
-                        @endif --}}
-
                     </tr>
                 </thead>
                 <tbody>
@@ -73,8 +54,6 @@
                                         <span class="badge badge-pill badge-danger">{{$stoc->estado_ubi}}</span>
                                     </td>
                                 @endif
-
-
                                 @if ($stoc->estados === 'Vacio')
                                     <td>
                                         <span class="badge badge-pill badge-danger">Vacio</span>
@@ -91,13 +70,6 @@
                                 <td><a href="{{ route('compras.updateProducto.vista', $stoc->id) }}"
                                     class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                                 </td>
-
-                                {{-- @if (Auth::user()->rol == "admin")
-                                <td><a href="{{ route('compras.update.vista', $stoc->id) }}"
-                                        class="btn btn-primary mb-2"><i class="fas fa-edit"></i> Editar</a>
-                                </td>
-                                @endif --}}
-
                             </tr>
                         @endif
                     @endforeach
