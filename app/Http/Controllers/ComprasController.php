@@ -35,13 +35,15 @@ class ComprasController extends Controller
             $compras = Compras::join('estados', 'estados.id', '=', 'compras.estado_id')
                 ->join('tipos', 'tipos.id', '=', 'compras.tipo')
                 ->join('proveedores', 'proveedores.id', '=', 'compras.proveedor_id')
-                ->select('estados.estado as estado','proveedores.remision as remision', 'tipos.nombre_id as tipos','tipos.presentacion_m3_id as presentacion', 'tipos.color_id as color', 'compras.*')
+                ->select('estados.estado as estado','proveedores.remision as remision', 'tipos.nombre_id as tipos','tipos.presentacion_m3_id as presen', 'tipos.color_id as col', 'compras.*')
                 ->where('serial','LIKE', '%' . $query . '%')
                 ->where('status','LIKE', '%' . 1 . '%')
                 ->orderBy('id', 'desc')
                 // ->get();
                 // comentado para pruebas
                 ->paginate(10);
+
+                // dd($compras);
 
             return view('compras/lista', [
                 'compras' => $compras,

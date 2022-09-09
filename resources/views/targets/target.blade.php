@@ -24,7 +24,7 @@
                         $i = 0;
                     @endphp
                     @foreach ($clientes as $cliente)
-                        @if ($cliente->estado === 'pendiente')
+                        @if ($cliente->entregado === 0 )
                             @php
                                 // $i= $loop->count
                                 $i = $i + 1;
