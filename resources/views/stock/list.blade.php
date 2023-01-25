@@ -100,7 +100,6 @@
                         <th>Fecha_ingreso</th>
                         <th>Vencimiento</th>
                         <th>Un.</th>
-                        {{-- <th>Lote</th> --}}
                         <th>Tipo</th>
                         <th>Ubicacion</th>
                         <th>Estado</th>

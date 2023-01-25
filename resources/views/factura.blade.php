@@ -175,7 +175,7 @@
         </table>
         <br>
         <div style="left;"><b style="font_size:10px">FECHA (dd-mm-aaaa): </b> <b
-                style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ $proveedor->created_at }}</b>
+                style="text-decoration:underline; font_size:11px; text-transform: uppercase">{{ \Carbon\Carbon::parse($proveedor->created_at)->format('d/m/Y') }}</b>
         </div>
         <br>
         <table style="width: 100%">

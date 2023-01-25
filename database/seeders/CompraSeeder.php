@@ -34,7 +34,7 @@ class CompraSeeder extends Seeder
             'estandar' => "C",
             'eti_lote' => "C",
             'integridad' => "C",
-            'aprobado' => "C",
+            'aprobado' => "X",
             'rechazado' => "",
             'status' => 1,
 
