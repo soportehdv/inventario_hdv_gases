@@ -98,30 +98,41 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)->first();
 
-         //validamos los datos
+        if ($request->input('password') != null) {
+            //validamos los datos
+            $validate = request()->validate( [
+                'password'  => ['required','min:6','confirmed'],
+            ],[
+                'password.required'  => 'El campo contraseña es obligatorio',
+                'password.min'  => 'La contraseña debe tener al menos 6 caracteres',
+                'password.confirmed'  => 'Las contraseñas no coinciden',
+            ]);
+
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+        }
+        else{
+            //validamos los datos
          $validate = request()->validate( [
             'name'      => 'required',
             'cargo'     => 'required',
             'email'     => 'required',
             'rol'       => 'required',
-            'password'  => ['required','min:6','confirmed'],
         ],[
             'name.required'      => 'El campo nombre es obligatorio',
             'cargo.required'      => 'El campo cargo es obligatorio',
             'email.required'      => 'El campo correo es obligatorio',
             'rol.required'      => 'El campo rol es obligatorio',
-            'password.required'  => 'El campo contraseña es obligatorio',
-            'password.min'  => 'La contraseña debe tener al menos 6 caracteres',
-            'password.confirmed'  => 'Las contraseñas no coinciden',
         ]);
 
 
         $user->name = $request->input('name');
         $user->cargo = $request->input('cargo');
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
         $user->rol = $request->input('rol');
         $user->save();
+        }
+
 
         $request->session()->flash('alert-success', 'Usuario actualizado con exito!');
 
